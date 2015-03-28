@@ -15,7 +15,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>2</value>
+        <value>3</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -281,6 +281,29 @@
         </propertySheet>
       </step>
       <step>
+        <stepName>grabDestinationDir</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition/>
+        <description/>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell>ec-perl</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>createTicketDirectory</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -301,7 +324,7 @@
           <property>
             <propertyName>Path</propertyName>
             <expandable>1</expandable>
-            <value>./$[/myJob/zendesk/ticketId]</value>
+            <value>$[/myJob/destinationDirectory]</value>
           </property>
         </actualParameters>
         <propertySheet>
@@ -328,7 +351,7 @@
           <property>
             <propertyName>destinationFile</propertyName>
             <expandable>1</expandable>
-            <value>./$[/myJob/zendesk/ticketId]</value>
+            <value>$[/myJob/destinationDirectory]</value>
           </property>
           <property>
             <propertyName>replaceDestinationIfPreexists</propertyName>
@@ -359,6 +382,29 @@
         <precondition/>
         <releaseMode>none</releaseMode>
         <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectAgentLogs</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition>$[/javascript "$[agents]" != "" ]</condition>
+        <description>If agent list is not empty, go grab agent.log and jagent.log</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
         <shell>ec-perl</shell>
         <timeLimit/>
         <timeLimitUnits>minutes</timeLimitUnits>

@@ -14,7 +14,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>2</value>
+        <value>3</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -24,7 +24,7 @@
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value></property><property><propertyName>project_version</propertyName><value>1.0.0.2</value></property></propertySheet>
+</value></property><property><propertyName>project_version</propertyName><value>1.0.0.3</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -283,6 +283,46 @@
         </propertySheet>
       </step>
       <step>
+        <stepName>grabDestinationDir</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+use Cwd;
+
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $cwd = getcwd();
+
+$ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]");
+</command>
+        <condition />
+        <description />
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>createTicketDirectory</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -303,7 +343,7 @@
           <property>
             <propertyName>Path</propertyName>
             <expandable>1</expandable>
-            <value>./$[/myJob/zendesk/ticketId]</value>
+            <value>$[/myJob/destinationDirectory]</value>
           </property>
         </actualParameters>
         <propertySheet>
@@ -330,7 +370,7 @@
           <property>
             <propertyName>destinationFile</propertyName>
             <expandable>1</expandable>
-            <value>./$[/myJob/zendesk/ticketId]</value>
+            <value>$[/myJob/destinationDirectory]</value>
           </property>
           <property>
             <propertyName>replaceDestinationIfPreexists</propertyName>
@@ -392,7 +432,7 @@ while (my $file = readdir(LOG)) {
             jobStepName  => "Copy $file",
             actualParameter => [
             	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => $cwd . "/$[/myJob/zendesk/ticketId]/$file"},
+            	{actualParameterName => 'destinationFile', value => "/$[/myJob/destinationDirectory]"},
             	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
             ],
         });
@@ -451,6 +491,72 @@ sub convertTimeToEpoch {
         <precondition />
         <releaseMode>none</releaseMode>
         <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectAgentLogs</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+use Cwd;
+
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#############################################################################
+#
+# Parameters
+#
+#############################################################################
+my $agentList = "$[agents]";
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $DEBUG=1;
+my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
+my $cwd = getcwd();
+
+foreach my $agent (sort split(",", $agentList)) {
+	# run step on remote agent so we can get the installDir
+    $ec->createJobStep({
+        subproject   => "/plugins/EC-FileOps/project",
+        subprocedure => "Remote Copy - Native",
+        jobStepName  => "Copy $agent",
+        resourceName => $agent,
+        actualParameter => [
+         	{actualParameterName => 'sourceWorkspaceName',      value => "default"},
+          	{actualParameterName => 'sourceResourceName',       value => "$agent"},
+            {actualParameterName => 'sourceFile',               value => $ENV{COMMANDER_DATA}."/logs/agent/*agent.log"},
+          	{actualParameterName => 'destinationResourceName',  value => "local"},
+           	{actualParameterName => 'destinationFile',          value => "$[/myJob/destinationDirectory]/$agent"},
+           	{actualParameterName => 'destinationWorkspaceName', value => "default"},
+           ],
+    });
+}
+
+</command>
+        <condition>$[/javascript "$[agents]" != "" ]</condition>
+        <description>If agent list is not empty, go grab agent.log and jagent.log</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>

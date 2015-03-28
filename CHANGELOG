@@ -1,4 +1,7 @@
 2015-03-28 System Administrator <lrochette@electric-cloud.com>
+  * 1.0.0.3: Grab remote agent logs
+
+2015-03-28 System Administrator <lrochette@electric-cloud.com>
   * 1.0.0.2: Transfer server logs based on time
 
 2015-03-27 System Administrator <lrochette@electric-cloud.com>
