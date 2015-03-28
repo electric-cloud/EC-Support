@@ -1,0 +1,430 @@
+<exportedData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="commander.xsd" version="61" buildLabel="build_4.2_77824_2014.09.27_02:09:10" buildVersion="4.2.6.77824" passkey="a30cbf89cfdae202c5227ce40fe867512295566d">
+  <exportPath>/projects/EC-Support</exportPath>
+  <project>
+    <projectName>EC-Support</projectName>
+    <description>Interaction with Support</description>
+    <resourceName />
+    <workspaceName />
+    <propertySheet>
+      <property>
+        <propertyName>ec_visibility</propertyName>
+        <expandable>1</expandable>
+        <value>pickListOnly</value>
+      </property>
+      <property>
+        <propertyName>pluginBuildNumber</propertyName>
+        <expandable>1</expandable>
+        <value>1</value>
+      </property>
+      <property>
+        <propertyName>version</propertyName>
+        <description />
+        <expandable>1</expandable>
+        <value>1.0.0</value>
+      </property>
+    <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
+@::createStepPickerSteps = ();
+</value></property><property><propertyName>project_version</propertyName><value>1.0.0.1</value></property></propertySheet>
+    <procedure>
+      <procedureName>openSupportTicket</procedureName>
+      <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
+      <jobNameTemplate />
+      <resourceName>local</resourceName>
+      <timeLimit />
+      <timeLimitUnits>minutes</timeLimitUnits>
+      <workspaceName />
+      <propertySheet>
+        <property>
+          <propertyName>ec_customEditorData</propertyName>
+          <propertySheet>
+            <property>
+              <propertyName>parameters</propertyName>
+              <propertySheet>
+                <property>
+                  <propertyName>agents</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>product</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>options</propertyName>
+                      <propertySheet>
+                        <property>
+                          <propertyName>option1</propertyName>
+                          <propertySheet>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <expandable>1</expandable>
+                              <value>ElectricCommander</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <expandable>1</expandable>
+                              <value>electriccommander</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option2</propertyName>
+                          <propertySheet>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <expandable>1</expandable>
+                              <value>ElectricFlow</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <expandable>1</expandable>
+                              <value>electricflow</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>optionCount</propertyName>
+                          <expandable>1</expandable>
+                          <value>2</value>
+                        </property>
+                        <property>
+                          <propertyName>type</propertyName>
+                          <expandable>1</expandable>
+                          <value>list</value>
+                        </property>
+                      </propertySheet>
+                    </property>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>stepId</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ticketDescription</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ticketTitle</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>time</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>version</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+              </propertySheet>
+            </property>
+          </propertySheet>
+        </property>
+      </propertySheet>
+      <formalParameter>
+        <formalParameterName>agents</formalParameterName>
+        <defaultValue />
+        <description>a commas separated list of agents. Will be used to get the logs from the agents involved in the issue</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>product</formalParameterName>
+        <defaultValue>electriccommander</defaultValue>
+        <description>the name of the product that failed</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <type>select</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>stepId</formalParameterName>
+        <defaultValue />
+        <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>ticketDescription</formalParameterName>
+        <defaultValue />
+        <description>The main description of the issue you are facing</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>ticketTitle</formalParameterName>
+        <defaultValue />
+        <description />
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>time</formalParameterName>
+        <defaultValue />
+        <description>The time at which the issue happened. Used to collect the right logs. If empty, will simply send the commander.log</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>version</formalParameterName>
+        <defaultValue />
+        <description>product version</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <step>
+        <stepName>fakeTicket</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>ectool setProperty "/myJob/zendesk/ticketId" --value "123456"
+</command>
+        <condition />
+        <description />
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <shell />
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>createTicket</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition>0</condition>
+        <description>Open the ticket</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <subprocedure>createTicket</subprocedure>
+        <subproject>/plugins/EC-Zendesk/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName />
+        <actualParameters>
+          <property>
+            <propertyName>product</propertyName>
+            <expandable>1</expandable>
+            <value>$[product]</value>
+          </property>
+          <property>
+            <propertyName>ticketDescription</propertyName>
+            <expandable>1</expandable>
+            <value>$[ticketDescription]</value>
+          </property>
+          <property>
+            <propertyName>ticketSubject</propertyName>
+            <expandable>1</expandable>
+            <value>$[ticketTitle]</value>
+          </property>
+          <property>
+            <propertyName>zendeskURL</propertyName>
+            <expandable>1</expandable>
+            <value>https://electriccloud.zendesk.com/api/v2</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>createTicketDirectory</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description>create a directory to collect the logs</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <subprocedure>CreateDirectory</subprocedure>
+        <subproject>/plugins/EC-FileOps/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName />
+        <actualParameters>
+          <property>
+            <propertyName>Path</propertyName>
+            <expandable>1</expandable>
+            <value>./$[/myJob/zendesk/ticketId]</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>copyCommander.log</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description>Copy the commander log into the folder</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <subprocedure>Copy</subprocedure>
+        <subproject>/plugins/EC-FileOps/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName />
+        <actualParameters>
+          <property>
+            <propertyName>destinationFile</propertyName>
+            <expandable>1</expandable>
+            <value>./$[/myJob/zendesk/ticketId]</value>
+          </property>
+          <property>
+            <propertyName>replaceDestinationIfPreexists</propertyName>
+            <expandable>1</expandable>
+            <value>1</value>
+          </property>
+          <property>
+            <propertyName>sourceFile</propertyName>
+            <expandable>1</expandable>
+            <value>$[/server/Electric Cloud/dataDirectory]/logs/commander.log</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectTimeBasedLogs</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+use File::stat;
+use Time::Local;
+
+#############################################################################
+#
+# Parameters
+#
+#############################################################################
+my $timeString = "$[time]";
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $DEBUG=1;
+my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
+
+my $serverTime=convertTime($timeString);
+
+opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
+
+while (my $file = readdir(LOG)) {
+	next if ($file !~ m/commander[\-\d.]*.log/);
+    printf("Processing $file\n") if ($DEBUG);
+	my $fileTS = ctime(stat($file)->mtime);
+    if ($fileTS >= $serverTime) {
+    	printf("Copying $file\n");
+    }
+}
+closedir(LOG);
+
+
+#############################################################################
+#
+# convertTime
+# Time is of format 'MM/DD/YYYY 11:35:00' or 11:35:00 or 11:35
+#############################################################################
+sub convertTime {
+	my $timeStr=shift @_;
+    
+	my($date, $time)=split('\s+', $timeStr);
+    my ($mday,$mon,$year)=split(/[.\\]/, $date);
+    $year += 2000 if ($year &lt; 100);
+    
+    my ($hour,$min,$sec) = split(/[:]/, $time);
+    my $time = timelocal($sec,$min,$hour,$mday,$mon-1,$year);
+	printf("Time of the incident: %s \n", $time) if ($DEBUG);
+    return $time
+}
+    
+</command>
+        <condition>$[/javascript "$[time]" != "" ]</condition>
+        <description>Collect the logs based on a time</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+    </procedure>
+  </project>
+</exportedData>
