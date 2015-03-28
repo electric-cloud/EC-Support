@@ -3,8 +3,10 @@
 # Copyright Electric-Cloud 2015
 #
 #############################################################################
-use File::stat;
 use Time::Local;
+use Cwd;
+
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
 
 #############################################################################
 #
@@ -20,17 +22,28 @@ my $timeString = "$[time]";
 #############################################################################
 my $DEBUG=1;
 my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
+my $cwd= getcwd();
 
-my $serverTime=convertTime($timeString);
+my $serverEpochTime=convertTimeToEpoch($timeString);
 
 opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
 
 while (my $file = readdir(LOG)) {
-	next if ($file !~ m/commander[\-\d.]*.log/);
-    printf("Processing $file\n") if ($DEBUG);
-	my $fileTS = ctime(stat($file)->mtime);
-    if ($fileTS >= $serverTime) {
-    	printf("Copying $file\n");
+    next if ($file !~ m/commander[\-\d.]*.log/);
+    # printf("Processing $file\n") if ($DEBUG);
+    my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
+    # printf("    time: %d\n", $fileModificationTime);
+    if ($fileModificationTime >= $serverEpochTime) {
+    	$ec->createJobStep({
+        	subproject   => "/plugins/EC-FileOps/project",
+            subprocedure => "Copy",
+            jobStepName  => "Copy $file",
+            actualParameter => [
+            	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
+            	{actualParameterName => 'destinationFile', value => $cwd . "/$[/myJob/zendesk/ticketId]/$file"},
+            	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
+            ],
+        });
     }
 }
 closedir(LOG);
@@ -41,16 +54,37 @@ closedir(LOG);
 # convertTime
 # Time is of format 'MM/DD/YYYY 11:35:00' or 11:35:00 or 11:35
 #############################################################################
-sub convertTime {
-	my $timeStr=shift @_;
+sub convertTimeToEpoch {
+    my $timeStr=shift @_;
     
-	my($date, $time)=split('\s+', $timeStr);
-    my ($mday,$mon,$year)=split(/[.\\]/, $date);
+    # Get passed time
+    my($date, $time);
+
+    if ($timeStr =~ m/\s+/) {
+        ($date, $time)=split('\s+', $timeStr);
+    } else {
+        $time=$timeStr;
+        $date="";
+    }
+    my ($year, $month, $day) = split(/[.\/\-]/, $date);
+    my ($hour, $min, $sec)   = split(/[:]/, $time);
+
+    printf("Incident time (original): %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
+
+    # get server time to fill missing values
+    my $localTime = "$[/timestamp MM-dd-yyyy HH:mm]";
+    my ($localMonth,$localDay,$localYear,$localHour,$localMinute) = split(/[\s\-:]+/, $localTime);
+
+    printf("Local month: $localMonth\n") if ($DEBUG);
+    $year = $localYear if ($year == 0);
     $year += 2000 if ($year < 100);
-    
-    my ($hour,$min,$sec) = split(/[:]/, $time);
-    my $time = timelocal($sec,$min,$hour,$mday,$mon-1,$year);
-	printf("Time of the incident: %s \n", $time) if ($DEBUG);
+    $month = $localMonth if ($month == 0);
+    $day   = $localDay if ($day == 0);
+
+    printf("Incident time: %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
+    my $time = timelocal(0,$min,$hour,$day,$month-1,$year);
+
+    printf("Time of the incident: %s \n", $time) if ($DEBUG);
     return $time
 }
     

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.1</version>
+  <version>1.0.0.2</version>
   <label>EC-Support</label>
   <description>A set of administrative tasks to help manage your server.
-2015-03-27 admin Initial commit</description>
+2015-03-28 admin Transfer server logs based on time</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 
