@@ -14,7 +14,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>3</value>
+        <value>4</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -24,7 +24,7 @@
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value></property><property><propertyName>project_version</propertyName><value>1.0.0.3</value></property></propertySheet>
+</value></property><property><propertyName>project_version</propertyName><value>1.0.0.4</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -562,6 +562,38 @@ foreach my $agent (sort split(",", $agentList)) {
         <timeLimitUnits>minutes</timeLimitUnits>
         <workingDirectory />
         <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>createBundle</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description>Zip the different files</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <subprocedure>Create Zip File</subprocedure>
+        <subproject>/plugins/EC-FileOps/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName />
+        <actualParameters>
+          <property>
+            <propertyName>sourceFile</propertyName>
+            <expandable>1</expandable>
+            <value>$[/myJob/destinationDirectory]</value>
+          </property>
+          <property>
+            <propertyName>zipFile</propertyName>
+            <expandable>1</expandable>
+            <value>$[/myJob/destinationDirectory].zip</value>
+          </property>
+        </actualParameters>
         <propertySheet>
         </propertySheet>
       </step>

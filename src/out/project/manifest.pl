@@ -7,4 +7,5 @@
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="copyCommander.log"]/command', 'procedures/openSupportTicket/steps/copyCommander.log.sh'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="collectTimeBasedLogs"]/command', 'procedures/openSupportTicket/steps/collectTimeBasedLogs.pl'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="collectAgentLogs"]/command', 'procedures/openSupportTicket/steps/collectAgentLogs.pl'],
+	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="createBundle"]/command', 'procedures/openSupportTicket/steps/createBundle.sh'],
 );

@@ -15,7 +15,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>3</value>
+        <value>4</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -410,6 +410,38 @@
         <timeLimitUnits>minutes</timeLimitUnits>
         <workingDirectory/>
         <workspaceName/>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>createBundle</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition/>
+        <description>Zip the different files</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <subprocedure>Create Zip File</subprocedure>
+        <subproject>/plugins/EC-FileOps/project</subproject>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName/>
+        <actualParameters>
+          <property>
+            <propertyName>sourceFile</propertyName>
+            <expandable>1</expandable>
+            <value>$[/myJob/destinationDirectory]</value>
+          </property>
+          <property>
+            <propertyName>zipFile</propertyName>
+            <expandable>1</expandable>
+            <value>$[/myJob/destinationDirectory].zip</value>
+          </property>
+        </actualParameters>
         <propertySheet>
         </propertySheet>
       </step>

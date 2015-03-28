@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.3</version>
+  <version>1.0.0.4</version>
   <label>EC-Support</label>
   <description>A set of administrative tasks to help manage your server.
-2015-03-28 admin Grab remote agent logs</description>
+2015-03-28 admin Bundle created</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 
