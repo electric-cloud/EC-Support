@@ -29,7 +29,7 @@ my $serverEpochTime=convertTimeToEpoch($timeString);
 opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
 
 while (my $file = readdir(LOG)) {
-    next if ($file !~ m/commander[\-\d.]*.log/);
+    next if ($file !~ m/commander[\-\d.]*.log.zip/);
     # printf("Processing $file\n") if ($DEBUG);
     my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
     # printf("    time: %d\n", $fileModificationTime);

@@ -14,7 +14,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>4</value>
+        <value>5</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -24,7 +24,7 @@
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value></property><property><propertyName>project_version</propertyName><value>1.0.0.4</value></property></propertySheet>
+</value></property><property><propertyName>project_version</propertyName><value>1.0.0.5</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -42,6 +42,16 @@
               <propertySheet>
                 <property>
                   <propertyName>agents</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>jobNumber</propertyName>
                   <propertySheet>
                     <property>
                       <propertyName>formType</propertyName>
@@ -169,20 +179,20 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
+        <formalParameterName>jobNumber</formalParameterName>
+        <defaultValue />
+        <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
         <formalParameterName>product</formalParameterName>
         <defaultValue>electriccommander</defaultValue>
         <description>the name of the product that failed</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
         <type>select</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>stepId</formalParameterName>
-        <defaultValue />
-        <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
-        <expansionDeferred>0</expansionDeferred>
-        <required>0</required>
-        <type>entry</type>
       </formalParameter>
       <formalParameter>
         <formalParameterName>ticketDescription</formalParameterName>
@@ -421,7 +431,7 @@ my $serverEpochTime=convertTimeToEpoch($timeString);
 opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
 
 while (my $file = readdir(LOG)) {
-    next if ($file !~ m/commander[\-\d.]*.log/);
+    next if ($file !~ m/commander[\-\d.]*.log.zip/);
     # printf("Processing $file\n") if ($DEBUG);
     my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
     # printf("    time: %d\n", $fileModificationTime);
@@ -482,6 +492,117 @@ sub convertTimeToEpoch {
     
 </command>
         <condition>$[/javascript "$[time]" != "" ]</condition>
+        <description>Collect the logs based on a time</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectJobIdBasedLogs copy</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+use Cwd;
+
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#############################################################################
+#
+# Parameters
+#
+#############################################################################
+my $jobNumber = "$[jobNumber]";
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $DEBUG=1;
+my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
+my $cwd= getcwd();
+
+opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
+
+while (my $file = readdir(LOG)) {
+    next if ($file !~ m/commander[\-\d.]*.log.zip/);
+    printf("Processing $file\n") if ($DEBUG);
+
+my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&amp;1");
+    if ($exitCode == 0) {
+    	printf("    Copying\n");
+    	$ec->createJobStep({
+        	subproject   => "/plugins/EC-FileOps/project",
+            subprocedure => "Copy",
+            jobStepName  => "Copy $file",
+            actualParameter => [
+            	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
+            	{actualParameterName => 'destinationFile', value => "/$[/myJob/destinationDirectory]"},
+            	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
+            ],
+        });
+    }
+}
+closedir(LOG);
+
+
+#############################################################################
+#
+# convertTime
+# Time is of format 'MM/DD/YYYY 11:35:00' or 11:35:00 or 11:35
+#############################################################################
+sub convertTimeToEpoch {
+    my $timeStr=shift @_;
+    
+    # Get passed time
+    my($date, $time);
+
+    if ($timeStr =~ m/\s+/) {
+        ($date, $time)=split('\s+', $timeStr);
+    } else {
+        $time=$timeStr;
+        $date="";
+    }
+    my ($year, $month, $day) = split(/[.\/\-]/, $date);
+    my ($hour, $min, $sec)   = split(/[:]/, $time);
+
+    printf("Incident time (original): %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
+
+    # get server time to fill missing values
+    my $localTime = "$[/timestamp MM-dd-yyyy HH:mm]";
+    my ($localMonth,$localDay,$localYear,$localHour,$localMinute) = split(/[\s\-:]+/, $localTime);
+
+    printf("Local month: $localMonth\n") if ($DEBUG);
+    $year = $localYear if ($year == 0);
+    $year += 2000 if ($year &lt; 100);
+    $month = $localMonth if ($month == 0);
+    $day   = $localDay if ($day == 0);
+
+    printf("Incident time: %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
+    my $time = timelocal(0,$min,$hour,$day,$month-1,$year);
+
+    printf("Time of the incident: %s \n", $time) if ($DEBUG);
+    return $time
+}
+    
+</command>
+        <condition>$[/javascript "$[jobNumber]" != "" ]</condition>
         <description>Collect the logs based on a time</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>

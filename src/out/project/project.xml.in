@@ -15,7 +15,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>4</value>
+        <value>5</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -23,7 +23,7 @@
         <expandable>1</expandable>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.4</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.5</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -41,6 +41,16 @@
               <propertySheet>
                 <property>
                   <propertyName>agents</propertyName>
+                  <propertySheet>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <expandable>1</expandable>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>jobNumber</propertyName>
                   <propertySheet>
                     <property>
                       <propertyName>formType</propertyName>
@@ -168,20 +178,20 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
+        <formalParameterName>jobNumber</formalParameterName>
+        <defaultValue/>
+        <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
         <formalParameterName>product</formalParameterName>
         <defaultValue>electriccommander</defaultValue>
         <description>the name of the product that failed</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
         <type>select</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>stepId</formalParameterName>
-        <defaultValue/>
-        <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
-        <expansionDeferred>0</expansionDeferred>
-        <required>0</required>
-        <type>entry</type>
       </formalParameter>
       <formalParameter>
         <formalParameterName>ticketDescription</formalParameterName>
@@ -373,6 +383,29 @@
         <broadcast>0</broadcast>
         <command>PLACEHOLDER</command>
         <condition>$[/javascript "$[time]" != "" ]</condition>
+        <description>Collect the logs based on a time</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectJobIdBasedLogs copy</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition>$[/javascript "$[jobNumber]" != "" ]</condition>
         <description>Collect the logs based on a time</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>

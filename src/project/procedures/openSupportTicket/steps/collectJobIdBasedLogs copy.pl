@@ -3,7 +3,6 @@
 # Copyright Electric-Cloud 2015
 #
 #############################################################################
-use Time::Local;
 use Cwd;
 
 $[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
@@ -13,7 +12,7 @@ $[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
 # Parameters
 #
 #############################################################################
-my $timeString = "$[time]";
+my $jobNumber = "$[jobNumber]";
 
 #############################################################################
 #
@@ -24,16 +23,15 @@ my $DEBUG=1;
 my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
 my $cwd= getcwd();
 
-my $serverEpochTime=convertTimeToEpoch($timeString);
-
 opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
 
 while (my $file = readdir(LOG)) {
     next if ($file !~ m/commander[\-\d.]*.log.zip/);
-    # printf("Processing $file\n") if ($DEBUG);
-    my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
-    # printf("    time: %d\n", $fileModificationTime);
-    if ($fileModificationTime >= $serverEpochTime) {
+    printf("Processing $file\n") if ($DEBUG);
+
+my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&1");
+    if ($exitCode == 0) {
+    	printf("    Copying\n");
     	$ec->createJobStep({
         	subproject   => "/plugins/EC-FileOps/project",
             subprocedure => "Copy",
