@@ -15,7 +15,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>6</value>
+        <value>7</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -23,7 +23,7 @@
         <expandable>1</expandable>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.6</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.7</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -168,6 +168,12 @@
             </property>
           </propertySheet>
         </property>
+        <property>
+          <propertyName>ec_parameterForm</propertyName>
+          <description/>
+          <expandable>1</expandable>
+          <value>PLACEHOLDER</value>
+        </property>
       </propertySheet>
       <formalParameter>
         <formalParameterName>agents</formalParameterName>
@@ -199,7 +205,7 @@
         <description>The main description of the issue you are facing</description>
         <expansionDeferred>0</expansionDeferred>
         <required>0</required>
-        <type>entry</type>
+        <type>textarea</type>
       </formalParameter>
       <formalParameter>
         <formalParameterName>ticketTitle</formalParameterName>
@@ -401,7 +407,7 @@
         </propertySheet>
       </step>
       <step>
-        <stepName>collectJobIdBasedLogs copy</stepName>
+        <stepName>collectJobIdBasedLogs</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
         <command>PLACEHOLDER</command>

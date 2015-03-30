@@ -1,4 +1,7 @@
 2015-03-30 System Administrator <lrochette@electric-cloud.com>
+  * 1.0.0.7: Add ec_parameterForm
+
+2015-03-30 System Administrator <lrochette@electric-cloud.com>
   * 1.0.0.6: Skip down resources. Fixed issue #1
 
 2015-03-30 System Administrator <lrochette@electric-cloud.com>

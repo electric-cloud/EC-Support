@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.6</version>
+  <version>1.0.0.7</version>
   <label>EC-Support</label>
   <description>A set of procedures to interact with Electric Cloud support.
-2015-03-30 admin Skip down resources. Fixed issue #1</description>
+2015-03-30 admin Add ec_parameterForm</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 
