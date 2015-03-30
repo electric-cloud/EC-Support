@@ -40,7 +40,7 @@ while (my $file = readdir(LOG)) {
             jobStepName  => "Copy $file",
             actualParameter => [
             	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => "/$[/myJob/destinationDirectory]"},
+            	{actualParameterName => 'destinationFile', value => "$[/myJob/destinationDirectory]/$file"},
             	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
             ],
         });

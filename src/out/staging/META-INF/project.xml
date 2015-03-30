@@ -14,7 +14,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>7</value>
+        <value>8</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -24,7 +24,7 @@
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value></property><property><propertyName>project_version</propertyName><value>1.0.0.7</value></property></propertySheet>
+</value></property><property><propertyName>project_version</propertyName><value>1.0.0.8</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -302,8 +302,9 @@
         <broadcast>0</broadcast>
         <command>ectool setProperty "/myJob/zendesk/ticketId" --value "123456"
 </command>
-        <condition />
-        <description />
+        <condition>0</condition>
+        <description>Used to create the property /myJob/zendesk/ticketId without opening a real ticket.
+Testing only</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName />
@@ -324,7 +325,7 @@
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition>0</condition>
+        <condition />
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -352,6 +353,11 @@
             <propertyName>ticketSubject</propertyName>
             <expandable>1</expandable>
             <value>$[ticketTitle]</value>
+          </property>
+          <property>
+            <propertyName>version</propertyName>
+            <expandable>1</expandable>
+            <value>$[version]</value>
           </property>
           <property>
             <propertyName>zendeskURL</propertyName>
@@ -512,7 +518,7 @@ while (my $file = readdir(LOG)) {
             jobStepName  => "Copy $file",
             actualParameter => [
             	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => "/$[/myJob/destinationDirectory]"},
+            	{actualParameterName => 'destinationFile', value => "$[/myJob/destinationDirectory]/$file"},
             	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
             ],
         });
@@ -608,9 +614,9 @@ my $DEBUG=1;
 my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
 my $cwd= getcwd();
 
-opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
+opendir(my $logD, $logDir) or die("Cannot open the log directory\n$!");
 
-while (my $file = readdir(LOG)) {
+while (my $file = readdir($logD)) {
     next if ($file !~ m/commander[\-\d.]*.log.zip/);
     printf("Processing $file\n") if ($DEBUG);
 
@@ -629,48 +635,9 @@ my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&amp;1");
         });
     }
 }
-closedir(LOG);
+closedir($logD);
 
 
-#############################################################################
-#
-# convertTime
-# Time is of format 'MM/DD/YYYY 11:35:00' or 11:35:00 or 11:35
-#############################################################################
-sub convertTimeToEpoch {
-    my $timeStr=shift @_;
-    
-    # Get passed time
-    my($date, $time);
-
-    if ($timeStr =~ m/\s+/) {
-        ($date, $time)=split('\s+', $timeStr);
-    } else {
-        $time=$timeStr;
-        $date="";
-    }
-    my ($year, $month, $day) = split(/[.\/\-]/, $date);
-    my ($hour, $min, $sec)   = split(/[:]/, $time);
-
-    printf("Incident time (original): %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
-
-    # get server time to fill missing values
-    my $localTime = "$[/timestamp MM-dd-yyyy HH:mm]";
-    my ($localMonth,$localDay,$localYear,$localHour,$localMinute) = split(/[\s\-:]+/, $localTime);
-
-    printf("Local month: $localMonth\n") if ($DEBUG);
-    $year = $localYear if ($year == 0);
-    $year += 2000 if ($year &lt; 100);
-    $month = $localMonth if ($month == 0);
-    $day   = $localDay if ($day == 0);
-
-    printf("Incident time: %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
-    my $time = timelocal(0,$min,$hour,$day,$month-1,$year);
-
-    printf("Time of the incident: %s \n", $time) if ($DEBUG);
-    return $time
-}
-    
 </command>
         <condition>$[/javascript "$[jobNumber]" != "" ]</condition>
         <description>Collect the logs based on a time</description>
@@ -782,6 +749,78 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
         </propertySheet>
       </step>
       <step>
+        <stepName>listing</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#############################################################################
+#
+# Parameters
+#
+#############################################################################
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $DEBUG=1;
+my $destDir="$[/myJob/zendesk/ticketId]";
+
+
+my $content=directoryContent($destDir);
+$ec->setProperty("/myJob/fileList", $content);
+
+#############################################################################
+#
+# directoryContent: return a string containing the list of files
+#                   in a directory
+#############################################################################
+sub directoryContent {
+    my $dir=shift @_;
+    my $content="";
+    
+    opendir(my $dh, $dir) or die("Cannot open the directory $dir\n$!");
+
+	while (my $file = readdir($dh)) {
+    	next if $file eq '.' or $file eq '..';
+    	if (-d "$dir/$file") {
+    		$content .= directoryContent("$dir/$file");	
+        } else {
+        	$content .= "$dir/$file\n";
+            printf("$dir/$file\n") if ($DEBUG);
+        }
+    }
+    closedir($dh);
+    return $content;
+}
+    
+</command>
+        <condition />
+        <description>Get the list of collected files</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>createBundle</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -808,6 +847,46 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
             <propertyName>zipFile</propertyName>
             <expandable>1</expandable>
             <value>$[/myJob/destinationDirectory].zip</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>commentForFiles</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description />
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <subprocedure>commentOnTicket</subprocedure>
+        <subproject>/plugins/EC-Zendesk/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName />
+        <actualParameters>
+          <property>
+            <propertyName>comment</propertyName>
+            <expandable>1</expandable>
+            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+It contains:
+
+$[/myJob/fileList]</value>
+          </property>
+          <property>
+            <propertyName>ticketNumber</propertyName>
+            <expandable>1</expandable>
+            <value>$[/myJob/zendesk/ticketId]</value>
+          </property>
+          <property>
+            <propertyName>zendeskURL</propertyName>
+            <expandable>1</expandable>
+            <value>https://electriccloud.zendesk.com/api/v2</value>
           </property>
         </actualParameters>
         <propertySheet>

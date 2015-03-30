@@ -15,7 +15,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>7</value>
+        <value>8</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -23,7 +23,7 @@
         <expandable>1</expandable>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.7</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.8</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -236,8 +236,9 @@
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
         <command>PLACEHOLDER</command>
-        <condition/>
-        <description/>
+        <condition>0</condition>
+        <description>Used to create the property /myJob/zendesk/ticketId without opening a real ticket.
+Testing only</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -258,7 +259,7 @@
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition>0</condition>
+        <condition/>
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -286,6 +287,11 @@
             <propertyName>ticketSubject</propertyName>
             <expandable>1</expandable>
             <value>$[ticketTitle]</value>
+          </property>
+          <property>
+            <propertyName>version</propertyName>
+            <expandable>1</expandable>
+            <value>$[version]</value>
           </property>
           <property>
             <propertyName>zendeskURL</propertyName>
@@ -453,6 +459,29 @@
         </propertySheet>
       </step>
       <step>
+        <stepName>listing</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition/>
+        <description>Get the list of collected files</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>createBundle</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -479,6 +508,46 @@
             <propertyName>zipFile</propertyName>
             <expandable>1</expandable>
             <value>$[/myJob/destinationDirectory].zip</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>commentForFiles</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition/>
+        <description/>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <subprocedure>commentOnTicket</subprocedure>
+        <subproject>/plugins/EC-Zendesk/project</subproject>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <workspaceName/>
+        <actualParameters>
+          <property>
+            <propertyName>comment</propertyName>
+            <expandable>1</expandable>
+            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+It contains:
+
+$[/myJob/fileList]</value>
+          </property>
+          <property>
+            <propertyName>ticketNumber</propertyName>
+            <expandable>1</expandable>
+            <value>$[/myJob/zendesk/ticketId]</value>
+          </property>
+          <property>
+            <propertyName>zendeskURL</propertyName>
+            <expandable>1</expandable>
+            <value>https://electriccloud.zendesk.com/api/v2</value>
           </property>
         </actualParameters>
         <propertySheet>

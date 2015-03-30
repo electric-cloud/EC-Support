@@ -9,5 +9,7 @@
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="collectTimeBasedLogs"]/command', 'procedures/openSupportTicket/steps/collectTimeBasedLogs.pl'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="collectJobIdBasedLogs"]/command', 'procedures/openSupportTicket/steps/collectJobIdBasedLogs.pl'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="collectAgentLogs"]/command', 'procedures/openSupportTicket/steps/collectAgentLogs.pl'],
+	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="listing"]/command', 'procedures/openSupportTicket/steps/listing.pl'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="createBundle"]/command', 'procedures/openSupportTicket/steps/createBundle.sh'],
+	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="commentForFiles"]/command', 'procedures/openSupportTicket/steps/commentForFiles.sh'],
 );

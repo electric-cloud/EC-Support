@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.7</version>
+  <version>1.0.0.8</version>
   <label>EC-Support</label>
   <description>A set of procedures to interact with Electric Cloud support.
-2015-03-30 admin Add ec_parameterForm</description>
+2015-03-30 admin Added list of files copied to ShareFile in the ticket</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 
