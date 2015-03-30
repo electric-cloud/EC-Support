@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.5</version>
+  <version>1.0.0.6</version>
   <label>EC-Support</label>
   <description>A set of procedures to interact with Electric Cloud support.
-2015-03-30 admin Add gathering of logs based on jobId</description>
+2015-03-30 admin Skip down resources. Fixed issue #1</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 

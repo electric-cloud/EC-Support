@@ -15,7 +15,7 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <expandable>1</expandable>
-        <value>5</value>
+        <value>6</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -23,7 +23,7 @@
         <expandable>1</expandable>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.5</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>1.0.0.6</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>

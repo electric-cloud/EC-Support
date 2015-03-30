@@ -1,4 +1,7 @@
 2015-03-30 System Administrator <lrochette@electric-cloud.com>
+  * 1.0.0.6: Skip down resources. Fixed issue #1
+
+2015-03-30 System Administrator <lrochette@electric-cloud.com>
   * 1.0.0.5: Add gathering of logs based on jobId
 
 2015-03-28 System Administrator <lrochette@electric-cloud.com>
