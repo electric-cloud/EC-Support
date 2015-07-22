@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.9</version>
+  <version>1.0.0.10</version>
   <label>EC-Support</label>
-  <description>A set of procedures to interact with Electric Cloud support.</description>
+  <description>A set of procedures to interact with Electric Cloud support.
+2015-07-22 admin add parameter for ShareFile upload directory</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 

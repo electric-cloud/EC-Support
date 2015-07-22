@@ -21,7 +21,7 @@
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>9</value>
+        <value>10</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -31,7 +31,7 @@
         <tracked>0</tracked>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.9</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.10</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -215,6 +215,20 @@
                   </propertySheet>
                 </property>
                 <property>
+                  <propertyName>sharefileUploadDirectory</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
                   <propertyName>stepId</propertyName>
                   <tracked>0</tracked>
                   <propertySheet>
@@ -284,6 +298,20 @@
                     </property>
                   </propertySheet>
                 </property>
+                <property>
+                  <propertyName>zendeskDirectory</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
               </propertySheet>
             </property>
           </propertySheet>
@@ -328,6 +356,15 @@
         <formalParameterName>ShareFileCredentialName</formalParameterName>
         <defaultValue/>
         <description>Name of the credential to access Sharefile (attached to EC-ShareFile)</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>sharefileUploadDirectory</formalParameterName>
+        <defaultValue>/clients/X-Z/NAME/uploads</defaultValue>
+        <description>Enter your upload directory path on ShareFile</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
         <tracked>0</tracked>
@@ -820,9 +857,8 @@
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>The following file have been uploaded  $[/myJob/output/sharefileURL]
-
-uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+            <value>The following file have been uploaded on ShareFile
+          $[sharefileUploadDirectory]/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
 
 It contains:
 

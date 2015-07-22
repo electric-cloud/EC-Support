@@ -23,10 +23,18 @@
         <required>1</required>
     </formElement> 
 
-    <formElement> 
+   <formElement> 
         <label>ShareFile credential</label> 
         <property>ShareFileCredentialName</property> 
         <documentation>The name of the credential attached to EC-ShareFile to access the service.</documentation> 
+        <type>entry</type>
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>ShareFile upload directory</label> 
+        <property>sharefileUploadDirectory</property> 
+        <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
         <type>entry</type>
         <required>1</required>
     </formElement> 
