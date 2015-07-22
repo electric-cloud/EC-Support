@@ -1,30 +1,38 @@
-<exportedData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="commander.xsd" version="61" buildLabel="build_4.2_77824_2014.09.27_02:09:10" buildVersion="4.2.6.77824" passkey="a30cbf89cfdae202c5227ce40fe867512295566d">
+<exportedData version="69" buildLabel="build_main_89270_2015.04.16_07:48:51" buildVersion="5.4.0.89270" passkey="5988fd40f08f691b7b3605f17301cfc761659b8f">
   <exportPath>/projects/EC-Support</exportPath>
   <project>
     <projectName>EC-Support</projectName>
     <description>Interaction with Support</description>
     <resourceName />
+    <tracked>0</tracked>
     <workspaceName />
     <propertySheet>
+      <tracked>0</tracked>
       <property>
         <propertyName>ec_visibility</propertyName>
+        <counter>0</counter>
         <expandable>1</expandable>
+        <tracked>0</tracked>
         <value>pickListOnly</value>
       </property>
       <property>
         <propertyName>pluginBuildNumber</propertyName>
+        <counter>0</counter>
         <expandable>1</expandable>
-        <value>8</value>
+        <tracked>0</tracked>
+        <value>9</value>
       </property>
       <property>
         <propertyName>version</propertyName>
+        <counter>0</counter>
         <description />
         <expandable>1</expandable>
+        <tracked>0</tracked>
         <value>1.0.0</value>
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value></property><property><propertyName>project_version</propertyName><value>1.0.0.8</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.9</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -32,135 +40,247 @@
       <resourceName>local</resourceName>
       <timeLimit />
       <timeLimitUnits>minutes</timeLimitUnits>
+      <tracked>0</tracked>
       <workspaceName />
       <propertySheet>
+        <tracked>0</tracked>
         <property>
           <propertyName>ec_customEditorData</propertyName>
+          <tracked>0</tracked>
           <propertySheet>
+            <tracked>0</tracked>
             <property>
               <propertyName>parameters</propertyName>
+              <tracked>0</tracked>
               <propertySheet>
+                <tracked>0</tracked>
                 <property>
-                  <propertyName>agents</propertyName>
+                  <propertyName>ShareFileCredentialName</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ShareFileCrendentialName</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ZendeskCredentialName</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ZendeskCrentialName</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>agents</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>jobNumber</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>product</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>options</propertyName>
+                      <tracked>0</tracked>
                       <propertySheet>
+                        <tracked>0</tracked>
                         <property>
                           <propertyName>option1</propertyName>
+                          <tracked>0</tracked>
                           <propertySheet>
+                            <tracked>0</tracked>
                             <property>
                               <propertyName>text</propertyName>
+                              <counter>0</counter>
                               <expandable>1</expandable>
+                              <tracked>0</tracked>
                               <value>ElectricCommander</value>
                             </property>
                             <property>
                               <propertyName>value</propertyName>
+                              <counter>0</counter>
                               <expandable>1</expandable>
+                              <tracked>0</tracked>
                               <value>electriccommander</value>
                             </property>
                           </propertySheet>
                         </property>
                         <property>
                           <propertyName>option2</propertyName>
+                          <tracked>0</tracked>
                           <propertySheet>
+                            <tracked>0</tracked>
                             <property>
                               <propertyName>text</propertyName>
+                              <counter>0</counter>
                               <expandable>1</expandable>
+                              <tracked>0</tracked>
                               <value>ElectricFlow</value>
                             </property>
                             <property>
                               <propertyName>value</propertyName>
+                              <counter>0</counter>
                               <expandable>1</expandable>
+                              <tracked>0</tracked>
                               <value>electricflow</value>
                             </property>
                           </propertySheet>
                         </property>
                         <property>
                           <propertyName>optionCount</propertyName>
+                          <counter>0</counter>
                           <expandable>1</expandable>
+                          <tracked>0</tracked>
                           <value>2</value>
                         </property>
                         <property>
                           <propertyName>type</propertyName>
+                          <counter>0</counter>
                           <expandable>1</expandable>
+                          <tracked>0</tracked>
                           <value>list</value>
                         </property>
                       </propertySheet>
                     </property>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>stepId</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>ticketDescription</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>ticketTitle</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>time</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
                 </property>
                 <property>
                   <propertyName>version</propertyName>
+                  <tracked>0</tracked>
                   <propertySheet>
+                    <tracked>0</tracked>
                     <property>
                       <propertyName>formType</propertyName>
+                      <counter>0</counter>
                       <expandable>1</expandable>
+                      <tracked>0</tracked>
                       <value>standard</value>
                     </property>
                   </propertySheet>
@@ -171,8 +291,10 @@
         </property>
         <property>
           <propertyName>ec_parameterForm</propertyName>
+          <counter>0</counter>
           <description />
           <expandable>1</expandable>
+          <tracked>0</tracked>
           <value>&lt;editor>
     &lt;formElement> 
         &lt;label>Title&lt;/label> 
@@ -187,6 +309,22 @@
         &lt;property>ticketDescription&lt;/property> 
         &lt;documentation>The full description of your ticket.&lt;/documentation> 
         &lt;type>textarea&lt;/type>
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Zendesk credential&lt;/label> 
+        &lt;property>ZendeskCredentialName&lt;/property> 
+        &lt;documentation>The name of the credential attached to EC-Zendesk to access the service.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>ShareFile credential&lt;/label> 
+        &lt;property>ShareFileCredentialName&lt;/property> 
+        &lt;documentation>The name of the credential attached to EC-ShareFile to access the service.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
         &lt;required>1&lt;/required>
     &lt;/formElement> 
 
@@ -206,14 +344,6 @@
         &lt;value>electriccommander&lt;/value> 
         &lt;required>1&lt;/required>
     &lt;/formElement> 
-
-    &lt;formElement> 
-        &lt;label>Product Version&lt;/label> 
-        &lt;property>version&lt;/property> 
-        &lt;documentation>Product version.&lt;/documentation> 
-        &lt;type>entry&lt;/type>
-    &lt;/formElement> 
-
 
     &lt;formElement> 
         &lt;label>Agent List&lt;/label> 
@@ -246,6 +376,7 @@
         <description>a commas separated list of agents. Will be used to get the logs from the agents involved in the issue</description>
         <expansionDeferred>0</expansionDeferred>
         <required>0</required>
+        <tracked>0</tracked>
         <type>entry</type>
       </formalParameter>
       <formalParameter>
@@ -254,6 +385,7 @@
         <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
         <expansionDeferred>0</expansionDeferred>
         <required>0</required>
+        <tracked>0</tracked>
         <type>entry</type>
       </formalParameter>
       <formalParameter>
@@ -262,7 +394,17 @@
         <description>the name of the product that failed</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
+        <tracked>0</tracked>
         <type>select</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>ShareFileCredentialName</formalParameterName>
+        <defaultValue />
+        <description>Name of the credential to access Sharefile (attached to EC-ShareFile)</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>0</tracked>
+        <type>entry</type>
       </formalParameter>
       <formalParameter>
         <formalParameterName>ticketDescription</formalParameterName>
@@ -270,6 +412,7 @@
         <description>The main description of the issue you are facing</description>
         <expansionDeferred>0</expansionDeferred>
         <required>0</required>
+        <tracked>0</tracked>
         <type>textarea</type>
       </formalParameter>
       <formalParameter>
@@ -278,6 +421,7 @@
         <description />
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
+        <tracked>0</tracked>
         <type>entry</type>
       </formalParameter>
       <formalParameter>
@@ -286,25 +430,41 @@
         <description>The time at which the issue happened. Used to collect the right logs. If empty, will simply send the commander.log</description>
         <expansionDeferred>0</expansionDeferred>
         <required>0</required>
+        <tracked>0</tracked>
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>version</formalParameterName>
+        <formalParameterName>ZendeskCredentialName</formalParameterName>
         <defaultValue />
-        <description>product version</description>
+        <description>Name of the credential for Zendesk (accthed to the EC-Zendesk)</description>
         <expansionDeferred>0</expansionDeferred>
-        <required>0</required>
+        <required>1</required>
+        <tracked>0</tracked>
         <type>entry</type>
       </formalParameter>
       <step>
-        <stepName>fakeTicket</stepName>
+        <stepName>getVersion</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <command>ectool setProperty "/myJob/zendesk/ticketId" --value "123456"
+        <command>$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+my ($ok, $json)=InvokeCommander("", 'getVersions');
+
+if ($ok) {
+	my $version=$json->{responses}->[0]->{serverVersion}->{version};
+
+	$ec->setProperty ("/myJob/serverVersion", $version);
+	$ec->setProperty ("summary", "Server version: $version");
+} else {
+	$ec->setProperty ("/myJob/serverVersion", "");
+	$ec->setProperty ("summary", "Cannot retrive server version");
+	$ec->setProperty ("outcome", "warning");
+	
+}    
+$[/plugins[EC-Admin]project/scripts/perlLibJSON]
 </command>
-        <condition>0</condition>
-        <description>Used to create the property /myJob/zendesk/ticketId without opening a real ticket.
-Testing only</description>
+        <condition />
+        <description>Retrieve the server version</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName />
@@ -313,19 +473,21 @@ Testing only</description>
         <precondition />
         <releaseMode>none</releaseMode>
         <resourceName />
-        <shell />
+        <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workingDirectory />
         <workspaceName />
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition />
+        <condition>1</condition>
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -337,35 +499,48 @@ Testing only</description>
         <subproject>/plugins/EC-Zendesk/project</subproject>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workspaceName />
         <actualParameters>
+          <tracked>0</tracked>
+          <property>
+            <propertyName>credential</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[ZendeskCredentialName]</value>
+          </property>
           <property>
             <propertyName>product</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[product]</value>
           </property>
           <property>
             <propertyName>ticketDescription</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[ticketDescription]</value>
           </property>
           <property>
             <propertyName>ticketSubject</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[ticketTitle]</value>
           </property>
           <property>
             <propertyName>version</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
-            <value>$[version]</value>
-          </property>
-          <property>
-            <propertyName>zendeskURL</propertyName>
-            <expandable>1</expandable>
-            <value>https://electriccloud.zendesk.com/api/v2</value>
+            <tracked>0</tracked>
+            <value>$[/myJob/serverVersion]</value>
           </property>
         </actualParameters>
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -403,9 +578,11 @@ $ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workingDirectory />
         <workspaceName />
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -424,19 +601,24 @@ $ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]
         <subproject>/plugins/EC-FileOps/project</subproject>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workspaceName />
         <actualParameters>
+          <tracked>0</tracked>
           <property>
             <propertyName>Path</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[/myJob/destinationDirectory]</value>
           </property>
         </actualParameters>
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
-        <stepName>copyCommander.log</stepName>
+        <stepName>grabCommander.log</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
         <condition />
@@ -451,25 +633,80 @@ $ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]
         <subproject>/plugins/EC-FileOps/project</subproject>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workspaceName />
         <actualParameters>
+          <tracked>0</tracked>
           <property>
             <propertyName>destinationFile</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[/myJob/destinationDirectory]</value>
           </property>
           <property>
             <propertyName>replaceDestinationIfPreexists</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>1</value>
           </property>
           <property>
             <propertyName>sourceFile</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[/server/Electric Cloud/dataDirectory]/logs/commander.log</value>
           </property>
         </actualParameters>
         <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>grabService.log copy</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description>Copy the service.log into the folder</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>local</resourceName>
+        <subprocedure>Copy</subprocedure>
+        <subproject>/plugins/EC-FileOps/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workspaceName />
+        <actualParameters>
+          <tracked>0</tracked>
+          <property>
+            <propertyName>destinationFile</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[/myJob/destinationDirectory]/service.log</value>
+          </property>
+          <property>
+            <propertyName>replaceDestinationIfPreexists</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>1</value>
+          </property>
+          <property>
+            <propertyName>sourceFile</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[/server/Electric Cloud/dataDirectory]/logs/service.log</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -580,9 +817,11 @@ sub convertTimeToEpoch {
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workingDirectory />
         <workspaceName />
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -652,9 +891,11 @@ closedir($logD);
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workingDirectory />
         <workspaceName />
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -743,9 +984,11 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workingDirectory />
         <workspaceName />
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -815,9 +1058,11 @@ sub directoryContent {
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workingDirectory />
         <workspaceName />
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -836,20 +1081,80 @@ sub directoryContent {
         <subproject>/plugins/EC-FileOps/project</subproject>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workspaceName />
         <actualParameters>
+          <tracked>0</tracked>
           <property>
             <propertyName>sourceFile</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[/myJob/destinationDirectory]</value>
           </property>
           <property>
             <propertyName>zipFile</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[/myJob/destinationDirectory].zip</value>
           </property>
         </actualParameters>
         <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>uploadBundleToSharefile</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description />
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <subprocedure>CreateFolderAndUploadFile</subprocedure>
+        <subproject>/plugins/EC-ShareFile/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workspaceName />
+        <actualParameters>
+          <tracked>0</tracked>
+          <property>
+            <propertyName>company</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>electric-cloud</value>
+          </property>
+          <property>
+            <propertyName>config</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[ShareFileCredentialName]</value>
+          </property>
+          <property>
+            <propertyName>folderToCreate</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>/clients/S-U/testing-users/uploads/$[/myJob/zendesk/ticketId]</value>
+          </property>
+          <property>
+            <propertyName>pathToFile</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[/myJob/destinationDirectory].zip</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
       <step>
@@ -868,28 +1173,42 @@ sub directoryContent {
         <subproject>/plugins/EC-Zendesk/project</subproject>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
         <workspaceName />
         <actualParameters>
+          <tracked>0</tracked>
           <property>
             <propertyName>comment</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
-            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+            <tracked>0</tracked>
+            <value>The following file have been uploaded  $[/myJob/output/sharefileURL]
+
+uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+
 It contains:
 
-$[/myJob/fileList]</value>
+$[/myJob/fileList]
+
+</value>
+          </property>
+          <property>
+            <propertyName>credential</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[ZendeskCredentialName]</value>
           </property>
           <property>
             <propertyName>ticketNumber</propertyName>
+            <counter>0</counter>
             <expandable>1</expandable>
+            <tracked>0</tracked>
             <value>$[/myJob/zendesk/ticketId]</value>
-          </property>
-          <property>
-            <propertyName>zendeskURL</propertyName>
-            <expandable>1</expandable>
-            <value>https://electriccloud.zendesk.com/api/v2</value>
           </property>
         </actualParameters>
         <propertySheet>
+          <tracked>0</tracked>
         </propertySheet>
       </step>
     </procedure>

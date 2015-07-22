@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.8</version>
+  <version>1.0.0.9</version>
   <label>EC-Support</label>
-  <description>A set of procedures to interact with Electric Cloud support.
-2015-03-30 admin Added list of files copied to ShareFile in the ticket</description>
+  <description>A set of procedures to interact with Electric Cloud support.</description>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 
@@ -14,5 +13,5 @@
          Typically, it is set to System or Step.
      -->
   <category>Administration</category>
- 	  <depends>EC-Core</depends>
+  <depends>EC-Core</depends>
 </plugin>
