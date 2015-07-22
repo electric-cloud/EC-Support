@@ -36,6 +36,7 @@
         <property>sharefileUploadDirectory</property> 
         <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
         <type>entry</type>
+        <value>/clients/X-Z/NAME/uploads</value>
         <required>1</required>
     </formElement> 
 
@@ -52,7 +53,7 @@
             <name>ElectricFlow</name> 
             <value>electricflow</value> 
         </option> 
-        <value>electriccommander</value> 
+        <value>electricflow</value> 
         <required>1</required>
     </formElement> 
 

@@ -20,7 +20,7 @@
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>10</value>
+        <value>11</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -32,7 +32,7 @@
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.10</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.11</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -361,6 +361,7 @@
         &lt;property>sharefileUploadDirectory&lt;/property> 
         &lt;documentation>The path to your EC-ShareFile uploads directory.&lt;/documentation> 
         &lt;type>entry&lt;/type>
+        &lt;value>/clients/X-Z/NAME/uploads&lt;/value>
         &lt;required>1&lt;/required>
     &lt;/formElement> 
 
@@ -377,7 +378,7 @@
             &lt;name>ElectricFlow&lt;/name> 
             &lt;value>electricflow&lt;/value> 
         &lt;/option> 
-        &lt;value>electriccommander&lt;/value> 
+        &lt;value>electricflow&lt;/value> 
         &lt;required>1&lt;/required>
     &lt;/formElement> 
 

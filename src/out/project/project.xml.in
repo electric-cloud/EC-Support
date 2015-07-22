@@ -21,7 +21,7 @@
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>10</value>
+        <value>11</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -31,7 +31,7 @@
         <tracked>0</tracked>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.10</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.11</value></property></propertySheet>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
