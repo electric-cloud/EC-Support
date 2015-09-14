@@ -14,6 +14,7 @@ $[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
 #
 #############################################################################
 my $timeString = "$[time]";
+my $serverResource = '$[serverResource]';	# name of the remote Server
 
 #############################################################################
 #
@@ -36,12 +37,26 @@ while (my $file = readdir(LOG)) {
     if ($fileModificationTime >= $serverEpochTime) {
     	$ec->createJobStep({
         	subproject   => "/plugins/EC-FileOps/project",
-            subprocedure => "Copy",
+            subprocedure => "Remote Copy - Native",
             jobStepName  => "Copy $file",
             actualParameter => [
-            	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => "$[/myJob/destinationDirectory]/$file"},
-            	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
+            	{actualParameterName => 'sourceFile',        
+                               value => "$logDir/$file"},
+            	{actualParameterName => 'sourceResourceName',   
+                               value => "$serverResource"},
+            	{actualParameterName => 'sourceWorkspaceName',   
+                               value => getP("/resources/$serverResource/workspaceName")?
+                               		getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},    
+                                    
+                {actualParameterName => 'destinationFile',         
+                               value => "$[destinationDirectory]/servers/$serverResource/"},
+            	{actualParameterName => 'destinationResourceName', 
+                               value => "$[targetServerResource]"},
+            	{actualParameterName => 'destinationWorkspaceName',   
+                               value => getP("/resources/$[targetServerResource]/workspaceName")?
+                               		getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},            	
             ],
         });
     }
@@ -87,4 +102,6 @@ sub convertTimeToEpoch {
     printf("Time of the incident: %s \n", $time) if ($DEBUG);
     return $time
 }
-    
+
+$[/plugins[EC-Admin]project/scripts/perlLibJSON]
+

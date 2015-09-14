@@ -39,32 +39,6 @@
         <type>entry</type>
     </formElement> 
 
-    <formElement> 
-        <label>Zendesk configuration</label> 
-        <property>zendeskConfiguration</property> 
-        <documentation>The name of the Zendesk configuration to use.</documentation> 
-        <type>entry</type>
-        <value>zendesk</value>
-        <required>1</required>
-    </formElement> 
-    
-    <formElement> 
-        <label>ShareFile configuration</label> 
-        <property>sharefileConfiguration</property> 
-        <documentation>The name of the ShareFile configuration to use.</documentation> 
-        <type>entry</type>
-        <value>sharefile</value>
-        <required>1</required>
-    </formElement> 
-
-    <formElement> 
-        <label>ShareFile upload directory</label> 
-        <property>sharefileUploadDirectory</property> 
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
-        <type>entry</type>
-        <value>/clients/X-Z/NAME/uploads</value>
-        <required>1</required>
-    </formElement> 
 
     <formElement> 
         <label>Agent List</label> 

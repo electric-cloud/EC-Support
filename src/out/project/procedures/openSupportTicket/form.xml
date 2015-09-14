@@ -16,31 +16,6 @@
     </formElement> 
 
     <formElement> 
-        <label>Zendesk credential</label> 
-        <property>ZendeskCredentialName</property> 
-        <documentation>The name of the credential attached to EC-Zendesk to access the service.</documentation> 
-        <type>entry</type>
-        <required>1</required>
-    </formElement> 
-
-   <formElement> 
-        <label>ShareFile credential</label> 
-        <property>ShareFileCredentialName</property> 
-        <documentation>The name of the credential attached to EC-ShareFile to access the service.</documentation> 
-        <type>entry</type>
-        <required>1</required>
-    </formElement> 
-
-    <formElement> 
-        <label>ShareFile upload directory</label> 
-        <property>sharefileUploadDirectory</property> 
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
-        <type>entry</type>
-        <value>/clients/X-Z/NAME/uploads</value>
-        <required>1</required>
-    </formElement> 
-
-    <formElement> 
         <label>Product</label> 
         <property>product</property> 
         <documentation>The name of the product with which you have an issue.</documentation> 
@@ -53,7 +28,41 @@
             <name>ElectricFlow</name> 
             <value>electricflow</value> 
         </option> 
-        <value>electricflow</value> 
+        <value>electriccommander</value> 
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>Product Version</label> 
+        <property>version</property> 
+        <documentation>Product version.</documentation> 
+        <type>entry</type>
+    </formElement> 
+
+    <formElement> 
+        <label>Zendesk configuration</label> 
+        <property>zendeskConfiguration</property> 
+        <documentation>The name of the Zendesk configuration to use.</documentation> 
+        <type>entry</type>
+        <value>zendesk</value>
+        <required>1</required>
+    </formElement> 
+    
+    <formElement> 
+        <label>ShareFile configuration</label> 
+        <property>sharefileConfiguration</property> 
+        <documentation>The name of the ShareFile configuration to use.</documentation> 
+        <type>entry</type>
+        <value>sharefile</value>
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>ShareFile upload directory</label> 
+        <property>sharefileUploadDirectory</property> 
+        <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
+        <type>entry</type>
+        <value>/clients/X-Z/NAME/uploads</value>
         <required>1</required>
     </formElement> 
 

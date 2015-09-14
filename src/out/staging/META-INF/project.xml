@@ -18,9 +18,10 @@
       <property>
         <propertyName>pluginBuildNumber</propertyName>
         <counter>0</counter>
+        <description />
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>11</value>
+        <value>14</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -32,7 +33,216 @@
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.11</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.14</value></property></propertySheet>
+    <procedure>
+      <procedureName>collectServerLogs</procedureName>
+      <description>a procedure to collect server logs</description>
+      <jobNameTemplate />
+      <resourceName />
+      <timeLimit />
+      <timeLimitUnits>minutes</timeLimitUnits>
+      <tracked>0</tracked>
+      <workspaceName />
+      <propertySheet>
+        <tracked>0</tracked>
+        <property>
+          <propertyName>ec_customEditorData</propertyName>
+          <tracked>0</tracked>
+          <propertySheet>
+            <tracked>0</tracked>
+            <property>
+              <propertyName>parameters</propertyName>
+              <tracked>0</tracked>
+              <propertySheet>
+                <tracked>0</tracked>
+                <property>
+                  <propertyName>destinationDirectory</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>jobNumber</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>serverResources</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>time</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+              </propertySheet>
+            </property>
+          </propertySheet>
+        </property>
+      </propertySheet>
+      <formalParameter>
+        <formalParameterName>destinationDirectory</formalParameterName>
+        <defaultValue />
+        <description>The directory in which to copy the logs.</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>jobNumber</formalParameterName>
+        <defaultValue />
+        <description>The ID of the job that generated the error. Will be used to collect the right logs</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>serverResources</formalParameterName>
+        <defaultValue />
+        <description>A list of resources or pools, comma separated</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>time</formalParameterName>
+        <defaultValue />
+        <description>The time at which the issue happened. Used to collect the right logs.</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <step>
+        <stepName>loop</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>$[/plugins[EC-Admin]/project/scripts/perlHeaderJSON]
+
+#
+# Parameters
+#
+my $serverResources = "$[serverResources]";
+
+#
+# global variables
+#
+my $targetServerResource="$[/myJobStep/assignedResourceName]";
+my %resourceHash=();
+
+#
+# Parse the list of servers
+foreach my $server (split(",", $serverResources)) {
+	$server =~ s/^\s*//;	# removing leading  spaces
+    $server =~ s/\s*$//;	# removing trailing spaces
+    
+	#
+	# Is this a pool?
+	my ($ok, $json)=InvokeCommander("IgnoreError SuppressLog", 'getResourcePool', $server);
+    if ($ok) {
+    	printf("Processing pool   $server\n");
+        foreach my $node($ec->getResourcesInPool($server)->findnodes("//resource")) {
+        	my $resName=$node->{resourceName};
+            printf("    processing server $resName\n");
+            $resourceHash{$resName}=1;
+        } 
+        next;
+    }
+    
+    #
+    # Check if it's a valid resource
+	my ($ok, $json)=InvokeCommander("IgnoreError SuppressLog", 'getResource', $server);
+    if ($ok) {
+    	printf("Processing server $server\n");
+        $resourceHash{$server}=1;
+    } else {
+    	printf("$server is not a recognized pool or resource\n");
+        exit(1);
+    }
+}
+
+printf("\n");
+foreach my $server (keys %resourceHash) {
+	printf("Collecting logs for %s\n", $server);
+	my ($ok, $json)=InvokeCommander("IgnoreError", 'getResource', $server);
+    my $node=$json->{responses}->[0]->{resource};
+    my $resName=$node->{resourceName};
+    
+    if (($node->{resourceDisabled} == 0) &amp;&amp; ($node->{agentState}->{alive} == 1) ) {
+    	$ec->createJobStep({
+              subprocedure=>"sub-collectServerLogs",
+              jobStepName => "collect-$resName",
+              actualParameter => [
+                {actualParameterName => "serverResource",       value => $resName},
+                {actualParameterName => "destinationDirectory", value => "$[destinationDirectory]"},
+                {actualParameterName => "targetServerResource", value => "$targetServerResource"},
+              ]});
+
+    }
+}
+
+$[/plugins[EC-Admin]/project/scripts/perlLibJSON]
+</command>
+        <condition />
+        <description />
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+    </procedure>
     <procedure>
       <procedureName>openSupportTicket</procedureName>
       <description>A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile</description>
@@ -56,48 +266,6 @@
                 <tracked>0</tracked>
                 <property>
                   <propertyName>ShareFileCredentialName</propertyName>
-                  <tracked>0</tracked>
-                  <propertySheet>
-                    <tracked>0</tracked>
-                    <property>
-                      <propertyName>formType</propertyName>
-                      <counter>0</counter>
-                      <expandable>1</expandable>
-                      <tracked>0</tracked>
-                      <value>standard</value>
-                    </property>
-                  </propertySheet>
-                </property>
-                <property>
-                  <propertyName>ShareFileCrendentialName</propertyName>
-                  <tracked>0</tracked>
-                  <propertySheet>
-                    <tracked>0</tracked>
-                    <property>
-                      <propertyName>formType</propertyName>
-                      <counter>0</counter>
-                      <expandable>1</expandable>
-                      <tracked>0</tracked>
-                      <value>standard</value>
-                    </property>
-                  </propertySheet>
-                </property>
-                <property>
-                  <propertyName>ZendeskCredentialName</propertyName>
-                  <tracked>0</tracked>
-                  <propertySheet>
-                    <tracked>0</tracked>
-                    <property>
-                      <propertyName>formType</propertyName>
-                      <counter>0</counter>
-                      <expandable>1</expandable>
-                      <tracked>0</tracked>
-                      <value>standard</value>
-                    </property>
-                  </propertySheet>
-                </property>
-                <property>
-                  <propertyName>ZendeskCrentialName</propertyName>
                   <tracked>0</tracked>
                   <propertySheet>
                     <tracked>0</tracked>
@@ -216,7 +384,21 @@
                   </propertySheet>
                 </property>
                 <property>
-                  <propertyName>sharefileUploadDirectory</propertyName>
+                  <propertyName>serverResources</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>sharefileConfiguration</propertyName>
                   <tracked>0</tracked>
                   <propertySheet>
                     <tracked>0</tracked>
@@ -300,7 +482,21 @@
                   </propertySheet>
                 </property>
                 <property>
-                  <propertyName>zendeskDirectory</propertyName>
+                  <propertyName>zendeskConfiguration</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>zendeskCredential</propertyName>
                   <tracked>0</tracked>
                   <propertySheet>
                     <tracked>0</tracked>
@@ -341,31 +537,6 @@
     &lt;/formElement> 
 
     &lt;formElement> 
-        &lt;label>Zendesk credential&lt;/label> 
-        &lt;property>ZendeskCredentialName&lt;/property> 
-        &lt;documentation>The name of the credential attached to EC-Zendesk to access the service.&lt;/documentation> 
-        &lt;type>entry&lt;/type>
-        &lt;required>1&lt;/required>
-    &lt;/formElement> 
-
-   &lt;formElement> 
-        &lt;label>ShareFile credential&lt;/label> 
-        &lt;property>ShareFileCredentialName&lt;/property> 
-        &lt;documentation>The name of the credential attached to EC-ShareFile to access the service.&lt;/documentation> 
-        &lt;type>entry&lt;/type>
-        &lt;required>1&lt;/required>
-    &lt;/formElement> 
-
-    &lt;formElement> 
-        &lt;label>ShareFile upload directory&lt;/label> 
-        &lt;property>sharefileUploadDirectory&lt;/property> 
-        &lt;documentation>The path to your EC-ShareFile uploads directory.&lt;/documentation> 
-        &lt;type>entry&lt;/type>
-        &lt;value>/clients/X-Z/NAME/uploads&lt;/value>
-        &lt;required>1&lt;/required>
-    &lt;/formElement> 
-
-    &lt;formElement> 
         &lt;label>Product&lt;/label> 
         &lt;property>product&lt;/property> 
         &lt;documentation>The name of the product with which you have an issue.&lt;/documentation> 
@@ -378,7 +549,41 @@
             &lt;name>ElectricFlow&lt;/name> 
             &lt;value>electricflow&lt;/value> 
         &lt;/option> 
-        &lt;value>electricflow&lt;/value> 
+        &lt;value>electriccommander&lt;/value> 
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Product Version&lt;/label> 
+        &lt;property>version&lt;/property> 
+        &lt;documentation>Product version.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Zendesk configuration&lt;/label> 
+        &lt;property>zendeskConfiguration&lt;/property> 
+        &lt;documentation>The name of the Zendesk configuration to use.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+        &lt;value>zendesk&lt;/value>
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+    
+    &lt;formElement> 
+        &lt;label>ShareFile configuration&lt;/label> 
+        &lt;property>sharefileConfiguration&lt;/property> 
+        &lt;documentation>The name of the ShareFile configuration to use.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+        &lt;value>sharefile&lt;/value>
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>ShareFile upload directory&lt;/label> 
+        &lt;property>sharefileUploadDirectory&lt;/property> 
+        &lt;documentation>The path to your EC-ShareFile uploads directory.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+        &lt;value>/clients/X-Z/NAME/uploads&lt;/value>
         &lt;required>1&lt;/required>
     &lt;/formElement> 
 
@@ -427,7 +632,7 @@
       </formalParameter>
       <formalParameter>
         <formalParameterName>product</formalParameterName>
-        <defaultValue>electriccommander</defaultValue>
+        <defaultValue>electricflow</defaultValue>
         <description>the name of the product that failed</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
@@ -435,18 +640,18 @@
         <type>select</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>ShareFileCredentialName</formalParameterName>
-        <defaultValue />
-        <description>Name of the credential to access Sharefile (attached to EC-ShareFile)</description>
+        <formalParameterName>serverResources</formalParameterName>
+        <defaultValue>local</defaultValue>
+        <description>A list of resources or pools, comma separated</description>
         <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+        <required>0</required>
         <tracked>0</tracked>
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>sharefileUploadDirectory</formalParameterName>
-        <defaultValue>/clients/X-Z/NAME/uploads</defaultValue>
-        <description>Enter your upload directory path on ShareFile</description>
+        <formalParameterName>sharefileConfiguration</formalParameterName>
+        <defaultValue>sharefile</defaultValue>
+        <description>Name of your Sharefile configuration</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
         <tracked>0</tracked>
@@ -480,9 +685,9 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>ZendeskCredentialName</formalParameterName>
-        <defaultValue />
-        <description>Name of the credential for Zendesk (accthed to the EC-Zendesk)</description>
+        <formalParameterName>zendeskConfiguration</formalParameterName>
+        <defaultValue>zendesk</defaultValue>
+        <description>The name of your Zendesk configuration</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
         <tracked>0</tracked>
@@ -530,10 +735,36 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
         </propertySheet>
       </step>
       <step>
+        <stepName>grabResource</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>ectool setProperty /myJob/assignedServerResource --value $[/myJobStep/assignedResourceName]
+</command>
+        <condition />
+        <description>Grab one of the commander server resources (in case of cluster)</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <shell />
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition>1</condition>
+        <condition>0</condition>
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -554,7 +785,7 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[ZendeskCredentialName]</value>
+            <value>$[zendeskConfiguration]</value>
           </property>
           <property>
             <propertyName>product</propertyName>
@@ -582,7 +813,7 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/myJob/serverVersion]</value>
+            <value>$[version]</value>
           </property>
         </actualParameters>
         <propertySheet>
@@ -642,7 +873,7 @@ $ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]
         <parallel>0</parallel>
         <precondition />
         <releaseMode>none</releaseMode>
-        <resourceName>local</resourceName>
+        <resourceName>$[/myJob/assignedServerResource]</resourceName>
         <subprocedure>CreateDirectory</subprocedure>
         <subproject>/plugins/EC-FileOps/project</subproject>
         <timeLimit />
@@ -664,19 +895,19 @@ $ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]
         </propertySheet>
       </step>
       <step>
-        <stepName>grabCommander.log</stepName>
+        <stepName>collectServerLogs</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
         <condition />
-        <description>Copy the commander log into the folder</description>
+        <description />
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <parallel>0</parallel>
         <precondition />
         <releaseMode>none</releaseMode>
-        <resourceName>local</resourceName>
-        <subprocedure>Copy</subprocedure>
-        <subproject>/plugins/EC-FileOps/project</subproject>
+        <resourceName />
+        <subprocedure>collectServerLogs</subprocedure>
+        <subproject />
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
         <tracked>0</tracked>
@@ -684,262 +915,34 @@ $ec->setProperty("/myJob/destinationDirectory", "$cwd/$[/myJob/zendesk/ticketId]
         <actualParameters>
           <tracked>0</tracked>
           <property>
-            <propertyName>destinationFile</propertyName>
+            <propertyName>destinationDirectory</propertyName>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
             <value>$[/myJob/destinationDirectory]</value>
           </property>
           <property>
-            <propertyName>replaceDestinationIfPreexists</propertyName>
+            <propertyName>jobNumber</propertyName>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>1</value>
+            <value>$[jobNumber]</value>
           </property>
           <property>
-            <propertyName>sourceFile</propertyName>
+            <propertyName>serverResources</propertyName>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/server/Electric Cloud/dataDirectory]/logs/commander.log</value>
+            <value>$[serverResources]</value>
+          </property>
+          <property>
+            <propertyName>time</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[time]</value>
           </property>
         </actualParameters>
-        <propertySheet>
-          <tracked>0</tracked>
-        </propertySheet>
-      </step>
-      <step>
-        <stepName>grabService.log copy</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <condition />
-        <description>Copy the service.log into the folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <parallel>0</parallel>
-        <precondition />
-        <releaseMode>none</releaseMode>
-        <resourceName>local</resourceName>
-        <subprocedure>Copy</subprocedure>
-        <subproject>/plugins/EC-FileOps/project</subproject>
-        <timeLimit />
-        <timeLimitUnits>minutes</timeLimitUnits>
-        <tracked>0</tracked>
-        <workspaceName />
-        <actualParameters>
-          <tracked>0</tracked>
-          <property>
-            <propertyName>destinationFile</propertyName>
-            <counter>0</counter>
-            <expandable>1</expandable>
-            <tracked>0</tracked>
-            <value>$[/myJob/destinationDirectory]/service.log</value>
-          </property>
-          <property>
-            <propertyName>replaceDestinationIfPreexists</propertyName>
-            <counter>0</counter>
-            <expandable>1</expandable>
-            <tracked>0</tracked>
-            <value>1</value>
-          </property>
-          <property>
-            <propertyName>sourceFile</propertyName>
-            <counter>0</counter>
-            <expandable>1</expandable>
-            <tracked>0</tracked>
-            <value>$[/server/Electric Cloud/dataDirectory]/logs/service.log</value>
-          </property>
-        </actualParameters>
-        <propertySheet>
-          <tracked>0</tracked>
-        </propertySheet>
-      </step>
-      <step>
-        <stepName>collectTimeBasedLogs</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command>#############################################################################
-#
-# Copyright Electric-Cloud 2015
-#
-#############################################################################
-use Time::Local;
-use Cwd;
-
-$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
-
-#############################################################################
-#
-# Parameters
-#
-#############################################################################
-my $timeString = "$[time]";
-
-#############################################################################
-#
-# Global Variables
-#
-#############################################################################
-my $DEBUG=1;
-my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
-my $cwd= getcwd();
-
-my $serverEpochTime=convertTimeToEpoch($timeString);
-
-opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
-
-while (my $file = readdir(LOG)) {
-    next if ($file !~ m/commander[\-\d.]*.log.zip/);
-    # printf("Processing $file\n") if ($DEBUG);
-    my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
-    # printf("    time: %d\n", $fileModificationTime);
-    if ($fileModificationTime >= $serverEpochTime) {
-    	$ec->createJobStep({
-        	subproject   => "/plugins/EC-FileOps/project",
-            subprocedure => "Copy",
-            jobStepName  => "Copy $file",
-            actualParameter => [
-            	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => "$[/myJob/destinationDirectory]/$file"},
-            	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
-            ],
-        });
-    }
-}
-closedir(LOG);
-
-
-#############################################################################
-#
-# convertTime
-# Time is of format 'MM/DD/YYYY 11:35:00' or 11:35:00 or 11:35
-#############################################################################
-sub convertTimeToEpoch {
-    my $timeStr=shift @_;
-    
-    # Get passed time
-    my($date, $time);
-
-    if ($timeStr =~ m/\s+/) {
-        ($date, $time)=split('\s+', $timeStr);
-    } else {
-        $time=$timeStr;
-        $date="";
-    }
-    my ($year, $month, $day) = split(/[.\/\-]/, $date);
-    my ($hour, $min, $sec)   = split(/[:]/, $time);
-
-    printf("Incident time (original): %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
-
-    # get server time to fill missing values
-    my $localTime = "$[/timestamp MM-dd-yyyy HH:mm]";
-    my ($localMonth,$localDay,$localYear,$localHour,$localMinute) = split(/[\s\-:]+/, $localTime);
-
-    printf("Local month: $localMonth\n") if ($DEBUG);
-    $year = $localYear if ($year == 0);
-    $year += 2000 if ($year &lt; 100);
-    $month = $localMonth if ($month == 0);
-    $day   = $localDay if ($day == 0);
-
-    printf("Incident time: %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
-    my $time = timelocal(0,$min,$hour,$day,$month-1,$year);
-
-    printf("Time of the incident: %s \n", $time) if ($DEBUG);
-    return $time
-}
-    
-</command>
-        <condition>$[/javascript "$[time]" != "" ]</condition>
-        <description>Collect the logs based on a time</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName />
-        <parallel>0</parallel>
-        <postProcessor />
-        <precondition />
-        <releaseMode>none</releaseMode>
-        <resourceName>local</resourceName>
-        <shell>ec-perl</shell>
-        <timeLimit />
-        <timeLimitUnits>minutes</timeLimitUnits>
-        <tracked>0</tracked>
-        <workingDirectory />
-        <workspaceName />
-        <propertySheet>
-          <tracked>0</tracked>
-        </propertySheet>
-      </step>
-      <step>
-        <stepName>collectJobIdBasedLogs</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command>#############################################################################
-#
-# Copyright Electric-Cloud 2015
-#
-#############################################################################
-use Cwd;
-
-$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
-
-#############################################################################
-#
-# Parameters
-#
-#############################################################################
-my $jobNumber = "$[jobNumber]";
-
-#############################################################################
-#
-# Global Variables
-#
-#############################################################################
-my $DEBUG=1;
-my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
-my $cwd= getcwd();
-
-opendir(my $logD, $logDir) or die("Cannot open the log directory\n$!");
-
-while (my $file = readdir($logD)) {
-    next if ($file !~ m/commander[\-\d.]*.log.zip/);
-    printf("Processing $file\n") if ($DEBUG);
-
-my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&amp;1");
-    if ($exitCode == 0) {
-    	printf("    Copying\n");
-    	$ec->createJobStep({
-        	subproject   => "/plugins/EC-FileOps/project",
-            subprocedure => "Copy",
-            jobStepName  => "Copy $file",
-            actualParameter => [
-            	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => "/$[/myJob/destinationDirectory]"},
-            	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
-            ],
-        });
-    }
-}
-closedir($logD);
-
-
-</command>
-        <condition>$[/javascript "$[jobNumber]" != "" ]</condition>
-        <description>Collect the logs based on a time</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName />
-        <parallel>0</parallel>
-        <postProcessor />
-        <precondition />
-        <releaseMode>none</releaseMode>
-        <resourceName>local</resourceName>
-        <shell>ec-perl</shell>
-        <timeLimit />
-        <timeLimitUnits>minutes</timeLimitUnits>
-        <tracked>0</tracked>
-        <workingDirectory />
-        <workspaceName />
         <propertySheet>
           <tracked>0</tracked>
         </propertySheet>
@@ -1100,7 +1103,7 @@ sub directoryContent {
         <postProcessor />
         <precondition />
         <releaseMode>none</releaseMode>
-        <resourceName>local</resourceName>
+        <resourceName>$[/myJob/assignedServerResource]</resourceName>
         <shell>ec-perl</shell>
         <timeLimit />
         <timeLimitUnits>minutes</timeLimitUnits>
@@ -1175,7 +1178,7 @@ sub directoryContent {
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>electric-cloud</value>
+            <value>Electric Cloud</value>
           </property>
           <property>
             <propertyName>config</propertyName>
@@ -1189,7 +1192,7 @@ sub directoryContent {
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>/clients/S-U/testing-users/uploads/$[/myJob/zendesk/ticketId]</value>
+            <value>$[sharefileUploadDirectory]/$[/myJob/zendesk/ticketId]</value>
           </property>
           <property>
             <propertyName>pathToFile</propertyName>
@@ -1207,7 +1210,7 @@ sub directoryContent {
         <stepName>commentForFiles</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition />
+        <condition>0</condition>
         <description />
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -1228,21 +1231,17 @@ sub directoryContent {
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>The following file have been uploaded on ShareFile
-          $[sharefileUploadDirectory]/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
-
+            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
 It contains:
 
-$[/myJob/fileList]
-
-</value>
+$[/myJob/fileList]</value>
           </property>
           <property>
             <propertyName>credential</propertyName>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[ZendeskCredentialName]</value>
+            <value>$[zendeskConfiguration]</value>
           </property>
           <property>
             <propertyName>ticketNumber</propertyName>
@@ -1252,6 +1251,639 @@ $[/myJob/fileList]
             <value>$[/myJob/zendesk/ticketId]</value>
           </property>
         </actualParameters>
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+    </procedure>
+    <procedure>
+      <procedureName>sub-collectServerLogs</procedureName>
+      <description>A sub-procedure to collect the logs from 1 commander server</description>
+      <jobNameTemplate />
+      <resourceName>$[serverResource]</resourceName>
+      <timeLimit />
+      <timeLimitUnits>minutes</timeLimitUnits>
+      <tracked>0</tracked>
+      <workspaceName />
+      <propertySheet>
+        <tracked>0</tracked>
+        <property>
+          <propertyName>ec_customEditorData</propertyName>
+          <tracked>0</tracked>
+          <propertySheet>
+            <tracked>0</tracked>
+            <property>
+              <propertyName>parameters</propertyName>
+              <tracked>0</tracked>
+              <propertySheet>
+                <tracked>0</tracked>
+                <property>
+                  <propertyName>agents</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>destinationDirectory</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>jobNumber</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>product</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>options</propertyName>
+                      <tracked>0</tracked>
+                      <propertySheet>
+                        <tracked>0</tracked>
+                        <property>
+                          <propertyName>option1</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>ElectricCommander</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>electriccommander</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option2</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>ElectricFlow</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>electricflow</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>optionCount</propertyName>
+                          <counter>0</counter>
+                          <expandable>1</expandable>
+                          <tracked>0</tracked>
+                          <value>2</value>
+                        </property>
+                        <property>
+                          <propertyName>type</propertyName>
+                          <counter>0</counter>
+                          <expandable>1</expandable>
+                          <tracked>0</tracked>
+                          <value>list</value>
+                        </property>
+                      </propertySheet>
+                    </property>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>serverResource</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>stepId</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>targetServerResource</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ticketDescription</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>ticketTitle</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>time</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
+                  <propertyName>version</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+              </propertySheet>
+            </property>
+          </propertySheet>
+        </property>
+        <property>
+          <propertyName>ec_parameterForm</propertyName>
+          <counter>0</counter>
+          <description />
+          <expandable>1</expandable>
+          <tracked>0</tracked>
+          <value>&lt;editor>
+    &lt;formElement> 
+        &lt;label>Title&lt;/label> 
+        &lt;property>ticketTitle&lt;/property> 
+        &lt;documentation>The title of your ticket.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Description&lt;/label> 
+        &lt;property>ticketDescription&lt;/property> 
+        &lt;documentation>The full description of your ticket.&lt;/documentation> 
+        &lt;type>textarea&lt;/type>
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Product&lt;/label> 
+        &lt;property>product&lt;/property> 
+        &lt;documentation>The name of the product with which you have an issue.&lt;/documentation> 
+        &lt;type>select&lt;/type> 
+        &lt;option> 
+            &lt;name>ElectricCommander&lt;/name> 
+            &lt;value>electriccommander&lt;/value> 
+        &lt;/option> 
+        &lt;option> 
+            &lt;name>ElectricFlow&lt;/name> 
+            &lt;value>electricflow&lt;/value> 
+        &lt;/option> 
+        &lt;value>electriccommander&lt;/value> 
+        &lt;required>1&lt;/required>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Product Version&lt;/label> 
+        &lt;property>version&lt;/property> 
+        &lt;documentation>Product version.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+    &lt;/formElement> 
+
+
+    &lt;formElement> 
+        &lt;label>Agent List&lt;/label> 
+        &lt;property>agents&lt;/property> 
+        &lt;documentation>The comma separated list of agents where the problem occured.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Time&lt;/label> 
+        &lt;property>time&lt;/property> 
+        &lt;documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+    &lt;/formElement> 
+
+    &lt;formElement> 
+        &lt;label>Job Id&lt;/label> 
+        &lt;property>jobNumber&lt;/property> 
+        &lt;documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.&lt;/documentation> 
+        &lt;type>entry&lt;/type>
+    &lt;/formElement> 
+
+&lt;/editor>
+</value>
+        </property>
+      </propertySheet>
+      <formalParameter>
+        <formalParameterName>destinationDirectory</formalParameterName>
+        <defaultValue />
+        <description>Directory where to copy the logs on the target system</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>serverResource</formalParameterName>
+        <defaultValue />
+        <description>The name of the commander server resource to grab the  logs from</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>targetServerResource</formalParameterName>
+        <defaultValue />
+        <description>Name of the resource onto which to copy the logs</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <step>
+        <stepName>copyCommander_log</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <condition />
+        <description />
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>$[serverResource]</resourceName>
+        <subprocedure>Remote Copy - Native</subprocedure>
+        <subproject>/plugins/EC-FileOps/project</subproject>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workspaceName />
+        <actualParameters>
+          <tracked>0</tracked>
+          <property>
+            <propertyName>destinationFile</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[destinationDirectory]/servers/$[serverResource]/</value>
+          </property>
+          <property>
+            <propertyName>destinationResourceName</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[targetServerResource]</value>
+          </property>
+          <property>
+            <propertyName>destinationWorkspaceName</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[/javascript (getProperty("/resources/$[targetServerResource]/workspaceName") == "")? "default":resources.$[serverResource].workspaceName ]</value>
+          </property>
+          <property>
+            <propertyName>sourceFile</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[/server/Electric Cloud/dataDirectory]/logs/*commander.log</value>
+          </property>
+          <property>
+            <propertyName>sourceResourceName</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[serverResource]</value>
+          </property>
+          <property>
+            <propertyName>sourceWorkspaceName</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[/javascript ( getProperty("/resources/$[serverResource]/workspaceName") == "" ) ? "default" : resources.$[serverResource].workspaceName ]</value>
+          </property>
+        </actualParameters>
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectTimeBasedLogs</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+use Time::Local;
+use Cwd;
+
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#############################################################################
+#
+# Parameters
+#
+#############################################################################
+my $timeString = "$[time]";
+my $serverResource = '$[serverResource]';	# name of the remote Server
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $DEBUG=1;
+my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
+my $cwd= getcwd();
+
+my $serverEpochTime=convertTimeToEpoch($timeString);
+
+opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
+
+while (my $file = readdir(LOG)) {
+    next if ($file !~ m/commander[\-\d.]*.log.zip/);
+    # printf("Processing $file\n") if ($DEBUG);
+    my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
+    # printf("    time: %d\n", $fileModificationTime);
+    if ($fileModificationTime >= $serverEpochTime) {
+    	$ec->createJobStep({
+        	subproject   => "/plugins/EC-FileOps/project",
+            subprocedure => "Remote Copy - Native",
+            jobStepName  => "Copy $file",
+            actualParameter => [
+            	{actualParameterName => 'sourceFile',        
+                               value => "$logDir/$file"},
+            	{actualParameterName => 'sourceResourceName',   
+                               value => "$serverResource"},
+            	{actualParameterName => 'sourceWorkspaceName',   
+                               value => getP("/resources/$serverResource/workspaceName")?
+                               		getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},    
+                                    
+                {actualParameterName => 'destinationFile',         
+                               value => "$[destinationDirectory]/servers/$serverResource/"},
+            	{actualParameterName => 'destinationResourceName', 
+                               value => "$[targetServerResource]"},
+            	{actualParameterName => 'destinationWorkspaceName',   
+                               value => getP("/resources/$[targetServerResource]/workspaceName")?
+                               		getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},            	
+            ],
+        });
+    }
+}
+closedir(LOG);
+
+
+#############################################################################
+#
+# convertTime
+# Time is of format 'MM/DD/YYYY 11:35:00' or 11:35:00 or 11:35
+#############################################################################
+sub convertTimeToEpoch {
+    my $timeStr=shift @_;
+    
+    # Get passed time
+    my($date, $time);
+
+    if ($timeStr =~ m/\s+/) {
+        ($date, $time)=split('\s+', $timeStr);
+    } else {
+        $time=$timeStr;
+        $date="";
+    }
+    my ($year, $month, $day) = split(/[.\/\-]/, $date);
+    my ($hour, $min, $sec)   = split(/[:]/, $time);
+
+    printf("Incident time (original): %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
+
+    # get server time to fill missing values
+    my $localTime = "$[/timestamp MM-dd-yyyy HH:mm]";
+    my ($localMonth,$localDay,$localYear,$localHour,$localMinute) = split(/[\s\-:]+/, $localTime);
+
+    printf("Local month: $localMonth\n") if ($DEBUG);
+    $year = $localYear if ($year == 0);
+    $year += 2000 if ($year &lt; 100);
+    $month = $localMonth if ($month == 0);
+    $day   = $localDay if ($day == 0);
+
+    printf("Incident time: %s-%s-%s %s:%s\n", $year, $month, $day, $hour, $min) if ($DEBUG);
+    my $time = timelocal(0,$min,$hour,$day,$month-1,$year);
+
+    printf("Time of the incident: %s \n", $time) if ($DEBUG);
+    return $time
+}
+
+$[/plugins[EC-Admin]project/scripts/perlLibJSON]
+
+</command>
+        <condition>$[/javascript "$[time]" != "" ]</condition>
+        <description>Collect the logs based on a time</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>$[serverResource]</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>collectJobIdBasedLogs</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>#############################################################################
+#
+# Copyright Electric-Cloud 2015
+#
+#############################################################################
+use Cwd;
+
+$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#############################################################################
+#
+# Parameters
+#
+#############################################################################
+my $jobNumber = "$[jobNumber]";
+my $serverResource = "$[serverResource]";
+
+#############################################################################
+#
+# Global Variables
+#
+#############################################################################
+my $DEBUG=1;
+my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
+my $cwd= getcwd();
+
+opendir(my $logD, $logDir) or die("Cannot open the log directory\n$!");
+
+while (my $file = readdir($logD)) {
+    next if ($file !~ m/commander[\-\d.]*.log.zip/);
+    printf("Processing $file\n") if ($DEBUG);
+
+my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&amp;1");
+    if ($exitCode == 0) {
+    	printf("    Copying\n");
+    	$ec->createJobStep({
+        	subproject   => "/plugins/EC-FileOps/project",
+            subprocedure => "Copy",
+            jobStepName  => "Copy $file",
+            actualParameter => [
+            	{actualParameterName => 'sourceFile',        
+                               value => "$logDir/$file"},
+            	{actualParameterName => 'sourceResourceName',   
+                               value => "$serverResource"},
+            	{actualParameterName => 'sourceWorkspaceName',   
+                               value => getP("/resources/$serverResource/workspaceName")?
+                                    getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},    
+                                    
+            	{actualParameterName => 'destinationFile',         
+                               value => "$[destinationDirectory]/servers/$serverResource/"},
+            	{actualParameterName => 'destinationResourceName', 
+                               value => "$[targetServerResource]"},
+            	{actualParameterName => 'destinationWorkspaceName',   
+                               	value => getP("/resources/$[targetServerResource]/workspaceName")?
+                                	getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},            	
+            ],
+        });
+    }
+}
+closedir($logD);
+
+$[/plugins[EC-Admin]project/scripts/perlLibJSON]
+
+
+</command>
+        <condition>$[/javascript "$[jobNumber]" != "" ]</condition>
+        <description>Collect the logs based on a time</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName>$[serverResource]</resourceName>
+        <shell>ec-perl</shell>
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory />
+        <workspaceName />
         <propertySheet>
           <tracked>0</tracked>
         </propertySheet>

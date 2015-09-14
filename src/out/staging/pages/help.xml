@@ -7,13 +7,13 @@
     <meta content="text/html; charset=us-ascii" http-equiv="content-type" />
 
     <title>Electric Commander Plugin for EC-Support</title>
-    <link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.11/pluginhelp.css" type="text/css" media= "screen" />
+    <link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.14/pluginhelp.css" type="text/css" media= "screen" />
 </head>
 
 <body>
     <div class="help">
       <h1>EC-Support</h1>
-      <p>Plugin Version 1.0.0.11</p>
+      <p>Plugin Version 1.0.0.14</p>
       <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
       <p>This is where your help should go.</p>

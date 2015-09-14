@@ -13,6 +13,7 @@ $[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
 #
 #############################################################################
 my $jobNumber = "$[jobNumber]";
+my $serverResource = "$[serverResource]";
 
 #############################################################################
 #
@@ -37,13 +38,29 @@ my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&1");
             subprocedure => "Copy",
             jobStepName  => "Copy $file",
             actualParameter => [
-            	{actualParameterName => 'sourceFile',      value => "$logDir/$file"},
-            	{actualParameterName => 'destinationFile', value => "/$[/myJob/destinationDirectory]"},
-            	{actualParameterName => 'replaceDestinationIfPreexists', value => 1},
+            	{actualParameterName => 'sourceFile',        
+                               value => "$logDir/$file"},
+            	{actualParameterName => 'sourceResourceName',   
+                               value => "$serverResource"},
+            	{actualParameterName => 'sourceWorkspaceName',   
+                               value => getP("/resources/$serverResource/workspaceName")?
+                                    getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},    
+                                    
+            	{actualParameterName => 'destinationFile',         
+                               value => "$[destinationDirectory]/servers/$serverResource/"},
+            	{actualParameterName => 'destinationResourceName', 
+                               value => "$[targetServerResource]"},
+            	{actualParameterName => 'destinationWorkspaceName',   
+                               	value => getP("/resources/$[targetServerResource]/workspaceName")?
+                                	getP("/resources/$[targetServerResource]/workspaceName"):
+                               		"default"},            	
             ],
         });
     }
 }
 closedir($logD);
+
+$[/plugins[EC-Admin]project/scripts/perlLibJSON]
 
 
