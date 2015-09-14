@@ -17,12 +17,122 @@
         <value>pickListOnly</value>
       </property>
       <property>
+        <propertyName>help</propertyName>
+        <counter>0</counter>
+        <description>The help page for EC-Support</description>
+        <expandable>1</expandable>
+        <tracked>0</tracked>
+        <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" /&gt;
+    &lt;title&gt;EC-Support Plugin&lt;/title&gt;
+    &lt;link rel="stylesheet" href= "../../plugins/@PLUGIN_NAME@/pluginhelp.css" type="text/css" media= "screen" /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class="help"&gt;
+        &lt;h1&gt;EC-Support&lt;/h1&gt;
+		&lt;p&gt;Plugin Version @PLUGIN_VERSION@&lt;/p&gt;
+        &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" /&gt;
+
+        &lt;p&gt;EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
+        &lt;a href="/commander/pages/EC-Zendesk/help"&gt;EC-Zendesk&lt;/a&gt; and 
+        &lt;a href="/commander/pages/EC-ShareFile/help"&gt;EC-ShareFile&lt;/a&gt; plugins.&lt;/p&gt;
+
+		&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this plugin was part of the bundle who helped Laurent Rochette and Nikhil Vaze won "Best in Show" at the Citrix Synergy 2015 conference.&lt;/p&gt;
+
+		&lt;h2&gt;ElectricFlow Integration to ElectricCloud support&lt;/h2&gt;
+
+		&lt;h1&gt;Plugin Procedures&lt;/h1&gt;
+
+	    &lt;p&gt;
+	        IMPORTANT: For all parameter descriptions below, required
+	        parameters are shown in &lt;span class="required"&gt;bold
+	        italics&lt;/span&gt;.
+	    &lt;/p&gt;
+    
+    	&lt;h2&gt;openSupportTicket&lt;/h2&gt;
+
+        &lt;p&gt;This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the requried logs and upload them on ShareFile automcatically.
+    	&lt;/p&gt;
+
+	    &lt;table class="grid"&gt;
+	        &lt;thead&gt;
+	            &lt;tr&gt;
+	                &lt;th&gt;Parameter&lt;/th&gt;
+
+	                &lt;th&gt;Description&lt;/th&gt;
+	            &lt;/tr&gt;
+	        &lt;/thead&gt;
+
+	        &lt;tbody&gt;
+	            &lt;tr&gt;
+	                &lt;td class="required"&gt;Title&lt;/td&gt;
+	                &lt;td&gt;The subject of your ticket.&lt;/td&gt;
+	            &lt;/tr&gt;
+	            &lt;tr&gt;
+	                &lt;td class="required"&gt;Description&lt;/td&gt;
+	                &lt;td&gt;The complete description of your ticket. Be as specific as possible.&lt;/td&gt;
+	            &lt;/tr&gt;
+	            &lt;tr&gt;
+	                &lt;td class="required"&gt;Product&lt;/td&gt;
+	                &lt;td&gt;ElectricFlow or ElectricCommander&lt;/td&gt;
+	            &lt;/tr&gt;
+	           &lt;tr&gt;
+	                &lt;td class="required"&gt;Server Resources&lt;/td&gt;
+	                &lt;td&gt;The resource associated to your server (default: local). If you have a clustered configuration, enter a comma separated list of agents or a pool.&lt;/td&gt;
+	            &lt;/tr&gt;
+           		&lt;tr&gt;
+	                &lt;td class="required"&gt;Zendesk Configuration&lt;/td&gt;
+	                &lt;td&gt;The configuration in the &lt;a href="/commander/pages/EC-Zendesk/help"&gt;EC-Zendesk plugin&lt;/a&gt; that contain login/password to connect to Zendesk and open a ticket.&lt;/td&gt;
+	            &lt;/tr&gt;
+           		&lt;tr&gt;
+	                &lt;td class="required"&gt;ShareFile Configuration&lt;/td&gt;
+	                &lt;td&gt;The configuration in the &lt;a href="/commander/pages/EC-ShareFile/help"&gt;EC-ShareFile plugin&lt;/a&gt; that contain login/password to connect to ShareFile to upload the logs.&lt;/td&gt;
+	            &lt;/tr&gt;
+           		&lt;tr&gt;
+	                &lt;td class="required"&gt;ShareFile Upload Directory&lt;/td&gt;
+	                &lt;td&gt;Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads.&lt;/td&gt;
+	            &lt;/tr&gt;
+           		&lt;tr&gt;
+	                &lt;td&gt;Agent List&lt;/td&gt;
+	                &lt;td&gt;This optional parameter allows to  pass a list of agents -commad separated- for which the logs will be gathered and uploaded automatically.&lt;/td&gt;
+	            &lt;/tr&gt;		        
+           		&lt;tr&gt;
+	                &lt;td&gt;Time&lt;/td&gt;
+	                &lt;td&gt;If this optional parameter is set, all the commander logs from that time on will be gathered from all servers and uploaded automatically.&lt;/td&gt;
+	            &lt;/tr&gt;		        
+           		&lt;tr&gt;
+	                &lt;td&gt;Job Id&lt;/td&gt;
+	                &lt;td&gt;If this optional parameter is set, all the commander logs containing this jobId will be gathered from all servers and uploaded automatically.&lt;/td&gt;
+	            &lt;/tr&gt;		        
+	        &lt;/tbody&gt;
+    	&lt;/table&gt;
+    	&lt;img src="../../plugins/@PLUGIN_KEY@/images/help/openSupportTicket.png" alt="form" border="1"/&gt;&lt;/div&gt;
+
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+      </property>
+      <property>
         <propertyName>pluginBuildNumber</propertyName>
         <counter>0</counter>
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>14</value>
+        <value>16</value>
+      </property>
+      <property>
+        <propertyName>pluginDependencies</propertyName>
+        <counter>0</counter>
+        <description>Minimum version of required plugins</description>
+        <expandable>1</expandable>
+        <tracked>0</tracked>
+        <value>EC-ShareFile,1.1.1
+EC-Zendesk,1.2.2</value>
       </property>
       <property>
         <propertyName>version</propertyName>
@@ -346,6 +456,20 @@
                   </propertySheet>
                 </property>
                 <property>
+                  <propertyName>sharefileUploadDirectory</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
                   <propertyName>stepId</propertyName>
                   <tracked>0</tracked>
                   <propertySheet>
@@ -496,6 +620,15 @@
         <formalParameterName>sharefileConfiguration</formalParameterName>
         <defaultValue>sharefile</defaultValue>
         <description>Name of your Sharefile configuration</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>0</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>sharefileUploadDirectory</formalParameterName>
+        <defaultValue/>
+        <description>Private directory on ShareFile on where to upload the logs</description>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
         <tracked>0</tracked>
