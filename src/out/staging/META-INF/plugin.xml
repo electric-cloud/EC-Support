@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.17</version>
+  <version>1.0.0.19</version>
   <label>EC-Support</label>
   <description>A set of procedures to interact with Electric Cloud support.
 2015-09-14 admin New help page</description>
