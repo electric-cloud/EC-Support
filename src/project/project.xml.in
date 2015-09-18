@@ -123,16 +123,19 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>24</value>
+        <value>26</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
         <counter>0</counter>
-        <description>Minimum version of required plugins</description>
+        <description>Minimum version of required plugins
+
+</description>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>EC-ShareFile,1.1.1
-EC-Zendesk,1.2.2</value>
+        <value>EC-Zendesk:1.2.2
+EC-ShareFile:1.1.1
+</value>
       </property>
       <property>
         <propertyName>version</propertyName>
