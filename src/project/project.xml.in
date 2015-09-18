@@ -123,10 +123,10 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>22</value>
+        <value>23</value>
       </property>
       <property>
-        <propertyName>pluginDependencies</propertyName>
+        <propertyName>pluginDependencies.xxx</propertyName>
         <counter>0</counter>
         <description>Minimum version of required plugins</description>
         <expandable>1</expandable>
