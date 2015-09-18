@@ -123,7 +123,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>19</value>
+        <value>20</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>

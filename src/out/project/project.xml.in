@@ -29,13 +29,13 @@
 &lt;head&gt;
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" /&gt;
     &lt;title&gt;EC-Support Plugin&lt;/title&gt;
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.19/pluginhelp.css" type="text/css" media= "screen" /&gt;
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.20/pluginhelp.css" type="text/css" media= "screen" /&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
     &lt;div class="help"&gt;
         &lt;h1&gt;EC-Support&lt;/h1&gt;
-		&lt;p&gt;Plugin Version 1.0.0.19&lt;/p&gt;
+		&lt;p&gt;Plugin Version 1.0.0.20&lt;/p&gt;
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" /&gt;
 
         &lt;p&gt;EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -123,7 +123,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>19</value>
+        <value>20</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -142,7 +142,7 @@ EC-Zendesk,1.2.2</value>
         <tracked>0</tracked>
         <value>1.0.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.19</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.20</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>
