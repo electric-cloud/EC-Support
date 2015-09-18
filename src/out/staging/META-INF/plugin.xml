@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.0.0.27</version>
+  <version>1.0.0.28</version>
   <label>EC-Support</label>
-  <description>A set of procedures to interact with Electric Cloud support.
-2015-09-18 admin New help page</description>
+  <description>A set of procedures to interact with Electric Cloud support.</description>
   <help>help.xml</help>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
