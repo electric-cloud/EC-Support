@@ -87,7 +87,7 @@
 	            </tr>		        
 	        </tbody>
     	</table>
-    	<img src="../../plugins/@PLUGIN_KEY@/images/help/openSupportTicket.png" alt="form" border="1"/></img>
+    	<img src="../../plugins/@PLUGIN_KEY@/images/help/openSupportTicket.png" alt="form" border="1"/>
 
 	</div>
 </body>

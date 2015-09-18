@@ -28,13 +28,13 @@
 &lt;head>
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     &lt;title>EC-Support Plugin&lt;/title>
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.28/pluginhelp.css" type="text/css" media= "screen" />
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.29/pluginhelp.css" type="text/css" media= "screen" />
 &lt;/head>
 
 &lt;body>
     &lt;div class="help">
         &lt;h1>EC-Support&lt;/h1>
-		&lt;p>Plugin Version 1.0.0.28&lt;/p>
+		&lt;p>Plugin Version 1.0.0.29&lt;/p>
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         &lt;p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -110,7 +110,7 @@
 	            &lt;/tr>		        
 	        &lt;/tbody>
     	&lt;/table>
-    	&lt;img src="../../plugins/EC-Support/images/help/openSupportTicket.png" alt="form" border="1"/>&lt;/img>
+    	&lt;img src="../../plugins/EC-Support/images/help/openSupportTicket.png" alt="form" border="1"/>
 
 	&lt;/div>
 &lt;/body>
@@ -122,7 +122,7 @@
         <description />
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>28</value>
+        <value>29</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -146,7 +146,7 @@ EC-ShareFile  :1.1.1
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.28</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.29</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>

@@ -111,7 +111,7 @@
 	            &lt;/tr&gt;		        
 	        &lt;/tbody&gt;
     	&lt;/table&gt;
-    	&lt;img src="../../plugins/@PLUGIN_KEY@/images/help/openSupportTicket.png" alt="form" border="1"/&gt;&lt;/img&gt;
+    	&lt;img src="../../plugins/@PLUGIN_KEY@/images/help/openSupportTicket.png" alt="form" border="1"/&gt;
 
 	&lt;/div&gt;
 &lt;/body&gt;
@@ -123,7 +123,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>28</value>
+        <value>29</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
