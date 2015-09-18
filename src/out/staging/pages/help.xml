@@ -5,13 +5,13 @@
 <head>
     <meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     <title>EC-Support Plugin</title>
-    <link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.29/pluginhelp.css" type="text/css" media= "screen" />
+    <link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.30/pluginhelp.css" type="text/css" media= "screen" />
 </head>
 
 <body>
     <div class="help">
         <h1>EC-Support</h1>
-		<p>Plugin Version 1.0.0.29</p>
+		<p>Plugin Version 1.0.0.30</p>
         <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         <p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -19,8 +19,6 @@
         <a href="/commander/pages/EC-ShareFile/help">EC-ShareFile</a> plugins.</p>
 
 		<p><b>Note:</b> this plugin was part of the bundle who helped Laurent Rochette and Nikhil Vaze won "Best in Show" at the Citrix Synergy 2015 conference.</p>
-
-		<h2>ElectricFlow Integration to ElectricCloud support</h2>
 
 		<h1>Plugin Procedures</h1>
 
@@ -32,7 +30,7 @@
     
     	<h2>openSupportTicket</h2>
 
-        <p>This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the requried logs and upload them on ShareFile automcatically.
+        <p>This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the required logs and upload them on ShareFile automatically.
     	</p>
 
 	    <table class="grid">
@@ -71,11 +69,11 @@
 	            </tr>
            		<tr>
 	                <td class="required">ShareFile Upload Directory</td>
-	                <td>Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads.</td>
+	                <td>Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads. Check on ShareFile if you are unsure.</td>
 	            </tr>
            		<tr>
 	                <td>Agent List</td>
-	                <td>This optional parameter allows to  pass a list of agents -commad separated- for which the logs will be gathered and uploaded automatically.</td>
+	                <td>This optional parameter allows to  pass a list of agents -comma separated- for which the logs will be gathered and uploaded automatically.</td>
 	            </tr>		        
            		<tr>
 	                <td>Time</td>

@@ -28,13 +28,13 @@
 &lt;head>
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     &lt;title>EC-Support Plugin&lt;/title>
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.29/pluginhelp.css" type="text/css" media= "screen" />
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.30/pluginhelp.css" type="text/css" media= "screen" />
 &lt;/head>
 
 &lt;body>
     &lt;div class="help">
         &lt;h1>EC-Support&lt;/h1>
-		&lt;p>Plugin Version 1.0.0.29&lt;/p>
+		&lt;p>Plugin Version 1.0.0.30&lt;/p>
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         &lt;p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -42,8 +42,6 @@
         &lt;a href="/commander/pages/EC-ShareFile/help">EC-ShareFile&lt;/a> plugins.&lt;/p>
 
 		&lt;p>&lt;b>Note:&lt;/b> this plugin was part of the bundle who helped Laurent Rochette and Nikhil Vaze won "Best in Show" at the Citrix Synergy 2015 conference.&lt;/p>
-
-		&lt;h2>ElectricFlow Integration to ElectricCloud support&lt;/h2>
 
 		&lt;h1>Plugin Procedures&lt;/h1>
 
@@ -55,7 +53,7 @@
     
     	&lt;h2>openSupportTicket&lt;/h2>
 
-        &lt;p>This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the requried logs and upload them on ShareFile automcatically.
+        &lt;p>This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the required logs and upload them on ShareFile automatically.
     	&lt;/p>
 
 	    &lt;table class="grid">
@@ -94,11 +92,11 @@
 	            &lt;/tr>
            		&lt;tr>
 	                &lt;td class="required">ShareFile Upload Directory&lt;/td>
-	                &lt;td>Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads.&lt;/td>
+	                &lt;td>Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads. Check on ShareFile if you are unsure.&lt;/td>
 	            &lt;/tr>
            		&lt;tr>
 	                &lt;td>Agent List&lt;/td>
-	                &lt;td>This optional parameter allows to  pass a list of agents -commad separated- for which the logs will be gathered and uploaded automatically.&lt;/td>
+	                &lt;td>This optional parameter allows to  pass a list of agents -comma separated- for which the logs will be gathered and uploaded automatically.&lt;/td>
 	            &lt;/tr>		        
            		&lt;tr>
 	                &lt;td>Time&lt;/td>
@@ -122,7 +120,7 @@
         <description />
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>29</value>
+        <value>30</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -146,7 +144,7 @@ EC-ShareFile  :1.1.1
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.29</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.0.0.30</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>

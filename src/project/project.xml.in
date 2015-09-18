@@ -44,8 +44,6 @@
 
 		&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this plugin was part of the bundle who helped Laurent Rochette and Nikhil Vaze won "Best in Show" at the Citrix Synergy 2015 conference.&lt;/p&gt;
 
-		&lt;h2&gt;ElectricFlow Integration to ElectricCloud support&lt;/h2&gt;
-
 		&lt;h1&gt;Plugin Procedures&lt;/h1&gt;
 
 	    &lt;p&gt;
@@ -56,7 +54,7 @@
     
     	&lt;h2&gt;openSupportTicket&lt;/h2&gt;
 
-        &lt;p&gt;This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the requried logs and upload them on ShareFile automcatically.
+        &lt;p&gt;This procedure is the workhorse of this plugin, it opens a ticket on Zendesk, gather the required logs and upload them on ShareFile automatically.
     	&lt;/p&gt;
 
 	    &lt;table class="grid"&gt;
@@ -95,11 +93,11 @@
 	            &lt;/tr&gt;
            		&lt;tr&gt;
 	                &lt;td class="required"&gt;ShareFile Upload Directory&lt;/td&gt;
-	                &lt;td&gt;Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads.&lt;/td&gt;
+	                &lt;td&gt;Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads. Check on ShareFile if you are unsure.&lt;/td&gt;
 	            &lt;/tr&gt;
            		&lt;tr&gt;
 	                &lt;td&gt;Agent List&lt;/td&gt;
-	                &lt;td&gt;This optional parameter allows to  pass a list of agents -commad separated- for which the logs will be gathered and uploaded automatically.&lt;/td&gt;
+	                &lt;td&gt;This optional parameter allows to  pass a list of agents -comma separated- for which the logs will be gathered and uploaded automatically.&lt;/td&gt;
 	            &lt;/tr&gt;		        
            		&lt;tr&gt;
 	                &lt;td&gt;Time&lt;/td&gt;
@@ -123,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>29</value>
+        <value>30</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
