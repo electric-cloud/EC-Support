@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>31</value>
+        <value>32</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -654,7 +654,7 @@ No log involved</description>
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition>0</condition>
+        <condition/>
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -703,7 +703,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[version]</value>
+            <value>$[serverVersion]</value>
           </property>
         </actualParameters>
         <propertySheet>
@@ -1148,7 +1148,7 @@ No log involved</description>
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition>0</condition>
+        <condition/>
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
