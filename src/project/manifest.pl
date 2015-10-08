@@ -1,6 +1,9 @@
 @files = (
 	['//project/propertySheet/property[propertyName="ec_setup"]/value', 'ec_setup.pl'],
 	['//project/procedure[procedureName="collectServerLogs"]/step[stepName="loop"]/command', 'procedures/collectServerLogs/steps/loop.pl'],
+	['//project/procedure[procedureName="openEnhancementRequest"]/propertySheet/property[propertyName="ec_parameterForm"]/value', 'procedures/openEnhancementRequest/form.xml'],
+	['//project/procedure[procedureName="openEnhancementRequest"]/step[stepName="getVersion"]/command', 'procedures/openEnhancementRequest/steps/getVersion.pl'],
+	['//project/procedure[procedureName="openEnhancementRequest"]/step[stepName="createTicket"]/command', 'procedures/openEnhancementRequest/steps/createTicket.sh'],
 	['//project/procedure[procedureName="openSupportTicket"]/propertySheet/property[propertyName="ec_parameterForm"]/value', 'procedures/openSupportTicket/form.xml'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="getVersion"]/command', 'procedures/openSupportTicket/steps/getVersion.pl'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="grabResource"]/command', 'procedures/openSupportTicket/steps/grabResource.sh'],

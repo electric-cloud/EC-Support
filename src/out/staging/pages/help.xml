@@ -5,13 +5,13 @@
 <head>
     <meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     <title>EC-Support Plugin</title>
-    <link rel="stylesheet" href= "../../plugins/EC-Support-1.0.0.30/pluginhelp.css" type="text/css" media= "screen" />
+    <link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.31/pluginhelp.css" type="text/css" media= "screen" />
 </head>
 
 <body>
     <div class="help">
         <h1>EC-Support</h1>
-		<p>Plugin Version 1.0.0.30</p>
+		<p>Plugin Version 1.1.0.31</p>
         <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         <p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 

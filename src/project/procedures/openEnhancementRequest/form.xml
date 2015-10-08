@@ -1,0 +1,44 @@
+<editor>
+    <formElement> 
+        <label>Title</label> 
+        <property>ticketTitle</property> 
+        <documentation>The title of your ticket.</documentation> 
+        <type>entry</type>
+        <value>Enhancement Request: </value>
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>Description</label> 
+        <property>ticketDescription</property> 
+        <documentation>The full description of your ticket.</documentation> 
+        <type>textarea</type>
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>Product</label> 
+        <property>product</property> 
+        <documentation>The name of the product with which you have an issue.</documentation> 
+        <type>select</type> 
+        <option> 
+            <name>ElectricCommander</name> 
+            <value>electriccommander</value> 
+        </option> 
+        <option> 
+            <name>ElectricFlow</name> 
+            <value>electricflow</value> 
+        </option> 
+        <value>electriccommander</value> 
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>Zendesk configuration</label> 
+        <property>zendeskConfiguration</property> 
+        <documentation>The name of the Zendesk configuration to use.</documentation> 
+        <type>entry</type>
+        <value>zendesk</value>
+        <required>1</required>
+    </formElement> 
+</editor>
