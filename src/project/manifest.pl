@@ -17,7 +17,7 @@
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="uploadBundleToSharefile"]/command', 'procedures/openSupportTicket/steps/uploadBundleToSharefile.sh'],
 	['//project/procedure[procedureName="openSupportTicket"]/step[stepName="commentForFiles"]/command', 'procedures/openSupportTicket/steps/commentForFiles.sh'],
 	['//project/procedure[procedureName="sub-collectServerLogs"]/propertySheet/property[propertyName="ec_parameterForm"]/value', 'procedures/sub-collectServerLogs/form.xml'],
-	['//project/procedure[procedureName="sub-collectServerLogs"]/step[stepName="grabWorkspaces"]/command', 'procedures/sub-collectServerLogs/steps/grabWorkspaces.sh'],
+	['//project/procedure[procedureName="sub-collectServerLogs"]/step[stepName="grabWorkspaces"]/command', 'procedures/sub-collectServerLogs/steps/grabWorkspaces.pl'],
 	['//project/procedure[procedureName="sub-collectServerLogs"]/step[stepName="copyCommander_log"]/command', 'procedures/sub-collectServerLogs/steps/copyCommander_log.sh'],
 	['//project/procedure[procedureName="sub-collectServerLogs"]/step[stepName="collectTimeBasedLogs"]/command', 'procedures/sub-collectServerLogs/steps/collectTimeBasedLogs.pl'],
 	['//project/procedure[procedureName="sub-collectServerLogs"]/step[stepName="collectJobIdBasedLogs"]/command', 'procedures/sub-collectServerLogs/steps/collectJobIdBasedLogs.pl'],

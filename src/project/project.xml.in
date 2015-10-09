@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>34</value>
+        <value>35</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -1148,7 +1148,14 @@ No log involved</description>
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition/>
+        <condition>$[/javascript
+  if ( "$[/server/settings/ipAddress]" == "ec54" ) {
+    setProperty("/myJob/zendesk/ticketId", "114520");
+   setProperty("summary", "Debug mode: 114520");
+   false;
+  } else {
+   true;
+  } ]</condition>
         <description>Open the ticket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -1802,7 +1809,7 @@ $[/myJob/fileList]</value>
         <precondition/>
         <releaseMode>none</releaseMode>
         <resourceName/>
-        <shell/>
+        <shell>ec-perl</shell>
         <timeLimit/>
         <timeLimitUnits>minutes</timeLimitUnits>
         <tracked>0</tracked>
