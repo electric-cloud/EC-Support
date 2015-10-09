@@ -28,13 +28,13 @@
 &lt;head>
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     &lt;title>EC-Support Plugin&lt;/title>
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.33/pluginhelp.css" type="text/css" media= "screen" />
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.34/pluginhelp.css" type="text/css" media= "screen" />
 &lt;/head>
 
 &lt;body>
     &lt;div class="help">
         &lt;h1>EC-Support&lt;/h1>
-		&lt;p>Plugin Version 1.1.0.33&lt;/p>
+		&lt;p>Plugin Version 1.1.0.34&lt;/p>
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         &lt;p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -120,7 +120,7 @@
         <description />
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>33</value>
+        <value>34</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -151,7 +151,7 @@ History:
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.33</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.34</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>
@@ -2218,6 +2218,60 @@ $[/myJob/fileList]</value>
         <type>entry</type>
       </formalParameter>
       <step>
+        <stepName>grabWorkspaces</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>$[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
+
+#
+# parameter
+#
+
+# Get the source workspace
+my $sourceWks=getP("/resources/$[serverResource]/workspaceName");
+printf("Source workspace: '%s'\n", $sourceWks);
+if (($sourceWks == undef) || ($sourceWks eq "")) {
+	$ec->setProperty("/myJob/sourceWorkspace", "default");
+} else {
+	$ec->setProperty("/myJob/sourceWorkspace", $sourceWks);
+}
+
+# Get the source workspace
+my $targetWks=getP("/resources/$[targetServerResource]/workspaceName");
+printf("Target workspace: '%s'\n", $targetWks);
+if (($targetWks == undef) || ($targetWks eq "")) {
+	$ec->setProperty("/myJob/targetWorkspace", "default");
+} else {
+	$ec->setProperty("/myJob/targetWorkspace", $targetWks);
+}
+
+$[/plugins[EC-Admin]project/scripts/perlLibJSON]
+
+</command>
+        <condition />
+        <description>grab the workspace value
+ - not defined: default
+ - empty: default
+ -else: pass the value</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName />
+        <parallel>0</parallel>
+        <postProcessor />
+        <precondition />
+        <releaseMode>none</releaseMode>
+        <resourceName />
+        <shell />
+        <timeLimit />
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory />
+        <workspaceName />
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>copyCommander_log</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -2256,7 +2310,7 @@ $[/myJob/fileList]</value>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/javascript (getProperty("/resources/$[targetServerResource]/workspaceName") == "")? "default":resources.$[serverResource].workspaceName ]</value>
+            <value>$[/myJob/targetWorkspace]</value>
           </property>
           <property>
             <propertyName>sourceFile</propertyName>
@@ -2277,7 +2331,7 @@ $[/myJob/fileList]</value>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/javascript ( getProperty("/resources/$[serverResource]/workspaceName") == "" ) ? "default" : resources.$[serverResource].workspaceName ]</value>
+            <value>$[/myJob/sourceWorkspace]</value>
           </property>
         </actualParameters>
         <propertySheet>
@@ -2335,18 +2389,14 @@ while (my $file = readdir(LOG)) {
             	{actualParameterName => 'sourceResourceName',   
                                value => "$serverResource"},
             	{actualParameterName => 'sourceWorkspaceName',   
-                               value => getP("/resources/$serverResource/workspaceName")?
-                               		getP("/resources/$[targetServerResource]/workspaceName"):
-                               		"default"},    
+                               value => "$[/myJob/sourceWorkspace]"},    
                                     
                 {actualParameterName => 'destinationFile',         
                                value => "$[destinationDirectory]/servers/$serverResource/"},
             	{actualParameterName => 'destinationResourceName', 
                                value => "$[targetServerResource]"},
             	{actualParameterName => 'destinationWorkspaceName',   
-                               value => getP("/resources/$[targetServerResource]/workspaceName")?
-                               		getP("/resources/$[targetServerResource]/workspaceName"):
-                               		"default"},            	
+                               value => "$[/myJob/targetWorkspace]"},            	
             ],
         });
     }
@@ -2392,8 +2442,6 @@ sub convertTimeToEpoch {
     printf("Time of the incident: %s \n", $time) if ($DEBUG);
     return $time
 }
-
-$[/plugins[EC-Admin]project/scripts/perlLibJSON]
 
 </command>
         <condition>$[/javascript "$[time]" != "" ]</condition>
@@ -2465,26 +2513,19 @@ my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&amp;1");
             	{actualParameterName => 'sourceResourceName',   
                                value => "$serverResource"},
             	{actualParameterName => 'sourceWorkspaceName',   
-                               value => getP("/resources/$serverResource/workspaceName")?
-                                    getP("/resources/$[targetServerResource]/workspaceName"):
-                               		"default"},    
+                               value => "$[/myJob/sourceWorkspace]"},    
                                     
             	{actualParameterName => 'destinationFile',         
                                value => "$[destinationDirectory]/servers/$serverResource/"},
             	{actualParameterName => 'destinationResourceName', 
                                value => "$[targetServerResource]"},
             	{actualParameterName => 'destinationWorkspaceName',   
-                               	value => getP("/resources/$[targetServerResource]/workspaceName")?
-                                	getP("/resources/$[targetServerResource]/workspaceName"):
-                               		"default"},            	
+                               	value => "$[/myJob/targetWorkspace]",            	
             ],
         });
     }
 }
 closedir($logD);
-
-$[/plugins[EC-Admin]project/scripts/perlLibJSON]
-
 
 </command>
         <condition>$[/javascript "$[jobNumber]" != "" ]</condition>

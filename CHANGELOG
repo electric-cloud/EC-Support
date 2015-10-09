@@ -1,4 +1,7 @@
 2015-10-08 System Administrator <lrochette@electric-cloud.com>
+  * 1.1.0.34: Fixed workspace issue
+
+2015-10-08 System Administrator <lrochette@electric-cloud.com>
   * 1.1.0.31: Fix  #8: added openEnhancementRequest procedure
 
 2015-09-18 System Administrator <lrochette@electric-cloud.com>

@@ -29,13 +29,13 @@
 &lt;head&gt;
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" /&gt;
     &lt;title&gt;EC-Support Plugin&lt;/title&gt;
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.33/pluginhelp.css" type="text/css" media= "screen" /&gt;
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.34/pluginhelp.css" type="text/css" media= "screen" /&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
     &lt;div class="help"&gt;
         &lt;h1&gt;EC-Support&lt;/h1&gt;
-		&lt;p&gt;Plugin Version 1.1.0.33&lt;/p&gt;
+		&lt;p&gt;Plugin Version 1.1.0.34&lt;/p&gt;
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" /&gt;
 
         &lt;p&gt;EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>33</value>
+        <value>34</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -150,7 +150,7 @@ History:
         <tracked>0</tracked>
         <value>1.1.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.33</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.34</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>
@@ -1785,6 +1785,34 @@ $[/myJob/fileList]</value>
         <type>entry</type>
       </formalParameter>
       <step>
+        <stepName>grabWorkspaces</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition/>
+        <description>grab the workspace value
+ - not defined: default
+ - empty: default
+ -else: pass the value</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell/>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>copyCommander_log</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -1823,7 +1851,7 @@ $[/myJob/fileList]</value>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/javascript (getProperty("/resources/$[targetServerResource]/workspaceName") == "")? "default":resources.$[serverResource].workspaceName ]</value>
+            <value>$[/myJob/targetWorkspace]</value>
           </property>
           <property>
             <propertyName>sourceFile</propertyName>
@@ -1844,7 +1872,7 @@ $[/myJob/fileList]</value>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/javascript ( getProperty("/resources/$[serverResource]/workspaceName") == "" ) ? "default" : resources.$[serverResource].workspaceName ]</value>
+            <value>$[/myJob/sourceWorkspace]</value>
           </property>
         </actualParameters>
         <propertySheet>

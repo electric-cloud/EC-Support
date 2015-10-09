@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>33</value>
+        <value>34</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -1785,6 +1785,34 @@ $[/myJob/fileList]</value>
         <type>entry</type>
       </formalParameter>
       <step>
+        <stepName>grabWorkspaces</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition/>
+        <description>grab the workspace value
+ - not defined: default
+ - empty: default
+ -else: pass the value</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell/>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>0</tracked>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+          <tracked>0</tracked>
+        </propertySheet>
+      </step>
+      <step>
         <stepName>copyCommander_log</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
@@ -1823,7 +1851,7 @@ $[/myJob/fileList]</value>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/javascript (getProperty("/resources/$[targetServerResource]/workspaceName") == "")? "default":resources.$[serverResource].workspaceName ]</value>
+            <value>$[/myJob/targetWorkspace]</value>
           </property>
           <property>
             <propertyName>sourceFile</propertyName>
@@ -1844,7 +1872,7 @@ $[/myJob/fileList]</value>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[/javascript ( getProperty("/resources/$[serverResource]/workspaceName") == "" ) ? "default" : resources.$[serverResource].workspaceName ]</value>
+            <value>$[/myJob/sourceWorkspace]</value>
           </property>
         </actualParameters>
         <propertySheet>

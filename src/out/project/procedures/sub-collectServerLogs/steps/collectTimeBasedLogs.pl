@@ -45,18 +45,14 @@ while (my $file = readdir(LOG)) {
             	{actualParameterName => 'sourceResourceName',   
                                value => "$serverResource"},
             	{actualParameterName => 'sourceWorkspaceName',   
-                               value => getP("/resources/$serverResource/workspaceName")?
-                               		getP("/resources/$[targetServerResource]/workspaceName"):
-                               		"default"},    
+                               value => "$[/myJob/sourceWorkspace]"},    
                                     
                 {actualParameterName => 'destinationFile',         
                                value => "$[destinationDirectory]/servers/$serverResource/"},
             	{actualParameterName => 'destinationResourceName', 
                                value => "$[targetServerResource]"},
             	{actualParameterName => 'destinationWorkspaceName',   
-                               value => getP("/resources/$[targetServerResource]/workspaceName")?
-                               		getP("/resources/$[targetServerResource]/workspaceName"):
-                               		"default"},            	
+                               value => "$[/myJob/targetWorkspace]"},            	
             ],
         });
     }
@@ -102,6 +98,4 @@ sub convertTimeToEpoch {
     printf("Time of the incident: %s \n", $time) if ($DEBUG);
     return $time
 }
-
-$[/plugins[EC-Admin]project/scripts/perlLibJSON]
 
