@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>32</value>
+        <value>33</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -1197,7 +1197,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[version]</value>
+            <value>$[/myJob/serverVersion]</value>
           </property>
         </actualParameters>
         <propertySheet>
