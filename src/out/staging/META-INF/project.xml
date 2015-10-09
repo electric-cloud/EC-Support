@@ -28,13 +28,13 @@
 &lt;head>
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     &lt;title>EC-Support Plugin&lt;/title>
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.36/pluginhelp.css" type="text/css" media= "screen" />
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.37/pluginhelp.css" type="text/css" media= "screen" />
 &lt;/head>
 
 &lt;body>
     &lt;div class="help">
         &lt;h1>EC-Support&lt;/h1>
-		&lt;p>Plugin Version 1.1.0.36&lt;/p>
+		&lt;p>Plugin Version 1.1.0.37&lt;/p>
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         &lt;p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -120,7 +120,7 @@
         <description />
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>36</value>
+        <value>37</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -151,7 +151,7 @@ History:
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.36</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.37</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>
@@ -1804,7 +1804,7 @@ sub directoryContent {
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>Electric Cloud</value>
+            <value>electric-cloud</value>
           </property>
           <property>
             <propertyName>config</propertyName>
@@ -1836,7 +1836,14 @@ sub directoryContent {
         <stepName>commentForFiles</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition />
+        <condition>$[/javascript
+  if ( "$[/server/settings/ipAddress]" == "ec54" ) {
+    setProperty("/myJob/zendesk/ticketId", "114520");
+   setProperty("summary", "Debug mode: 114520");
+   false;
+  } else {
+   true;
+  } ]</condition>
         <description />
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -1857,7 +1864,7 @@ sub directoryContent {
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+            <value>The following file have been uploaded  $[sharefileUploadDirectory]/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
 It contains:
 
 $[/myJob/fileList]</value>

@@ -29,13 +29,13 @@
 &lt;head&gt;
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" /&gt;
     &lt;title&gt;EC-Support Plugin&lt;/title&gt;
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.36/pluginhelp.css" type="text/css" media= "screen" /&gt;
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.1.0.37/pluginhelp.css" type="text/css" media= "screen" /&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
     &lt;div class="help"&gt;
         &lt;h1&gt;EC-Support&lt;/h1&gt;
-		&lt;p&gt;Plugin Version 1.1.0.36&lt;/p&gt;
+		&lt;p&gt;Plugin Version 1.1.0.37&lt;/p&gt;
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" /&gt;
 
         &lt;p&gt;EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>36</value>
+        <value>37</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -150,7 +150,7 @@ History:
         <tracked>0</tracked>
         <value>1.1.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.36</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.1.0.37</value></property></propertySheet>
     <procedure>
       <procedureName>collectServerLogs</procedureName>
       <description>a procedure to collect server logs</description>
@@ -1435,7 +1435,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>Electric Cloud</value>
+            <value>electric-cloud</value>
           </property>
           <property>
             <propertyName>config</propertyName>
@@ -1467,7 +1467,14 @@ No log involved</description>
         <stepName>commentForFiles</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition/>
+        <condition>$[/javascript
+  if ( "$[/server/settings/ipAddress]" == "ec54" ) {
+    setProperty("/myJob/zendesk/ticketId", "114520");
+   setProperty("summary", "Debug mode: 114520");
+   false;
+  } else {
+   true;
+  } ]</condition>
         <description/>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -1488,7 +1495,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+            <value>The following file have been uploaded  $[sharefileUploadDirectory]/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
 It contains:
 
 $[/myJob/fileList]</value>

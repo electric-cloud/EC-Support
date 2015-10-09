@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>36</value>
+        <value>37</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -1435,7 +1435,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>Electric Cloud</value>
+            <value>electric-cloud</value>
           </property>
           <property>
             <propertyName>config</propertyName>
@@ -1467,7 +1467,14 @@ No log involved</description>
         <stepName>commentForFiles</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition/>
+        <condition>$[/javascript
+  if ( "$[/server/settings/ipAddress]" == "ec54" ) {
+    setProperty("/myJob/zendesk/ticketId", "114520");
+   setProperty("summary", "Debug mode: 114520");
+   false;
+  } else {
+   true;
+  } ]</condition>
         <description/>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
@@ -1488,7 +1495,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>The following file have been uploaded  uploads/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
+            <value>The following file have been uploaded  $[sharefileUploadDirectory]/$[/myJob/zendesk/ticketId]/$[/myJob/zendesk/ticketId].zip
 It contains:
 
 $[/myJob/fileList]</value>
