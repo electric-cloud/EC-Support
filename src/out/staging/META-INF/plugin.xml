@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.1.0.35</version>
+  <version>1.1.0.36</version>
   <label>EC-Support</label>
-  <description>A set of procedures to interact with Electric Cloud support.</description>
+  <description>A set of procedures to interact with Electric Cloud support.
+2015-10-08 admin broken version for Nikhil to debug #3</description>
   <help>help.xml</help>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>

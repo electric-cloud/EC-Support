@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>35</value>
+        <value>36</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -1442,7 +1442,7 @@ No log involved</description>
             <counter>0</counter>
             <expandable>1</expandable>
             <tracked>0</tracked>
-            <value>$[ShareFileCredentialName]</value>
+            <value>$[ShareFileConfiguration]</value>
           </property>
           <property>
             <propertyName>folderToCreate</propertyName>
@@ -1467,7 +1467,7 @@ No log involved</description>
         <stepName>commentForFiles</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition>0</condition>
+        <condition/>
         <description/>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
