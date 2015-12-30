@@ -32,6 +32,38 @@
         <required>1</required>
     </formElement> 
 
+    <formElement> 
+        <label>Problem Type</label> 
+        <property>problemType</property> 
+        <documentation>The type of problem, to help support prioritize your ticket.</documentation> 
+        <type>select</type> 
+        <option><name>Enhancement</name><value>1_enhancement</value></option> 
+        <option><name>Need Assistance</name><value>2_need_assistance</value></option> 
+        <option><name>Nuisance</name><value>3_nuisance</value></option> 
+        <option><name>Tool Limiting</name><value>4_tool_limiting</value></option> 
+        <option><name>Performance</name><value>5_performance</value></option> 
+        <option><name>Blocking</name><value>6_blocking</value></option> 
+        <value>2_need_assistance</value> 
+        <required>1</required>
+    </formElement> 
+
+    <formElement> 
+        <label>Problem Scope</label> 
+        <property>problemScope</property> 
+        <documentation>The scope of the problem, to help support prioritize your ticket.</documentation> 
+        <type>select</type> 
+        <option><name>Test Setup</name><value>01_test_setup</value></option> 
+        <option><name>One User</name><value>2_one_user</value></option> 
+        <option><name>One Team</name><value>3_one_team</value></option> 
+        <option><name>Some users</name><value>4_some_users</value></option> 
+        <option><name>One Site</name><value>5_one_site</value></option> 
+        <option><name>Some teams</name><value>6_some_teams</value></option> 
+        <option><name>Some sites</name><value>7_some_sites</value></option> 
+        <option><name>Everyone</name><value>8_everyone</value></option> 
+        <value>2_one_user</value> 
+        <required>1</required>
+    </formElement> 
+
     <formElement>
         <label>Server Resources</label>
         <property>serverResources</property>
@@ -64,7 +96,7 @@
         <property>sharefileUploadDirectory</property> 
         <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
         <type>entry</type>
-        <value>/clients/X-Z/NAME/uploads</value>
+        <value>/clients/S-U/Test/uploads</value>
         <required>1</required>
     </formElement> 
 
