@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>39</value>
+        <value>40</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -1534,6 +1534,209 @@ No log involved</description>
                   </propertySheet>
                 </property>
                 <property>
+                  <propertyName>problemScope</propertyName>
+                  <tracked>0</tracked>
+                  <propertySheet>
+                    <tracked>0</tracked>
+                    <property>
+                      <propertyName>options</propertyName>
+                      <tracked>0</tracked>
+                      <propertySheet>
+                        <tracked>0</tracked>
+                        <property>
+                          <propertyName>option1</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>Test Setup</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>1_test_setup</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option2</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>One User</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>2_one_user</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option3</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>One Team</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>3_one_team</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option4</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>Some users</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>4_some_users</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option5</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>One Site</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>5_one_site</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option6</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>Some teams</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>6_some_teams</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option7</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>Some sites</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>7_some_sites</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>option8</propertyName>
+                          <tracked>0</tracked>
+                          <propertySheet>
+                            <tracked>0</tracked>
+                            <property>
+                              <propertyName>text</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>Everyone</value>
+                            </property>
+                            <property>
+                              <propertyName>value</propertyName>
+                              <counter>0</counter>
+                              <expandable>1</expandable>
+                              <tracked>0</tracked>
+                              <value>8_everyone</value>
+                            </property>
+                          </propertySheet>
+                        </property>
+                        <property>
+                          <propertyName>optionCount</propertyName>
+                          <counter>0</counter>
+                          <expandable>1</expandable>
+                          <tracked>0</tracked>
+                          <value>8</value>
+                        </property>
+                        <property>
+                          <propertyName>type</propertyName>
+                          <counter>0</counter>
+                          <expandable>1</expandable>
+                          <tracked>0</tracked>
+                          <value>list</value>
+                        </property>
+                      </propertySheet>
+                    </property>
+                    <property>
+                      <propertyName>formType</propertyName>
+                      <counter>0</counter>
+                      <expandable>1</expandable>
+                      <tracked>0</tracked>
+                      <value>standard</value>
+                    </property>
+                  </propertySheet>
+                </property>
+                <property>
                   <propertyName>product</propertyName>
                   <tracked>0</tracked>
                   <propertySheet>
@@ -1764,6 +1967,15 @@ No log involved</description>
         </property>
       </propertySheet>
       <formalParameter>
+        <formalParameterName>problemScope</formalParameterName>
+        <defaultValue>2_one_user</defaultValue>
+        <description/>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <tracked>0</tracked>
+        <type>select</type>
+      </formalParameter>
+      <formalParameter>
         <formalParameterName>product</formalParameterName>
         <defaultValue>electricflow</defaultValue>
         <description>the name of the product that failed</description>
@@ -1850,6 +2062,20 @@ No log involved</description>
             <expandable>1</expandable>
             <tracked>0</tracked>
             <value>$[zendeskConfiguration]</value>
+          </property>
+          <property>
+            <propertyName>problemScope</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>$[problemScope]</value>
+          </property>
+          <property>
+            <propertyName>problemType</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>0</tracked>
+            <value>1_enhancement</value>
           </property>
           <property>
             <propertyName>product</propertyName>
