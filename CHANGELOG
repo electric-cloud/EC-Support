@@ -1,3 +1,6 @@
+2016-12-30 Laurent Rochette <lrochette@electric-cloud.com>
+  * 1.3.0.39: Add error handling
+
 2015-10-08 System Administrator <lrochette@electric-cloud.com>
   * 1.1.0.37: Fixed workspace issue
               Fix #8: added openEnhancementRequest procedure

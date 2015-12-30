@@ -28,13 +28,13 @@
 &lt;head>
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     &lt;title>EC-Support Plugin&lt;/title>
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.3.0.38/pluginhelp.css" type="text/css" media= "screen" />
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.3.0.39/pluginhelp.css" type="text/css" media= "screen" />
 &lt;/head>
 
 &lt;body>
     &lt;div class="help">
         &lt;h1>EC-Support&lt;/h1>
-		&lt;p>Plugin Version 1.3.0.38&lt;/p>
+		&lt;p>Plugin Version 1.3.0.39&lt;/p>
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         &lt;p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -120,7 +120,7 @@
         <description />
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>38</value>
+        <value>39</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -158,7 +158,7 @@ History:
       </property>
     <property><propertyName>ec_setup</propertyName><value># Data that drives the create step picker registration for this plugin.
 @::createStepPickerSteps = ();
-</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.3.0.38</value></property></propertySheet>
+</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.3.0.39</value></property></propertySheet>
     <procedure>
       <procedureName>AddLogsToExistingTicket</procedureName>
       <description>A procedure to automatically add the required logs to ShareFile and comment on an existing ticket</description>
@@ -3229,10 +3229,7 @@ $[/plugins[EC-Admin]project/scripts/perlLibJSON]
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition />
-        <description>Open the ticket
-
-$[/javascript
+        <condition>$[/javascript
   if ( "$[/server/settings/ipAddress]" == "ec54" ) {
     setProperty("/myJob/zendesk/ticketId", "114520");
    setProperty("summary", "Debug mode: 114520");
@@ -3240,6 +3237,9 @@ $[/javascript
   } else {
    true;
   } ]
+</condition>
+        <description>Open the ticket
+
 </description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>

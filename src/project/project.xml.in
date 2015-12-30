@@ -121,7 +121,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>38</value>
+        <value>39</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -2704,10 +2704,7 @@ No log involved</description>
         <stepName>createTicket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <condition/>
-        <description>Open the ticket
-
-$[/javascript
+        <condition>$[/javascript
   if ( "$[/server/settings/ipAddress]" == "ec54" ) {
     setProperty("/myJob/zendesk/ticketId", "114520");
    setProperty("summary", "Debug mode: 114520");
@@ -2715,6 +2712,9 @@ $[/javascript
   } else {
    true;
   } ]
+</condition>
+        <description>Open the ticket
+
 </description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
