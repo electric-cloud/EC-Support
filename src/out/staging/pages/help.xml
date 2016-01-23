@@ -5,13 +5,13 @@
 <head>
     <meta content="text/html; charset=us-ascii" http-equiv="content-type" />
     <title>EC-Support Plugin</title>
-    <link rel="stylesheet" href= "../../plugins/EC-Support-1.3.0.41/pluginhelp.css" type="text/css" media= "screen" />
+    <link rel="stylesheet" href= "../../plugins/EC-Support-1.4.0.43/pluginhelp.css" type="text/css" media= "screen" />
 </head>
 
 <body>
     <div class="help">
         <h1>EC-Support</h1>
-		<p>Plugin Version 1.3.0.41</p>
+		<p>Plugin Version 1.4.0.43</p>
         <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
         <p>EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -34,14 +34,7 @@
     	</p>
 
 	    <table class="grid">
-	        <thead>
-	            <tr>
-	                <th>Parameter</th>
-
-	                <th>Description</th>
-	            </tr>
-	        </thead>
-
+      <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
 	        <tbody>
 	            <tr>
 	                <td class="required">Title</td>
@@ -55,38 +48,105 @@
 	                <td class="required">Product</td>
 	                <td>ElectricFlow or ElectricCommander</td>
 	            </tr>
+              <tr>
+                <td class="required">Gathering Resource</td>
+                <td>The resource used on which to gather the logs. Useful in 
+                case your server does not have internet access.</td>
+              </tr>
 	           <tr>
 	                <td class="required">Server Resources</td>
-	                <td>The resource associated to your server (default: local). If you have a clustered configuration, enter a comma separated list of agents or a pool.</td>
+	                <td>The resource associated to your server (default: local). 
+                  If you have a clustered configuration, enter a comma separated 
+                  list of agents or a pool.</td>
 	            </tr>
            		<tr>
 	                <td class="required">Zendesk Configuration</td>
-	                <td>The configuration in the <a href="/commander/pages/EC-Zendesk/help">EC-Zendesk plugin</a> that contain login/password to connect to Zendesk and open a ticket.</td>
+	                <td>The configuration in the <
+                  a href="/commander/pages/EC-Zendesk/help">EC-Zendesk plugin</a> 
+                  that contain login/password to connect to Zendesk and open a 
+                  ticket.</td>
 	            </tr>
            		<tr>
 	                <td class="required">ShareFile Configuration</td>
-	                <td>The configuration in the <a href="/commander/pages/EC-ShareFile/help">EC-ShareFile plugin</a> that contain login/password to connect to ShareFile to upload the logs.</td>
+	                <td>The configuration in the 
+                  <a href="/commander/pages/EC-ShareFile/help">EC-ShareFile plugin</a> 
+                  that contain login/password to connect to ShareFile to upload 
+                  the logs.</td>
 	            </tr>
            		<tr>
 	                <td class="required">ShareFile Upload Directory</td>
-	                <td>Your company directory on ShareFile where to upload the logs files. The directory is usually something like /clients/X-Z/NAME/uploads. Check on ShareFile if you are unsure.</td>
+	                <td>Your company directory on ShareFile where to upload the 
+                  logs files. The directory is usually something like 
+                  /clients/X-Z/NAME/uploads. Check on ShareFile if you are unsure.</td>
 	            </tr>
            		<tr>
 	                <td>Agent List</td>
-	                <td>This optional parameter allows to  pass a list of agents -comma separated- for which the logs will be gathered and uploaded automatically.</td>
+	                <td>This optional parameter allows to  pass a list of agents 
+                  -comma separated- for which the logs will be gathered and 
+                  uploaded automatically.</td>
 	            </tr>		        
            		<tr>
 	                <td>Time</td>
-	                <td>If this optional parameter is set, all the commander logs from that time on will be gathered from all servers and uploaded automatically.</td>
+	                <td>If this optional parameter is set, all the commander logs 
+                  from that time on will be gathered from all servers and uploaded 
+                  automatically.</td>
 	            </tr>		        
            		<tr>
 	                <td>Job Id</td>
-	                <td>If this optional parameter is set, all the commander logs containing this jobId will be gathered from all servers and uploaded automatically.</td>
+	                <td>If this optional parameter is set, all the commander logs 
+                  containing this jobId will be gathered from all servers and 
+                  uploaded automatically.</td>
 	            </tr>		        
 	        </tbody>
     	</table>
     	<img src="../../plugins/EC-Support/images/help/openSupportTicket.png" alt="form" border="1"/>
 
+      <h2>gatherLogs</h2>
+
+        <p>This procedure is a simplified version of the previous one. It 
+        gathers the logs identically but does not do any call to Zendesk or 
+        ShareFile. Very useful for users without external internet access.
+    	</p>
+
+	    <table class="grid">
+	        <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+	        <tbody>
+             <tr>
+               <td class="required">Gathering Resource</td>
+               <td>The resource used on which to gather the logs.</td>
+             </tr>
+	           <tr>
+	                <td class="required">Server Resources</td>
+	                <td>The resource associated to your server (default: local). 
+                  If you have a clustered configuration, enter a comma separated 
+                  list of agents or a pool.</td>
+	            </tr>
+           		<tr>
+	                <td>Agent List</td>
+	                <td>This optional parameter allows to  pass a list of agents 
+                  -comma separated- for which the logs will be gathered and 
+                  uploaded automatically.</td>
+	            </tr>		        
+           		<tr>
+	                <td>Time</td>
+	                <td>If this optional parameter is set, all the commander logs 
+                  from that time on will be gathered from all servers and 
+                  uploaded automatically.</td>
+	            </tr>		        
+           		<tr>
+	                <td>Job Id</td>
+	                <td>If this optional parameter is set, all the commander logs 
+                  containing this jobId will be gathered from all servers and 
+                  uploaded automatically.</td>
+	            </tr>		        
+              <tr>
+	                <td>Create Artifact</td>
+	                <td>Checkbox to create a EC-Support:logs artifact version that 
+                  you can download later to you desktop.</td>
+	            </tr>		        
+	        </tbody>
+    	</table>
+  
 	</div>
 </body>
 </html>

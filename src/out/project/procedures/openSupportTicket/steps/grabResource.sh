@@ -1,1 +1,1 @@
-ectool setProperty /myJob/assignedServerResource --value $[/myJobStep/assignedResourceName]
+ectool setProperty /myJob/gatheringResource --value $[/myJobStep/assignedResourceName]
