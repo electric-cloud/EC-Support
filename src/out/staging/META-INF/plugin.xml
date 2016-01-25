@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-Support</key>
-  <version>1.4.0.43</version>
+  <version>1.4.0.44</version>
   <label>EC-Support</label>
-  <description>A set of procedures to interact with Electric Cloud support.
-2016-01-22 lrochette Add new procedure to gather logs only</description>
+  <description>A set of procedures to interact with Electric Cloud support.</description>
   <help>help.xml</help>
   <author>L. Rochette</author>
   <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>

@@ -29,13 +29,13 @@
 &lt;head&gt;
     &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" /&gt;
     &lt;title&gt;EC-Support Plugin&lt;/title&gt;
-    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.4.0.43/pluginhelp.css" type="text/css" media= "screen" /&gt;
+    &lt;link rel="stylesheet" href= "../../plugins/EC-Support-1.4.0.44/pluginhelp.css" type="text/css" media= "screen" /&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
     &lt;div class="help"&gt;
         &lt;h1&gt;EC-Support&lt;/h1&gt;
-		&lt;p&gt;Plugin Version 1.4.0.43&lt;/p&gt;
+		&lt;p&gt;Plugin Version 1.4.0.44&lt;/p&gt;
         &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" /&gt;
 
         &lt;p&gt;EC-Support is a collection of procedures to help you interact with Electric Cloud support. It requires both 
@@ -181,7 +181,7 @@
         <description/>
         <expandable>1</expandable>
         <tracked>0</tracked>
-        <value>43</value>
+        <value>44</value>
       </property>
       <property>
         <propertyName>pluginDependencies</propertyName>
@@ -221,7 +221,7 @@ History:
         <tracked>0</tracked>
         <value>1.4.0</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.4.0.43</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>1.4.0.44</value></property></propertySheet>
     <procedure>
       <procedureName>AddLogsToExistingTicket</procedureName>
       <description>A procedure to automatically add the required logs to ShareFile and comment on an existing ticket</description>
@@ -1535,7 +1535,7 @@ $[/myJob/fileList]</value>
     </procedure>
     <procedure>
       <procedureName>gatherLogs</procedureName>
-      <description>A procedure to gather logs without sending them. It is for customers without internet access. Optionally, an artifact can be created</description>
+      <description>A procedure to gather logs without sending them in case your EF cluster does not have external internet access. Optionally, an artifact can be created that can be downloaded later to the user desktop.</description>
       <jobNameTemplate/>
       <resourceName>local</resourceName>
       <timeLimit/>
