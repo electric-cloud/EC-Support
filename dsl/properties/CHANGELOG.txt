@@ -1,0 +1,19 @@
+Changelog for EC-Support plugin
+
+History:
+- version 1.4.0
+  + Add procedure to gather logs only (no Sharefile or Zendesk call)
+  + Add automatic pickup of service.log
+
+- version 1.3.0
+  + Reflect EC-Zendesk plugin new parameters problemScope and problemType
+
+- version 1.2.0
+  + added procedure to add logs to existing ticket
+  + added procedure commentOnSupportTicket
+
+- version 1.1.0
+  + Fix #8: added openEnhancementRequest procedure
+
+- version 1.0.0
+  + original version
