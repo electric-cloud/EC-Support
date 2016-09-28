@@ -1,4 +1,4 @@
-ckage com.electriccloud.commander.dsl.util
+package com.electriccloud.commander.dsl.util
 
 import groovy.io.FileType
 import org.codehaus.groovy.control.CompilerConfiguration
@@ -16,15 +16,15 @@ abstract class BasePlugin extends DslDelegatingScript {
 						<description>$description</description>
 					</step>
 				""".stripIndent()
-	} 
+	}
 
 	def setupCustomEditorData(String pluginName) {
 		getProcedures(pluginName).each { proc ->
 			getFormalParameters (pluginName, procedureName: proc.procedureName).each { param ->
 				property 'ec_customEditorData', procedureName: proc.procedureName, {
-				
+
 				  property 'parameters', {
-				
+
 					property param.formalParameterName, {
 					  formType = 'standard'
 					  if ('checkbox'.equals(param.type)) {
@@ -42,44 +42,44 @@ abstract class BasePlugin extends DslDelegatingScript {
 			if (stepPicker) {
 				def createStepPicker = getProperty("/projects/${pluginName}/procedures/${proc.procedureName}/stepPicker/create", suppressNoSuchPropertyException: true)
 				if (createStepPicker == 'false') {
-					addStepPicker = false	
+					addStepPicker = false
 				}
 			}
-			
+
 			if (addStepPicker) {
 				def label = getStringProp("/projects/${pluginName}/procedures/${proc.procedureName}/stepPicker/label") ?: "$pluginKey - $procedureName"
 				def category = getStringProp("/projects/${pluginName}/procedures/${proc.procedureName}/stepPicker/category") ?: "TODO:Plugin Category"
 				def description = getStringProp("/projects/${pluginName}/procedures/${proc.procedureName}/stepPicker/description") ?: "TODO:Proc description"
-				
+
 				stepPicker (label, 'TODO: pluginKey', proc.procedureName, category, description)
 			}
 			*/
 		}
 	}
-	
+
 	def loadProcedures(String pluginDir, String pluginKey, String pluginName) {
-	
+
 		// Loop over the sub-directories in the procedures directory
 		// and evaluate procedures if a procedure.dsl file exists
-		
+
 		File procsDir = new File(pluginDir, 'dsl/procedures')
-		procsDir.eachDir { 
-			
+		procsDir.eachDir {
+
 			it.eachFile FileType.FILES, {
 				if (it.name == 'procedure.dsl') {
 					loadProcedure(pluginDir, pluginKey, pluginName, it.absolutePath)
 				}
 			}
 		}
-		
+
 		// plugin boiler-plate
 		setupCustomEditorData(pluginName)
 	}
-	
+
 	def loadProcedure(String pluginDir, String pluginKey, String pluginName, String dslFile) {
 		evalInlineDsl(dslFile, [pluginKey: pluginKey, pluginName: pluginName, pluginDir: pluginDir])
 	}
-	
+
 	//Helper function to load another dsl script and evaluate it in-context
 	def evalInlineDsl(String dslFile, Map bindingMap) {
 		CompilerConfiguration cc = new CompilerConfiguration();

@@ -14,6 +14,7 @@ if(defined $ENV{QUERY_STRING}) { # Promotion through UI
 $commander->setProperty("/plugins/$pluginName/project/pluginDir",{value=>$pluginDir});
 $logfile .= "Plugin Name: $pluginName\n";
 $logfile .= "Current directory: $dir\n";
+$logfile .= "Plugin directory: $pluginDir\n";
 
 # Evaluate promote.groovy or demote.groovy based on whether plugin is being promoted or demoted ($promoteAction)
 local $/ = undef;

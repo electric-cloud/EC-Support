@@ -65,7 +65,7 @@ open(my $fh, '>', $xmlFile) or die "Could not open file '$xmlFile' $!";
 print $fh $xs->XMLout($ref);
 close $fh;
 
-# Update help.xml.txt with key, version, label, description
+# Update help.xml.txt with key, version,
 # Save as help.xml
 print "[INFO] - Processing 'pages/help.xml' file...\n";
 $file = "pages/help.xml.txt";
