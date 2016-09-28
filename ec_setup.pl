@@ -30,7 +30,7 @@ my $dslReponse = $commander->evalDsl($dsl,
              {
                    "pluginName":"$pluginName"
              },
-         		serverLibraryPath=>"$pluginsDir/$pluginName/dsl"
+         		serverLibraryPath=>"$pluginDir/$pluginName/dsl"
       )})->findnodes_as_string("/");
 $logfile .= $dslReponse;
 
