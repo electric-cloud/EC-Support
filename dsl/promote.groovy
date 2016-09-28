@@ -16,7 +16,7 @@ project pluginName, {
 
 	property 'version', {
 		value = '1.4.1'
-		Description= new File(pluginDir + "/dsl/properties/CHANGELOG.txt").text
+		description= new File(pluginDir + "/dsl/properties/CHANGELOG.txt").text
 	}
 
 	loadProcedures(pluginDir, pluginKey, pluginName)
