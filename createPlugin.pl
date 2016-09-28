@@ -10,10 +10,10 @@ use ElectricCommander ();
 $| = 1;
 my $ec = new ElectricCommander->new();
 
-my $version = "1.4.1";
+my $pluginVersion = "1.4.1";
 my $pluginKey = "EC-Support";
 my $description = "A set of procedures to interact with Electric Cloud support.";
-GetOptions ("version=s" => \$version,
+GetOptions ("version=s" => \$pluginVersion,
 			"pluginKey=s"   => \$pluginKey,
 			"description=s"  => \$description
 			) or die(qq(
@@ -27,7 +27,7 @@ Error in command line arguments
 		)
 );
 
-my $pluginName = "${pluginKey}-${version}";
+my $pluginName = "${pluginKey}-${pluginVersion}";
 
 my $xs = XML::Simple->new(
 	ForceArray => 1,
@@ -58,12 +58,31 @@ print "[INFO] - Processing 'META-INF/plugin.xml' file...\n";
 $xmlFile = "META-INF/plugin.xml";
 $ref  = $xs->XMLin($xmlFile);
 $ref->{plugin}[0]->{key}[0] = $pluginKey;
-$ref->{plugin}[0]->{version}[0] = $version;
+$ref->{plugin}[0]->{version}[0] = $pluginVersion;
 $ref->{plugin}[0]->{label}[0] = $pluginKey;
 $ref->{plugin}[0]->{description}[0] = $description;
 open(my $fh, '>', $xmlFile) or die "Could not open file '$xmlFile' $!";
 print $fh $xs->XMLout($ref);
 close $fh;
+
+# Update help.xml.txt with key, version, label, description
+# Save as help.xml
+print "[INFO] - Processing 'pages/help.xml' file...\n";
+$file = "pages/help.xml.txt";
+{
+  local $/ = undef;
+  open FILE, $file or warn "Couldn't open file: $!";
+	my $value=<FILE>;
+  close FILE;
+
+	$value =~	s/\@PLUGIN_NAME\@/$pluginName/g;
+	$value =~	s/\@PLUGIN_KEY\@/$pluginKey/g;
+	$value =~	s/\@PLUGIN_VERSION\@/$pluginVersion/g;
+
+	open FILE, "> pages/help.xml" or die "Couldn't open file: $!";
+  print FILE $value;
+  close FILE;
+}
 
 # Create plugin jar file
 print "[INFO] - Creating plugin jar file, ${pluginKey}.jar\n";
@@ -75,7 +94,8 @@ while (my $file = readdir(DIR)) {
 		$file eq "${pluginKey}.jar" or
 		$file eq ".git" or
 		$file eq "." or
-		$file eq ".."
+		$file eq ".." or
+		$file eq "help.xml.txt"
 		);
 }
 # Save the Zip file
