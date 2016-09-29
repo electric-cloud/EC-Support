@@ -27,15 +27,14 @@ if(defined $ENV{QUERY_STRING}) { # Promotion through UI
 my $dsl = <FILE>;
 close FILE;
 my $dslReponse = $commander->evalDsl($dsl,
-      { parameters=>qq(
-             {
-                   "pluginName":"$pluginName"
-             },
-         		serverLibraryPath=>"$pluginDir/dsl"
-      )})->findnodes_as_string("/");
+      { parameters=>qq( {"pluginName":"$pluginName"}),
+        serverLibraryPath => "$pluginDir/dsl"
+      }
+)->findnodes_as_string("/");
 $logfile .= $dslReponse;
 
 # Create output property
 
 my $nowString = localtime;
 $commander->setProperty("/plugins/$pluginName/project/logs/$nowString",{value=>$logfile});
+

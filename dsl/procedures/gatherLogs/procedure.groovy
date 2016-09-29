@@ -1,4 +1,3 @@
-
 procedure 'gatherLogs', {
   description = 'A procedure to gather logs without sending them in case your EF cluster does not have external internet access. Optionally, an artifact can be created that can be downloaded later to the user desktop.'
   resourceName = 'local'
@@ -42,7 +41,7 @@ procedure 'gatherLogs', {
 
   step 'grabResource', {
     description = 'Grab one of the commander server resources (in case of cluster)'
-    command = new File(pluginDir + "/dsl/procedures/gatherLogs/steps/grabResource.pl").text
+    command = new File(pluginDir + "/dsl/procedures/gatherLogs/steps/grabResource.sh").text
     resourceName = '$[gatheringResource]'
   }
 
@@ -52,7 +51,7 @@ procedure 'gatherLogs', {
   }
 
   step 'grabDestinationDir', {
-    command = new File(pluginDir + "/dsl/procedures/gatherLogs/steps/grbaDestinationDir.pl").text
+    command = new File(pluginDir + "/dsl/procedures/gatherLogs/steps/grabDestinationDir.pl").text
     resourceName = '$[/myJob/gatheringResource]'
     shell = 'ec-perl'
   }

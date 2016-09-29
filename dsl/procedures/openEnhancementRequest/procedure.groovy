@@ -97,7 +97,7 @@ No log involved'''
         property 'options', {
           property 'option1', {
             text = 'ElectricCommander'
-            property 'value', value: 'electriccommander',
+            property 'value', value: 'electriccommander'
           }
           property 'option2', {
             text = 'ElectricFlow'
