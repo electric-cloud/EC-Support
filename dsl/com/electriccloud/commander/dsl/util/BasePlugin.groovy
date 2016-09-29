@@ -60,13 +60,13 @@ abstract class BasePlugin extends DslDelegatingScript {
 	def loadProcedures(String pluginDir, String pluginKey, String pluginName) {
 
 		// Loop over the sub-directories in the procedures directory
-		// and evaluate procedures if a procedure.dsl file exists
+		// and evaluate procedures if a procedure.groovy file exists
 
 		File procsDir = new File(pluginDir, 'dsl/procedures')
 		procsDir.eachDir {
 
 			it.eachFile FileType.FILES, {
-				if (it.name == 'procedure.dsl') {
+				if (it.name == 'procedure.groovy') {
 					loadProcedure(pluginDir, pluginKey, pluginName, it.absolutePath)
 				}
 			}
