@@ -110,6 +110,7 @@ procedure 'AddLogsToExistingTicket',
   step 'createBundle',
     description: 'Zip the different files',
     subprocedure: 'Create Zip File',
+    subproject: '/plugins/EC-ShareFile/project',
     resourceName: '',
     actualParameter: [
         sourceFile: '$' + '[/myJob/destinationDirectory]',
