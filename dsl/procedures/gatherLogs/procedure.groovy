@@ -70,8 +70,8 @@ be created that can be downloaded later to the user desktop.''',
           'Path': '$' + '[/myJob/destinationDirectory]'
         ]
 
-    step 'collectServerLogs',
-        subprocedure: 'collectServerLogs',
+    step 'sub-collectAllServerLogs',
+        subprocedure: 'sub-collectAllServerLogs',
         subproject: '',
         actualParameter: [
             destinationDirectory: '$' + '[/myJob/destinationDirectory]',

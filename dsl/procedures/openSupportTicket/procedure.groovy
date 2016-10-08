@@ -110,8 +110,8 @@ procedure 'openSupportTicket',
       Path: '$' + '[/myJob/destinationDirectory]'
     ]
 
-  step 'collectServerLogs',
-    subprocedure: 'collectServerLogs',
+  step 'sub-collectAllServerLogs',
+    subprocedure: 'sub-collectAllServerLogs',
     actualParameter: [
       destinationDirectory: '$' + '[/myJob/destinationDirectory]',
       jobNumber: '$' + '[jobNumber]',

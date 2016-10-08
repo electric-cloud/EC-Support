@@ -84,8 +84,8 @@ procedure 'AddLogsToExistingTicket',
         Path: '$' + '[/myJob/destinationDirectory]'
     ]
 
-  step 'collectServerLogs',
-    subprocedure: 'collectServerLogs',
+  step 'sub-collectAllServerLogs',
+    subprocedure: 'sub-collectAllServerLogs',
     resourceName: '',
     actualParameter: [
         destinationDirectory: '$' + '[/myJob/destinationDirectory]',
