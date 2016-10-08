@@ -46,7 +46,7 @@ procedure 'sub-collectServerLogs',
         destinationFile: '$' + '[destinationDirectory]/servers/$' + '[serverResource]/',
         destinationResourceName: '$' + '[targetServerResource]',
         destinationWorkspaceName: '$' + '[/myJob/targetWorkspace]',
-        sourceFile: '$' + '[/server/Electric Cloud/dataDirectory]/logs/service.log',
+        sourceFile: '$' + '[/server/Electric Cloud/dataDirectory]/logs/commander-service.log',
         sourceResourceName: '$' + '[serverResource]',
         sourceWorkspaceName: '$' + '[/myJob/sourceWorkspace]'
     ]
