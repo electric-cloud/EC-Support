@@ -1,4 +1,5 @@
 2016-11-11 Laurent Rochette <lrochette@electric-cloud.com>
+  * 1.4.3: Issue #12 Fix pattern matching to grab the log files
   * 1.4.2: Increase version number to avoid conflict
 
 2016-09-27 Laurent Rochette <lrochette@electric-cloud.com>
@@ -52,4 +53,3 @@
 
 2015-03-27 System Administrator <lrochette@electric-cloud.com>
   * 1.0.0.1: Initial commit
-

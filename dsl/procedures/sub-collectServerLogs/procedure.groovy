@@ -33,23 +33,23 @@ procedure 'sub-collectServerLogs',
         destinationFile: '$' + '[destinationDirectory]/servers/$' + '[serverResource]/',
         destinationResourceName: '$' + '[targetServerResource]',
         destinationWorkspaceName: '$' + '[/myJob/targetWorkspace]',
-        sourceFile: '$' + '[/server/Electric Cloud/dataDirectory]/logs/*commander.log',
+        sourceFile: '$' + '[/server/Electric Cloud/dataDirectory]/logs/commander*.log',
         sourceResourceName: '$' + '[serverResource]',
         sourceWorkspaceName: '$' + '[/myJob/sourceWorkspace]'
     ]
 
-  step 'copyService_log',
-    resourceName: '$' + '[serverResource]',
-    subprocedure: 'Remote Copy - Native',
-    subproject: '/plugins/EC-FileOps/project',
-    actualParameter: [
-        destinationFile: '$' + '[destinationDirectory]/servers/$' + '[serverResource]/',
-        destinationResourceName: '$' + '[targetServerResource]',
-        destinationWorkspaceName: '$' + '[/myJob/targetWorkspace]',
-        sourceFile: '$' + '[/server/Electric Cloud/dataDirectory]/logs/commander-service.log',
-        sourceResourceName: '$' + '[serverResource]',
-        sourceWorkspaceName: '$' + '[/myJob/sourceWorkspace]'
-    ]
+  // step 'copyService_log',
+  //   resourceName: '$' + '[serverResource]',
+  //   subprocedure: 'Remote Copy - Native',
+  //   subproject: '/plugins/EC-FileOps/project',
+  //   actualParameter: [
+  //       destinationFile: '$' + '[destinationDirectory]/servers/$' + '[serverResource]/',
+  //       destinationResourceName: '$' + '[targetServerResource]',
+  //       destinationWorkspaceName: '$' + '[/myJob/targetWorkspace]',
+  //       sourceFile: '$' + '[/server/Electric Cloud/dataDirectory]/logs/commander-service.log',
+  //       sourceResourceName: '$' + '[serverResource]',
+  //       sourceWorkspaceName: '$' + '[/myJob/sourceWorkspace]'
+  //   ]
 
   step 'collectTimeBasedLogs',
     description: 'Collect the logs based on a time',
