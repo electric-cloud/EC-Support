@@ -1,0 +1,51 @@
+<exportedData buildLabel="build_3.5_30434_OPT_2010.01.13_07:32:22" buildVersion="3.5.1.30434" version="39">
+  <exportPath>/projects/EC-Support-1.4.1</exportPath>
+  <project>
+    <projectName>EC-Support-1.4.2</projectName>
+    <propertySheet>
+      <property>
+        <expandable>0</expandable>
+        <propertyName>ec_setup</propertyName>
+        <value>use Cwd;
+use File::Spec;
+use POSIX;
+
+my $dir = getcwd;
+my $logfile =&quot;&quot;;
+my $nowString = localtime;
+my $pluginDir=$commander-&gt;getProperty(&quot;/server/settings/pluginsDirectory&quot;)
+                -&gt;findnodes(&quot;//value&quot;)-&gt;string_value() . &quot;/$pluginName&quot; ;
+
+$commander-&gt;setProperty(&quot;/plugins/$pluginName/project/pluginDir&quot;,{value=&gt;$pluginDir});
+$logfile .= &quot;Plugin Name: $pluginName\n&quot;;
+$logfile .= &quot;Current directory: $dir\n&quot;;
+$logfile .= &quot;Plugin directory: $pluginDir\n&quot;;
+
+$commander-&gt;setProperty(&quot;/plugins/$pluginName/project/logs/$nowString&quot;,{value=&gt;$logfile});
+
+# Evaluate promote.groovy or demote.groovy based on whether plugin is being promoted or demoted ($promoteAction)
+local $/ = undef;
+my $promoteFile=&quot;&quot;;
+#If env variable QUERY_STRING exists:
+if(defined $ENV{QUERY_STRING}) { # Promotion through UI
+  $promoteFile=&quot;$pluginDir/dsl/$promoteAction.groovy&quot;;
+} else {  # Promotion from the command line
+  $promoteFile = &quot;dsl/$promoteAction.groovy&quot;;
+}
+open FILE,  $promoteFile or die &quot;Couldn't open file $promoteFile: $!&quot;;
+my $dsl = &lt;FILE&gt;;
+close FILE;
+my $dslReponse = $commander-&gt;evalDsl($dsl,
+      { parameters=&gt;qq({&quot;pluginName&quot;:&quot;$pluginName&quot;}),
+        serverLibraryPath=&gt;&quot;$pluginDir/dsl&quot;
+      }
+)-&gt;findnodes_as_string(&quot;/&quot;);
+$logfile .= $dslReponse;
+
+# Create output property
+$commander-&gt;setProperty(&quot;/plugins/$pluginName/project/logs/$nowString&quot;,{value=&gt;$logfile});
+</value>
+      </property>
+    </propertySheet>
+  </project>
+</exportedData>
