@@ -4,26 +4,27 @@ use POSIX;
 
 my $dir = getcwd;
 my $logfile ="";
-my $pluginDir;
-if(defined $ENV{QUERY_STRING}) { # Promotion through UI
-       $pluginDir = $ENV{COMMANDER_PLUGINS} . "/$pluginName";
-} else {
-       $pluginDir = $dir;
-}
+my $nowString = localtime;
+my $pluginDir=$commander->getProperty("/server/settings/pluginsDirectory")
+                ->findnodes("//value")->string_value() . "/$pluginName" ;
 
 $commander->setProperty("/plugins/$pluginName/project/pluginDir",{value=>$pluginDir});
 $logfile .= "Plugin Name: $pluginName\n";
 $logfile .= "Current directory: $dir\n";
 $logfile .= "Plugin directory: $pluginDir\n";
 
+$commander->setProperty("/plugins/$pluginName/project/logs/$nowString",{value=>$logfile});
+
 # Evaluate promote.groovy or demote.groovy based on whether plugin is being promoted or demoted ($promoteAction)
 local $/ = undef;
-# If env variable QUERY_STRING exists:
+my $promoteFile="";
+#If env variable QUERY_STRING exists:
 if(defined $ENV{QUERY_STRING}) { # Promotion through UI
-     open FILE, $ENV{COMMANDER_PLUGINS} . "/$pluginName/dsl/$promoteAction.groovy" or die "Couldn't open file: $!";
+  $promoteFile="$pluginDir/dsl/$promoteAction.groovy";
 } else {  # Promotion from the command line
-     open FILE, "dsl/$promoteAction.groovy" or die "Couldn't open file: $!";
+  $promoteFile = "dsl/$promoteAction.groovy";
 }
+open FILE,  $promoteFile or die "Couldn't open file $promoteFile: $!";
 my $dsl = <FILE>;
 close FILE;
 my $dslReponse = $commander->evalDsl($dsl,
@@ -34,6 +35,4 @@ my $dslReponse = $commander->evalDsl($dsl,
 $logfile .= $dslReponse;
 
 # Create output property
-
-my $nowString = localtime;
 $commander->setProperty("/plugins/$pluginName/project/logs/$nowString",{value=>$logfile});

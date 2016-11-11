@@ -6,7 +6,7 @@ be created that can be downloaded later to the user desktop.''',
   resourceName: 'local',
 {
   //
-  //  Paramaters
+  //  Parameters
   //
   formalParameter 'agents',
     description: 'a commas separated list of agents. Will be used to get the logs from the agents involved in the issue',
@@ -18,17 +18,23 @@ be created that can be downloaded later to the user desktop.''',
     type: 'checkbox'
 
   formalParameter 'gatheringResource', defaultValue: 'local',
-    description: 'The resource to use to gather log and open ticket',
+    description: 'The resource to use to gather logs',
     required: '1',
-    type: 'entry'
+    type:'entry'
 
   formalParameter 'jobNumber',
     description: 'The ID of the job that generated the error. Will be used to collect the right logs',
     required: '0',
     type: 'entry'
 
-  formalParameter 'serverResources', defaultValue: 'default',
+  formalParameter 'serverResources',
+    defaultValue: 'default',
     description: 'A list of resources or pools, comma separated',
+    required: '0',
+    type: 'entry'
+
+  formalParameter 'time',
+    description: 'The time at which the issue happened. Used to collect the right logs. If empty, will simply send the commander.log',
     required: '0',
     type: 'entry'
 
