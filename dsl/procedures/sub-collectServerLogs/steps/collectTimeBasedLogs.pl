@@ -30,7 +30,7 @@ my $serverEpochTime=convertTimeToEpoch($timeString);
 opendir(LOG, $logDir) or die("Cannot open the log directory\n$!");
 
 while (my $file = readdir(LOG)) {
-    next if ($file !~ m/commander[\-\d.]*.log.zip/);
+    next if ($file !~ m/commander.*\.log\.zip/);
     # printf("Processing $file\n") if ($DEBUG);
     my $fileModificationTime = (stat("$logDir/$file"))[9];      # get modification time
     # printf("    time: %d\n", $fileModificationTime);
@@ -40,19 +40,19 @@ while (my $file = readdir(LOG)) {
             subprocedure => "Remote Copy - Native",
             jobStepName  => "Copy $file",
             actualParameter => [
-            	{actualParameterName => 'sourceFile',        
+            	{actualParameterName => 'sourceFile',
                                value => "$logDir/$file"},
-            	{actualParameterName => 'sourceResourceName',   
+            	{actualParameterName => 'sourceResourceName',
                                value => "$serverResource"},
-            	{actualParameterName => 'sourceWorkspaceName',   
-                               value => "$[/myJob/sourceWorkspace]"},    
-                                    
-                {actualParameterName => 'destinationFile',         
+            	{actualParameterName => 'sourceWorkspaceName',
+                               value => "$[/myJob/sourceWorkspace]"},
+
+                {actualParameterName => 'destinationFile',
                                value => "$[destinationDirectory]/servers/$serverResource/"},
-            	{actualParameterName => 'destinationResourceName', 
+            	{actualParameterName => 'destinationResourceName',
                                value => "$[targetServerResource]"},
-            	{actualParameterName => 'destinationWorkspaceName',   
-                               value => "$[/myJob/targetWorkspace]"},            	
+            	{actualParameterName => 'destinationWorkspaceName',
+                               value => "$[/myJob/targetWorkspace]"},
             ],
         });
     }
@@ -67,7 +67,7 @@ closedir(LOG);
 #############################################################################
 sub convertTimeToEpoch {
     my $timeStr=shift @_;
-    
+
     # Get passed time
     my($date, $time);
 
@@ -86,7 +86,7 @@ sub convertTimeToEpoch {
     my $localTime = "$[/timestamp MM-dd-yyyy HH:mm]";
     my ($localMonth,$localDay,$localYear,$localHour,$localMinute) = split(/[\s\-:]+/, $localTime);
 
-    printf("Local month: $localMonth\n") if ($DEBUG);
+    #printf("Local month: $localMonth\n") if ($DEBUG);
     $year = $localYear if ($year == 0);
     $year += 2000 if ($year < 100);
     $month = $localMonth if ($month == 0);
@@ -98,4 +98,3 @@ sub convertTimeToEpoch {
     printf("Time of the incident: %s \n", $time) if ($DEBUG);
     return $time
 }
-
