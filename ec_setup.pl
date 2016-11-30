@@ -18,8 +18,8 @@ $commander->setProperty("/plugins/$pluginName/project/logs/$nowString",{value=>$
 # Evaluate promote.groovy or demote.groovy based on whether plugin is being promoted or demoted ($promoteAction)
 local $/ = undef;
 my $promoteFile="";
-#If env variable QUERY_STRING exists:
-if(defined $ENV{QUERY_STRING}) { # Promotion through UI
+#If env variable QUERY_STRING exists or we are in a step:
+if(defined $ENV{COMMANDER_JOBSTEPID} || defined $ENV{QUERY_STRING}) { # Promotion through UI
   $promoteFile="$pluginDir/dsl/$promoteAction.groovy";
 } else {  # Promotion from the command line
   $promoteFile = "dsl/$promoteAction.groovy";
