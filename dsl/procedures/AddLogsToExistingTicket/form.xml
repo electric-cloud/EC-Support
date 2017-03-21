@@ -29,7 +29,7 @@
          <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation>
         <type>entry</type>
         <required>1</required>
-        <value>local</value>
+        <value>default</value>
     </formElement>
 
     <formElement>
