@@ -10,7 +10,7 @@ use ElectricCommander ();
 $| = 1;
 my $ec = new ElectricCommander->new();
 
-my $pluginVersion = "1.4.4";
+my $pluginVersion = "1.4.5";
 my $pluginKey = "EC-Support";
 my $description = "A set of procedures to interact with Electric Cloud support.";
 GetOptions ("version=s" => \$pluginVersion,
