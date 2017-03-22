@@ -27,7 +27,26 @@ Error in command line arguments
 		)
 );
 
+
+# Read buildCounter
+my $buildCounter;
+{
+  local $/ = undef;
+  open FILE, "buildCounter" or die "Couldn't open file: $!";
+  $buildCounter = <FILE>;
+  close FILE;
+
+ $buildCounter++;
+ $pluginVersion .= ".$buildCounter";
+ print "[INFO] - Incrementing build number to $buildCounter...\n";
+
+ open FILE, "> buildCounter" or die "Couldn't open file: $!";
+ print FILE $buildCounter;
+ close FILE;
+}
+
 my $pluginName = "${pluginKey}-${pluginVersion}";
+print "[INFO] - Building  $pluginName...\n";
 
 my $xs = XML::Simple->new(
 	ForceArray => 1,
@@ -92,6 +111,7 @@ opendir (DIR, $directory) or die $!;
 while (my $file = readdir(DIR)) {
 	$zip->addTree( $file, $file ) unless (
 		$file eq "${pluginKey}.jar" or
+		$file eq "systemtest" or
 		$file eq ".git" or
 		$file eq "." or
 		$file eq ".." or

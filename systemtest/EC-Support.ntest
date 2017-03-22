@@ -1,0 +1,68 @@
+# -*-Perl-*-
+
+# EC-Support.ntest -
+#
+# Exercise basic components of EC-Support plugin
+#
+# Copyright (c) 2017 Electric Cloud, Inc.
+# All rights reserved
+
+use strict;
+use warnings;
+use ECTest;
+
+initCommander();
+$::N=$adminSession;
+
+my $pluginKey = "EC-Support";
+my $xpath = $::N->getPlugin($pluginKey);
+my $pluginName = $xpath->findnode("//pluginName")->value;
+
+#-------------------------------------------------------------------------------
+# Test permissions and visibility, which should be set regardless of whether the
+# plugin is promoted or not.
+#-------------------------------------------------------------------------------
+ntest "install", {}, sub {
+    # Start out with the demoted plugin
+    assertOK($::N->promotePlugin($pluginName, {promoted => 0}));
+
+};
+
+#-------------------------------------------------------------------------------
+# Test promote & demote behavior.
+#-------------------------------------------------------------------------------
+ntest "promote", {}, sub {
+    # Start out with the demoted plugin
+    assertOK($::N->promotePlugin($pluginName, {promoted => 0}));
+
+    # Make sure the plugin's ec_setup script exists
+    assertOK($xpath = $::N->getProperty("/projects/$pluginName/ec_setup",
+                                      {expand => 0}),
+             "ec_setup property exists");
+    assertNe("", $xpath->findvalue("//value")->value,
+             "ec_setup script not empty");
+
+    # Promote the plugin
+    assertOK($::N->promotePlugin($pluginName));
+
+    # Demote the plugin
+    assertOK($::N->promotePlugin($pluginName, {promoted => 0}));
+};
+
+# Ensure the plugin is promoted for later tests
+$::N->promotePlugin($pluginName);
+
+#-------------------------------------------------------------------------------
+# Test procedure present.
+#-------------------------------------------------------------------------------
+ntest "procedures", {}, sub {
+        assertOK($::N->getProcedure($pluginName, "AddLogsToExistingTicket"), "procedure AddLogsToExistingTicket missing");
+        assertOK($::N->getProcedure($pluginName, "commentOnSupportTicket"), "procedure commentOnSupportTicket missing");
+        assertOK($::N->getProcedure($pluginName, "gatherLogs"), "procedure gatherLogs missing");
+        assertOK($::N->getProcedure($pluginName, "openEnhancementRequest"), "procedure openEnhancementRequest missing");
+        assertOK($::N->getProcedure($pluginName, "openSupportTicket"), "procedure openSupportTicket missing");
+        assertOK($::N->getProcedure($pluginName, "sub-collectAllServerLogs"), "procedure sub-collectAllServerLogs missing");
+        assertOK($::N->getProcedure($pluginName, "sub-collectServerLogs"), "procedure sub-collectServerLogs missing");
+};
+
+1;
