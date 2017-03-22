@@ -14,17 +14,17 @@ procedure 'AddLogsToExistingTicket',
       required: '0',
       type: 'entry'
 
-  formalParameter 'product',
-      defaultValue: 'electricflow',
-      description: 'the name of the product that failed',
+  formalParameter 'gatheringResource',
+      defaultValue: 'local',
+      description: '',
       required: '1',
-      type: 'select'
+      type: 'entry'
 
   formalParameter 'serverResources',
-      defaultValue: 'local',
-      description: 'A list of resources or pools, comma separated',
-      required: '0',
-      type: 'entry'
+          defaultValue: 'local',
+          description: 'A list of resources or pools, comma separated',
+          required: '0',
+          type: 'entry'
 
   formalParameter 'sharefileConfiguration',
       defaultValue: 'sharefile',
@@ -62,18 +62,17 @@ procedure 'AddLogsToExistingTicket',
     description: 'Assign ticketId to global job property',
     command: new File(pluginDir + "/dsl/procedures/AddLogsToExistingTicket/steps/Init.pl").text,
     shell: 'ec-perl',
-    resourceName: ''
-
+    resourceName: '$' + '[gatheringResource]'
 
   step 'grabResource',
     description: 'Grab one of the commander server resources (in case of cluster)',
     command: new File(pluginDir + "/dsl/procedures/AddLogsToExistingTicket/steps/grabResource.sh").text,
-    resourceName: ''
+    resourceName: '$' + '[gatheringResource]'
 
   step 'grabDestinationDir',
     command: new File(pluginDir + "/dsl/procedures/AddLogsToExistingTicket/steps/grabDestinationDir.pl").text,
     shell: 'ec-perl',
-    resourceName: ''
+    resourceName: '$[/myJob/assignedServerResource]'
 
   step 'createTicketDirectory',
     description: 'create a directory to collect the logs',
@@ -99,19 +98,19 @@ procedure 'AddLogsToExistingTicket',
     command: new File(pluginDir + "/dsl/procedures/AddLogsToExistingTicket/steps/collectAgentLogs.pl").text,
     condition: '$' + '[/javascript "$' + '[agents]" != "" ]',
     shell: 'ec-perl',
-    resourceName: ''
+    resourceName: '$[/myJob/assignedServerResource]'
 
   step 'listing',
     description: 'Get the list of collected files',
     command: new File(pluginDir + "/dsl/procedures/AddLogsToExistingTicket/steps/listing.pl").text,
-    resourceName: '$' + '[/myJob/assignedServerResource]',
+    resourceName: '$[/myJob/assignedServerResource]',
     shell: 'ec-perl'
 
   step 'createBundle',
     description: 'Zip the different files',
     subprocedure: 'Create Zip File',
     subproject: '/plugins/EC-ShareFile/project',
-    resourceName: '',
+    resourceName: '$[/myJob/assignedServerResource]',
     actualParameter: [
         sourceFile: '$' + '[/myJob/destinationDirectory]',
         zipFile: '$' + '[/myJob/destinationDirectory].zip'
@@ -120,7 +119,7 @@ procedure 'AddLogsToExistingTicket',
   step 'uploadBundleToSharefile',
     subprocedure: 'CreateFolderAndUploadFile',
     subproject: '/plugins/EC-ShareFile/project',
-    resourceName: '',
+    resourceName: '$[/myJob/assignedServerResource]',
     actualParameter: [
         company: 'electric-cloud',
         config: '$' + '[ShareFileConfiguration]',
@@ -132,7 +131,7 @@ procedure 'AddLogsToExistingTicket',
     condition: '1',
     subprocedure: 'commentOnTicket',
     subproject: '/plugins/EC-Zendesk/project',
-    resourceName: '',
+    resourceName: '$[/myJob/assignedServerResource]',
     actualParameter: [
         comment: '$' +'''[ticketComment]
 
@@ -144,26 +143,6 @@ $''' + '[/myJob/fileList]',
         ticketNumber: '$' + '[/myJob/zendesk/ticketId]'
     ]
 
-  // Custom properties
-  property 'ec_customEditorData', {
-    property 'parameters', {
-      property 'product', {
-        property 'options', {
-          property 'option1', {
-            property 'text', value: 'ElectricCommander'
-            property 'value', value: 'electriccommander'
-          }
-          property 'option2', {
-            property 'text', value: 'ElectricFlow'
-            property 'value', value: 'electricflow'
-          }
-          property 'optionCount', value: '2'
-          property 'type', value: 'list'
-        }
-        property 'formType', value: 'standard'
-      }
-    }
-  }
   property 'ec_parameterForm', value: new File(pluginDir + "/dsl/procedures/AddLogsToExistingTicket/form.xml").text
 
 }

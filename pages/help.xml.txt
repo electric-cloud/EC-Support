@@ -46,31 +46,39 @@
 	            </tr>
 	            <tr>
 	                <td class="required">Product</td>
-	                <td>ElectricFlow or ElectricCommander</td>
+	                <td>ElectricFlow or ElectricCommander.</td>
+	            </tr>
+              <tr>
+	                <td class="required">Problem Type</td>
+	                <td>More information about the type of problem you are facing.</td>
+	            </tr>
+              <tr>
+	                <td class="required">Problem Scope</td>
+	                <td>How many people are affected.</td>
 	            </tr>
               <tr>
                 <td class="required">Gathering Resource</td>
-                <td>The resource used on which to gather the logs. Useful in
+                <td>The resource used to gather the logs. Useful in
                 case your server does not have internet access.</td>
               </tr>
-	           <tr>
-	                <td class="required">Server Resources</td>
-	                <td>The resource associated to your server (default: local).
-                  If you have a clustered configuration, enter a comma separated
-                  list of agents or a pool.</td>
-	            </tr>
+              <tr>
+ 	                <td class="required">Server Resources</td>
+ 	                <td>The resource associated to your server (default: local).
+                   If you have a clustered configuration, enter a comma separated
+                   list of agents or a pool.</td>
+ 	            </tr>
            		<tr>
 	                <td class="required">Zendesk Configuration</td>
 	                <td>The configuration in the
                    <a ref="/commander/pages/EC-Zendesk/help">EC-Zendesk plugin</a>
-                  that contain login/password to connect to Zendesk and open a
+                  that contains login/password to connect to Zendesk and open a
                   ticket.</td>
 	            </tr>
            		<tr>
 	                <td class="required">ShareFile Configuration</td>
 	                <td>The configuration in the
                   <a href="/commander/pages/EC-ShareFile/help">EC-ShareFile plugin</a>
-                  that contain login/password to connect to ShareFile to upload
+                  that contains login/password to connect to ShareFile to upload
                   the logs.</td>
 	            </tr>
            		<tr>
@@ -81,7 +89,7 @@
 	            </tr>
            		<tr>
 	                <td>Agent List</td>
-	                <td>This optional parameter allows to  pass a list of agents
+	                <td>This optional parameter allows you to  pass a list of agents
                   -comma separated- for which the logs will be gathered and
                   uploaded automatically.</td>
 	            </tr>
@@ -142,10 +150,107 @@
               <tr>
 	                <td>Create Artifact</td>
 	                <td>Checkbox to create a EC-Support:logs artifact version that
-                  you can download later to you desktop.</td>
+                  you can download later to your desktop.</td>
 	            </tr>
 	        </tbody>
     	</table>
+      <img src="../../plugins/@PLUGIN_KEY@/images/help/gatherLogs.png" alt="form" border="1"/>
+
+      <h2>commentOnSupportTicket</h2>
+
+        <p>This procedure adds a comment on an existing Zendesk ticket.
+    	</p>
+
+	    <table class="grid">
+	        <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+	        <tbody>
+             <tr>
+               <td class="required">Ticket Id</td>
+               <td>The ID of the existing Zendesk ticket.</td>
+             </tr>
+	           <tr>
+	                <td class="required">Comment</td>
+	                <td>The comment you wish to add to the ticket.</td>
+	            </tr>
+              <tr>
+	                <td class="required">Zendesk Configuration</td>
+	                <td>The configuration in the
+                   <a ref="/commander/pages/EC-Zendesk/help">EC-Zendesk plugin</a>
+                  that contains login/password to connect to Zendesk and comment
+                   on a ticket.</td>
+	            </tr>
+
+	        </tbody>
+    	</table>
+      <img src="../../plugins/@PLUGIN_KEY@/images/help/commentOnSupportTicket.png" alt="form" border="1"/>
+
+      <h2>AddLogsToExistingTicket</h2>
+
+        <p>This procedure is used to gather and add logs to an existing ticket.</p>
+
+	    <table class="grid">
+      <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+	        <tbody>
+	            <tr>
+	                <td class="required">Ticket Id</td>
+	                <td>The ID of your ticket.</td>
+	            </tr>
+	            <tr>
+	                <td class="required">Comment</td>
+	                <td>The comment to go along the logs.</td>
+	            </tr>
+              <tr>
+                <td class="required">Gathering Resource</td>
+                <td>The resource used to gather the logs. Useful in
+                case your server does not have internet access.</td>
+              </tr>
+              <tr>
+ 	                <td class="required">Server Resources</td>
+ 	                <td>The resource associated to your server (default: local).
+                   If you have a clustered configuration, enter a comma separated
+                   list of agents or a pool.</td>
+ 	            </tr>
+           		<tr>
+	                <td class="required">Zendesk Configuration</td>
+	                <td>The configuration in the
+                   <a ref="/commander/pages/EC-Zendesk/help">EC-Zendesk plugin</a>
+                  that contains login/password to connect to Zendesk and open a
+                  ticket.</td>
+	            </tr>
+           		<tr>
+	                <td class="required">ShareFile Configuration</td>
+	                <td>The configuration in the
+                  <a href="/commander/pages/EC-ShareFile/help">EC-ShareFile plugin</a>
+                  that contains login/password to connect to ShareFile to upload
+                  the logs.</td>
+	            </tr>
+           		<tr>
+	                <td class="required">ShareFile Upload Directory</td>
+	                <td>Your company directory on ShareFile where to upload the
+                  logs files. The directory is usually something like
+                  /clients/X-Z/NAME/uploads. Check on ShareFile if you are unsure.</td>
+	            </tr>
+           		<tr>
+	                <td>Agent List</td>
+	                <td>This optional parameter allows you to  pass a list of agents
+                  -comma separated- for which the logs will be gathered and
+                  uploaded automatically.</td>
+	            </tr>
+           		<tr>
+	                <td>Time</td>
+	                <td>If this optional parameter is set, all the commander logs
+                  from that time on will be gathered from all servers and uploaded
+                  automatically.</td>
+	            </tr>
+           		<tr>
+	                <td>Job Id</td>
+	                <td>If this optional parameter is set, all the commander logs
+                  containing this jobId will be gathered from all servers and
+                  uploaded automatically.</td>
+	            </tr>
+	        </tbody>
+    	</table>
+    	<img src="../../plugins/@PLUGIN_KEY@/images/help/addLogsToExistingTicket.png" alt="form" border="1"/>
 
 	</div>
 </body>

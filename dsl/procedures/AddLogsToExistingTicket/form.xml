@@ -1,91 +1,83 @@
 <editor>
-    <formElement> 
-        <label>Ticket ID</label> 
-        <property>ticketId</property> 
-        <documentation>The ID of your existing ticket</documentation> 
+    <formElement>
+        <label>Ticket ID</label>
+        <property>ticketId</property>
+        <documentation>The ID of your existing ticket</documentation>
         <type>entry</type>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Comment</label> 
-        <property>ticketComment</property> 
-        <documentation>A comment to add to the ticket along the logs.</documentation> 
+    <formElement>
+        <label>Comment</label>
+        <property>ticketComment</property>
+        <documentation>A comment to add to the ticket along the logs.</documentation>
         <type>textarea</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Product</label> 
-        <property>product</property> 
-        <documentation>The name of the product with which you have an issue.</documentation> 
-        <type>select</type> 
-        <option> 
-            <name>ElectricCommander</name> 
-            <value>electriccommander</value> 
-        </option> 
-        <option> 
-            <name>ElectricFlow</name> 
-            <value>electricflow</value> 
-        </option> 
-        <value>electriccommander</value> 
+    <formElement>
+        <label>Gathering Resource</label>
+        <property>gatheringResource</property>
+         <documentation>The resource to gather the logs, open ticket and upload logs.</documentation>
+        <type>entry</type>
         <required>1</required>
-    </formElement> 
+        <value>local</value>
+    </formElement>
 
     <formElement>
         <label>Server Resources</label>
         <property>serverResources</property>
-         <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation> 
+         <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation>
         <type>entry</type>
         <required>1</required>
-        <value>local</value>       
-    </formElement> 
+        <value>default</value>
+    </formElement>
 
-    <formElement> 
-        <label>Zendesk configuration</label> 
-        <property>zendeskConfiguration</property> 
-        <documentation>The name of the Zendesk configuration to use.</documentation> 
+    <formElement>
+        <label>Zendesk configuration</label>
+        <property>zendeskConfiguration</property>
+        <documentation>The name of the Zendesk configuration to use.</documentation>
         <type>entry</type>
         <value>zendesk</value>
         <required>1</required>
-    </formElement> 
-    
-    <formElement> 
-        <label>ShareFile configuration</label> 
-        <property>sharefileConfiguration</property> 
-        <documentation>The name of the ShareFile configuration to use.</documentation> 
+    </formElement>
+
+    <formElement>
+        <label>ShareFile configuration</label>
+        <property>sharefileConfiguration</property>
+        <documentation>The name of the ShareFile configuration to use.</documentation>
         <type>entry</type>
         <value>sharefile</value>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>ShareFile upload directory</label> 
-        <property>sharefileUploadDirectory</property> 
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
+    <formElement>
+        <label>ShareFile upload directory</label>
+        <property>sharefileUploadDirectory</property>
+        <documentation>The path to your EC-ShareFile uploads directory.</documentation>
         <type>entry</type>
         <value>/clients/X-Z/NAME/uploads</value>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Agent List</label> 
-        <property>agents</property> 
-        <documentation>The comma separated list of agents where the problem occured.</documentation> 
+    <formElement>
+        <label>Agent List</label>
+        <property>agents</property>
+        <documentation>The comma separated list of agents where the problem occured.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Time</label> 
-        <property>time</property> 
-        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation> 
+    <formElement>
+        <label>Time</label>
+        <property>time</property>
+        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Job Id</label> 
-        <property>jobNumber</property> 
-        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation> 
+    <formElement>
+        <label>Job Id</label>
+        <property>jobNumber</property>
+        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
 </editor>

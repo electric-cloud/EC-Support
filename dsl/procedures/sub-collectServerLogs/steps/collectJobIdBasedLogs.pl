@@ -30,7 +30,7 @@ while (my $file = readdir($logD)) {
     next if ($file !~ m/commander.*\.log\.zip/);
     printf("Processing $file\n") if ($DEBUG);
 
-my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&1");
+    my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&1");
     if ($exitCode == 0) {
     	printf("    Copying\n");
     	$ec->createJobStep({
@@ -40,19 +40,12 @@ my $exitCode=system("zgrep jobId=$jobNumber $logDir/$file 2>&1");
             actualParameter => [
             	{actualParameterName => 'sourceFile',
                                value => "$logDir/$file"},
-            	{actualParameterName => 'sourceResourceName',
-                               value => "$serverResource"},
-            	{actualParameterName => 'sourceWorkspaceName',
-                               value => "$[/myJob/sourceWorkspace]"},
-
             	{actualParameterName => 'destinationFile',
                                value => "$[destinationDirectory]/servers/$serverResource/"},
-            	{actualParameterName => 'destinationResourceName',
-                               value => "$[targetServerResource]"},
-            	{actualParameterName => 'destinationWorkspaceName',
-                               	value => "$[/myJob/targetWorkspace]",
+            	{actualParameterName => 'replaceDestinationIfPreexists',
+                               	value => "1"},
             ],
         });
     }
-}
+} # while
 closedir($logD);
