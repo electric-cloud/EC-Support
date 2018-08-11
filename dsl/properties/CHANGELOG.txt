@@ -1,6 +1,21 @@
 Changelog for EC-Support plugin
 
 History:
+-version 1.4.6
+  + Upgrade to newer version of PluginWizard
+  + Use ecpluginbuilder to create the plugin
+- version 1.4.5
+  + Fix parameters issue
+  + Fix artifact link
+  + Add buildCounter mechanism
+- version 1.4.4
+  + Fix #9 improve help page
+- version 1.4.3
+  Issue #12 Fix pattern matching to grab the log files
+- version 1.4.2
+  + Increase version number to avoid conflict
+- version 1.4.1
+  + Convert to PluginLite structure
 - version 1.4.0
   + Add procedure to gather logs only (no Sharefile or Zendesk call)
   + Add automatic pickup of service.log

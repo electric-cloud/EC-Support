@@ -3,20 +3,6 @@ procedure 'sub-collectServerLogs',
   description: 'A sub-procedure to collect the logs from 1 commander server',
   resourceName: '$' + '[serverResource]',
 {
-  formalParameter 'destinationDirectory',
-    description: 'Directory where to copy the logs on the target system',
-    required: '1',
-    type: 'entry'
-
-  formalParameter 'serverResource',
-    description: 'The name of the commander server resource to grab the  logs from',
-    required: '1',
-    type: 'entry'
-
-  formalParameter 'targetServerResource',
-    description: 'Name of the resource onto which to copy the logs',
-    type: 'entry'
-
   step 'grabWorkspaces',
     description: '''grab the workspace value
  - not defined: default

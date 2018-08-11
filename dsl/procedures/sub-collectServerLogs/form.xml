@@ -1,64 +1,25 @@
 <editor>
-    <formElement> 
-        <label>Title</label> 
-        <property>ticketTitle</property> 
-        <documentation>The title of your ticket.</documentation> 
+    <formElement>
+        <label>Destination Directory</label>
+        <property>destinationDirectory</property>
+        <documentation>Directory where to copy the logs on the target system.</documentation>
         <type>entry</type>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Description</label> 
-        <property>ticketDescription</property> 
-        <documentation>The full description of your ticket.</documentation> 
-        <type>textarea</type>
+    <formElement>
+        <label>Server Resource</label> 
+        <property>serverResource</property>
+        <documentation>The name of the commander server resource to grab the logs from.</documentation>
+        <type>entry</type>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Product</label> 
-        <property>product</property> 
-        <documentation>The name of the product with which you have an issue.</documentation> 
-        <type>select</type> 
-        <option> 
-            <name>ElectricCommander</name> 
-            <value>electriccommander</value> 
-        </option> 
-        <option> 
-            <name>ElectricFlow</name> 
-            <value>electricflow</value> 
-        </option> 
-        <value>electriccommander</value> 
-        <required>1</required>
-    </formElement> 
-
-    <formElement> 
-        <label>Product Version</label> 
-        <property>version</property> 
-        <documentation>Product version.</documentation> 
+    <formElement>
+        <label>Target Server Resource</label>
+        <property>targetServerResource</property>
+        <documentation>Name of the resource onto which to copy the logs.</documentation>
         <type>entry</type>
-    </formElement> 
-
-
-    <formElement> 
-        <label>Agent List</label> 
-        <property>agents</property> 
-        <documentation>The comma separated list of agents where the problem occured.</documentation> 
-        <type>entry</type>
-    </formElement> 
-
-    <formElement> 
-        <label>Time</label> 
-        <property>time</property> 
-        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation> 
-        <type>entry</type>
-    </formElement> 
-
-    <formElement> 
-        <label>Job Id</label> 
-        <property>jobNumber</property> 
-        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation> 
-        <type>entry</type>
-    </formElement> 
+    </formElement>
 
 </editor>
