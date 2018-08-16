@@ -2,51 +2,62 @@
     <formElement>
         <label>Gathering Resource</label>
         <property>gatheringResource</property>
-         <documentation>The resource to gather the logs, open ticket and upload logs.</documentation> 
+        <documentation>The resource to gather the logs and create the artifact version.</documentation>
         <type>entry</type>
         <required>1</required>
-        <value>local</value>       
-    </formElement> 
+        <value>local</value>
+    </formElement>
 
     <formElement>
         <label>Server Resources</label>
         <property>serverResources</property>
-         <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation> 
+         <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation>
         <type>entry</type>
         <required>1</required>
-        <value>default</value>       
-    </formElement> 
+        <value>default</value>
+    </formElement>
 
-    <formElement> 
-        <label>Agent List</label> 
-        <property>agents</property> 
-        <documentation>The comma separated list of agents where the problem occured.</documentation> 
+    <formElement>
+        <label>Agent List</label>
+        <property>agents</property>
+        <documentation>The comma separated list of agents where the problem occured.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Time</label> 
-        <property>time</property> 
-        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation> 
+    <formElement>
+        <label>Time</label>
+        <property>time</property>
+        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Job Id</label> 
-        <property>jobNumber</property> 
-        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation> 
+    <formElement>
+        <label>Job Id</label>
+        <property>jobNumber</property>
+        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Create Artifact</label> 
-        <property>createArtifact</property> 
-        <documentation>A boolean to create an artifact with all the logs</documentation> 
-        <type>checkbox</type> 
-        <checkedValue>true</checkedValue> 
-        <uncheckedValue>false</uncheckedValue> 
-        <initiallyChecked>1</initiallyChecked> 
-        <value>true</value>     
-    </formElement> 
+    <formElement>
+        <label>Obfuscate logs</label>
+        <property>obfuscate</property>
+        <documentation>A boolean to obfuscate or not the log files/</documentation>
+        <type>checkbox</type>
+        <checkedValue>true</checkedValue>
+        <uncheckedValue>false</uncheckedValue>
+        <initiallyChecked>o</initiallyChecked>
+        <value>false</value>
+    </formElement>
+
+    <formElement>
+        <label>Create Artifact</label>
+        <property>createArtifact</property>
+        <documentation>A boolean to create an artifact with all the logs</documentation>
+        <type>checkbox</type>
+        <checkedValue>true</checkedValue>
+        <uncheckedValue>false</uncheckedValue>
+        <initiallyChecked>1</initiallyChecked>
+        <value>true</value>
+    </formElement>
 
 </editor>

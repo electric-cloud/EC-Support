@@ -33,7 +33,7 @@ foreach my $agent (sort split(",", $agentList)) {
         $ec->setProperty("outcome", "warning");
         next;
     }
-    
+
     # Testing if agent is running
     #
     if ($json->{responses}->[0]->{resource}->{agentState}->{state} ne "alive") {
@@ -46,7 +46,7 @@ foreach my $agent (sort split(",", $agentList)) {
         $ec->setProperty("outcome", "warning");
         next;
     }
-    
+
 	# run step on remote agent so we can get the installDir
     $ec->createJobStep({
         subproject   => "/plugins/EC-FileOps/project",
@@ -58,11 +58,10 @@ foreach my $agent (sort split(",", $agentList)) {
           	{actualParameterName => 'sourceResourceName',       value => "$agent"},
             {actualParameterName => 'sourceFile',               value => $ENV{COMMANDER_DATA}."/logs/agent/*agent.log"},
           	{actualParameterName => 'destinationResourceName',  value => "local"},
-           	{actualParameterName => 'destinationFile',          value => "$[/myJob/destinationDirectory]/$agent"},
+           	{actualParameterName => 'destinationFile',          value => "$[/myJob/destinationDirectory]/agents/$agent"},
            	{actualParameterName => 'destinationWorkspaceName', value => "default"},
            ],
     });
 }
 
 $[/plugins[EC-Admin]project/scripts/perlLibJSON]
-

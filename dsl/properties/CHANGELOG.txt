@@ -1,6 +1,9 @@
 Changelog for EC-Support plugin
 
 History:
+-version 1.5.0
+  + Add log obfuscation
+
 -version 1.4.6
   + Upgrade to newer version of PluginWizard
   + Use ecpluginbuilder to create the plugin

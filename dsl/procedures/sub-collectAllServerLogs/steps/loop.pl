@@ -15,7 +15,7 @@ my %resourceHash=();
 # Parse the list of servers
 foreach my $server (split(",", $serverResources)) {
 	$server =~ s/^\s*//;	# removing leading  spaces
-    $server =~ s/\s*$//;	# removing trailing spaces
+  $server =~ s/\s*$//;	# removing trailing spaces
 
 	#
 	# Is this a pool?
