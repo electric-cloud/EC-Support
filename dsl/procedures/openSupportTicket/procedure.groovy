@@ -3,72 +3,6 @@ procedure 'openSupportTicket',
   description: 'A procedure to automatically open a ticket on Zendesk and deliver the required logs to ShareFile',
   resourceName: 'local',
 {
-  formalParameter 'agents',
-    description: 'a commas separated list of agents. Will be used to get the logs from the agents involved in the issue',
-    required: '0',
-    type: 'entry'
-
-  formalParameter 'gatheringResource',
-    defaultValue: 'local',
-    description: 'The resource to use to gather log and open ticket',
-    required: '1',
-    type: 'entry'
-
-  formalParameter 'jobNumber',
-    description: 'The ID of the job that generated the error. Will be used to collect the right logs',
-    type: 'entry'
-
-  formalParameter 'problemScope',
-    defaultValue: '2_one_user',
-    required: '1',
-    type: 'select'
-
-  formalParameter 'problemType',
-    defaultValue: '2_need_assistance',
-    required: '1',
-    type: 'select'
-
-  formalParameter 'product',
-    defaultValue: 'electricflow',
-    description: 'the name of the product that failed',
-    required: '1',
-    type: 'select'
-
-  formalParameter 'serverResources',
-    defaultValue: 'default',
-    description: 'A list of resources or pools, comma separated',
-    type: 'entry'
-
-  formalParameter 'sharefileConfiguration',
-    defaultValue: 'sharefile',
-    description: 'Name of your Sharefile configuration',
-    required: '1',
-    type: 'entry'
-
-  formalParameter 'sharefileUploadDirectory',
-    description: 'Private directory on ShareFile on where to upload the logs',
-    required: '1',
-    type: 'entry'
-
-  formalParameter 'ticketDescription',
-    description: 'The main description of the issue you are facing',
-    type: 'textarea'
-
-  formalParameter 'ticketTitle',
-    required: '1',
-    type: 'entry'
-
-  formalParameter 'time',
-    description: 'The time at which the issue happened. Used to collect the right logs. If empty, will simply send the commander.log',
-    type: 'entry'
-
-  formalParameter 'zendeskConfiguration',
-    defaultValue: 'zendesk',
-    description: 'The name of your Zendesk configuration',
-    required: '1',
-    type: 'entry'
-
-
   step 'getVersion',
     description: 'Retrieve the server version',
     command: new File(pluginDir + "/dsl/procedures/openSupportTicket/steps/getVersion.pl").text,
@@ -110,6 +44,17 @@ procedure 'openSupportTicket',
       Path: '$' + '[/myJob/destinationDirectory]'
     ]
 
+  step 'gatherLogs',
+    subprocedure: 'gatherLogs',
+    actualParameter: [
+      gatheringResource: '$[/myJob/gatheringResource]',
+      serverResources: '$' + '[serverResources]',
+      agents: '$[agents]',
+      time: '$' + '[time]',
+      jobNumber: '$' + '[jobNumber]',
+      obfuscate: '$[obfuscate]',
+      createArtifact: 'false'
+    ]
   step 'sub-collectAllServerLogs',
     subprocedure: 'sub-collectAllServerLogs',
     actualParameter: [
