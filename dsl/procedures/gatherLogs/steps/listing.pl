@@ -17,7 +17,7 @@ $[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
 #
 #############################################################################
 my $DEBUG=1;
-my $destDir="$[/myJob/zendesk/ticketId]";
+my $destDir='$[/myJob/destinationDirectory]';
 
 
 my $content=directoryContent($destDir);
@@ -31,13 +31,13 @@ $ec->setProperty("/myJob/fileList", $content);
 sub directoryContent {
     my $dir=shift @_;
     my $content="";
-    
+
     opendir(my $dh, $dir) or die("Cannot open the directory $dir\n$!");
 
 	while (my $file = readdir($dh)) {
     	next if $file eq '.' or $file eq '..';
     	if (-d "$dir/$file") {
-    		$content .= directoryContent("$dir/$file");	
+    		$content .= directoryContent("$dir/$file");
         } else {
         	$content .= "$dir/$file\n";
             printf("$dir/$file\n") if ($DEBUG);
@@ -46,4 +46,3 @@ sub directoryContent {
     closedir($dh);
     return $content;
 }
-    

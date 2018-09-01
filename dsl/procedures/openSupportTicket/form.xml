@@ -45,7 +45,7 @@
             <name>ElectricFlow</name>
             <value>electricflow</value>
         </option>
-        <value>electriccommander</value>
+        <value>electricflow</value>
         <required>1</required>
     </formElement>
 

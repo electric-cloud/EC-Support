@@ -1,6 +1,8 @@
-Changelog for EC-Support plugin
+CHANGELOG for EC-Support plugin
 
 History:
+- version 1.5.2
+  + Reintegrate with EC-Zendesk
 - version 1.5.1
   + Fixed Help page
 - version 1.5.0

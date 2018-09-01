@@ -23,12 +23,13 @@ procedure procName,
 EF cluster does not have external internet access. Optionally, an artifact can
 be created that can be downloaded later to the user desktop.''',
 {
+/*
     step 'getVersion',
       description: 'Retrieve the server version',
       command: new File(pluginDir + "/dsl/procedures/$procName/steps/getVersion.pl").text,
       resourceName: '$[gatheringResource]',
       shell: 'ec-perl'
-
+*/
     step 'grabResource',
       description: 'Grab one of the commander server resources (in case of cluster)',
       command: new File(pluginDir + "/dsl/procedures/$procName/steps/grabResource.sh").text,
@@ -85,6 +86,11 @@ be created that can be downloaded later to the user desktop.''',
             sourceFile: '$[/myJob/destinationDirectory]',
             zipFile: '$[/myJob/destinationDirectory].zip'
         ]
+    step 'listing',
+      description: 'Get the list of collected files',
+      command: new File(pluginDir + "/dsl/procedures/$procName/steps/listing.pl").text,
+      resourceName: '$' + '[/myJob/gatheringResource]',
+      shell: 'ec-perl'
 
     step 'createArtifact',
       resourceName: '$[/myJob/gatheringResource]',
