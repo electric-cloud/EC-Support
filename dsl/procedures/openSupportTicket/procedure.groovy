@@ -57,7 +57,8 @@ procedure 'openSupportTicket',
     subproject: '/plugins/EC-ShareFile/project',
     actualParameter: [
       config: '$[ShareFileConfiguration]',
-      pathToFile: '$[/myJob/destinationDirectory].zip'
+      pathToFile: '$[/myJob/destinationDirectory].zip',
+      folder: '$[/myJob/zendesk/ticketId]'
     ]
 
   step 'commentForFiles',
@@ -66,9 +67,8 @@ procedure 'openSupportTicket',
     subprocedure: 'commentOnTicket',
     subproject: '/plugins/EC-Zendesk/project',
     actualParameter: [
-      comment: '''The following file have been uploaded to Sharefile in the /$[/myJob/zendesk/ticketId] folder:
+      ticketComment: '''The following file have been uploaded to Sharefile in the /$[/myJob/zendesk/ticketId] folder:
 It contains:
-
 $[/myJob/fileList]''',
       config: '$[zendeskConfiguration]',
       ticketNumber: '$[/myJob/zendesk/ticketId]'
