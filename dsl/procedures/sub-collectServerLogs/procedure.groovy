@@ -1,6 +1,6 @@
 
 procedure 'sub-collectServerLogs',
-  description: 'A sub-procedure to collect the logs from 1 commander server',
+  description: 'Do not call directly!!! This is a sub-procedure to collect the logs from 1 commander server',
   resourceName: '$' + '[serverResource]',
 {
   step 'grabWorkspaces',

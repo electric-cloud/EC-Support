@@ -1,6 +1,6 @@
 
 procedure 'sub-collectAllServerLogs',
-  description: 'a sub-procedure to collect server logs',
+  description: 'Do not call directly!!! This is a sub-procedure to collect server logs',
 {
   formalParameter 'destinationDirectory',
     description: 'The directory in which to copy the logs.',

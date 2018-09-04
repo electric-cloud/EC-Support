@@ -1,3 +1,20 @@
+/*
+
+     Copyright 2016-2018 Electric Cloud, Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+*/
 import java.io.File
 
 def procName='gatherLogs'
@@ -6,12 +23,13 @@ procedure procName,
 EF cluster does not have external internet access. Optionally, an artifact can
 be created that can be downloaded later to the user desktop.''',
 {
+/*
     step 'getVersion',
       description: 'Retrieve the server version',
       command: new File(pluginDir + "/dsl/procedures/$procName/steps/getVersion.pl").text,
       resourceName: '$[gatheringResource]',
       shell: 'ec-perl'
-
+*/
     step 'grabResource',
       description: 'Grab one of the commander server resources (in case of cluster)',
       command: new File(pluginDir + "/dsl/procedures/$procName/steps/grabResource.sh").text,
@@ -68,6 +86,11 @@ be created that can be downloaded later to the user desktop.''',
             sourceFile: '$[/myJob/destinationDirectory]',
             zipFile: '$[/myJob/destinationDirectory].zip'
         ]
+    step 'listing',
+      description: 'Get the list of collected files',
+      command: new File(pluginDir + "/dsl/procedures/$procName/steps/listing.pl").text,
+      resourceName: '$' + '[/myJob/gatheringResource]',
+      shell: 'ec-perl'
 
     step 'createArtifact',
       resourceName: '$[/myJob/gatheringResource]',

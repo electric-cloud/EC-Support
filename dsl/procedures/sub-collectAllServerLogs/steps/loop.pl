@@ -4,7 +4,8 @@ $[/plugins[EC-Admin]/project/scripts/perlHeaderJSON]
 # Parameters
 #
 my $serverResources = "$[serverResources]";
-
+my $timeString      = "$[time]";
+my $jobNumber       = "$[jobNumber]";
 #
 # global variables
 #
@@ -46,20 +47,22 @@ printf("\n");
 foreach my $server (keys %resourceHash) {
 	printf("Collecting logs for %s\n", $server);
 	my ($ok, $json)=InvokeCommander("IgnoreError", 'getResource', $server);
-    my $node=$json->{responses}->[0]->{resource};
-    my $resName=$node->{resourceName};
+  my $node=$json->{responses}->[0]->{resource};
+  my $resName=$node->{resourceName};
 
-    if (($node->{resourceDisabled} == 0) && ($node->{agentState}->{alive} == 1) ) {
-    	$ec->createJobStep({
-              subprocedure=>"sub-collectServerLogs",
-              jobStepName => "collect-$resName",
-              actualParameter => [
-                {actualParameterName => "serverResource",       value => $resName},
-                {actualParameterName => "destinationDirectory", value => "$[destinationDirectory]"},
-                {actualParameterName => "targetServerResource", value => "$targetServerResource"},
-              ]});
+  if (($node->{resourceDisabled} == 0) && ($node->{agentState}->{alive} == 1) ) {
+  	$ec->createJobStep({
+      subprocedure=>"sub-collectServerLogs",
+      jobStepName => "collect-$resName",
+      actualParameter => [
+        {actualParameterName => "serverResource",       value => $resName},
+        {actualParameterName => "destinationDirectory", value => "$[destinationDirectory]"},
+        {actualParameterName => "targetServerResource", value => "$targetServerResource"},
+				{actualParameterName => "time",                 value => "$timeString"},
+				{actualParameterName => "jobNumber",            value => "$jobNumber"},
+    ]});
 
-    }
+  }
 }
 
 $[/plugins[EC-Admin]/project/scripts/perlLibJSON]
