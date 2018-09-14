@@ -1,4 +1,8 @@
 History:
+- version 1.5.4.70
+  + Fixed AddLogsToExistingTicket
+  + Fixed #25 issue promoting on Windows
+  + Fixed commentOnSupportTicket
 - version 1.5.2.62
   + Reintegrate with EC-Zendesk and EC-Sharefile
 - version 1.5.1

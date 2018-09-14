@@ -9,11 +9,11 @@
 
     <formElement>
         <label>Comment</label>
-        <property>comment</property>
+        <property>ticketComment</property>
         <documentation>The new comment to add to your ticket.</documentation>
         <type>textarea</type>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
     <formElement>
         <label>Zendesk configuration</label>
