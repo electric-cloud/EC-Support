@@ -66,8 +66,14 @@ be created that can be downloaded later to the user desktop.''',
     step 'collectAgentLogs',
         description: 'If agent list is not empty, go grab agent.log and jagent.log',
         command: new File(pluginDir + "/dsl/procedures/$procName/steps/collectAgentLogs.pl").text,
-        condition: '$[/javascript "$' + '[agents]" != "" ]',
+        condition: '$[/javascript "$[agents]" != "" ]',
         shell: 'ec-perl'
+
+  step 'collectWebLogs',
+      description: 'If web list is not empty, go grab error.log and stdout.log',
+      command: new File(pluginDir + "/dsl/procedures/$procName/steps/collectWebLogs.pl").text,
+      condition: '$[/javascript "$[web]" != "" ]',
+      shell: 'ec-perl'
 
     step 'obfuscateLogs',
       description: "optionaly remove IP, server URL, user Id, ... from the logs",

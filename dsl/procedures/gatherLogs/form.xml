@@ -40,6 +40,12 @@
         <documentation>The comma separated list of agents where the problem occured.</documentation>
         <type>entry</type>
     </formElement>
+    <formElement>
+        <label>Web server  List</label>
+        <property>web</property>
+        <documentation>The comma separated list of Web servers if you want to include ther apache logs.</documentation>
+        <type>entry</type>
+    </formElement>
 
     <formElement>
         <label>Time</label>
