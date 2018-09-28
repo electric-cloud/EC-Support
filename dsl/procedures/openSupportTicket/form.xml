@@ -129,15 +129,6 @@
     </formElement>
 
     <formElement>
-        <label>ShareFile upload directory</label>
-        <property>sharefileUploadDirectory</property>
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation>
-        <type>entry</type>
-        <value>/clients/S-U/Test/uploads</value>
-        <required>1</required>
-    </formElement>
-
-    <formElement>
         <label>Agent List</label>
         <property>agents</property>
         <documentation>The comma separated list of agents where the problem occured.</documentation>

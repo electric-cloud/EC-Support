@@ -75,6 +75,12 @@ be created that can be downloaded later to the user desktop.''',
       condition: '$[/javascript "$[web]" != "" ]',
       shell: 'ec-perl'
 
+  step 'collectRepoLogs',
+      description: 'If repo list is not empty, go grab repository.log and repository-service.log.log',
+      command: new File(pluginDir + "/dsl/procedures/$procName/steps/collectRepoLogs.pl").text,
+      condition: '$[/javascript "$[repo]" != "" ]',
+      shell: 'ec-perl'
+
     step 'obfuscateLogs',
       description: "optionaly remove IP, server URL, user Id, ... from the logs",
       resourceName: '$[/myJob/gatheringResource]',

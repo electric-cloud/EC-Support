@@ -18,6 +18,7 @@ procedure 'openSupportTicket',
     description: 'Open the ticket',
     condition: '1',
     resourceName: '$[/myJob/gatheringResource]',
+    errorHandling: "abortProcedure",
     subprocedure: 'createTicket',
     subproject: '/plugins/EC-Zendesk/project',
     actualParameter: [
@@ -41,16 +42,7 @@ procedure 'openSupportTicket',
       obfuscate: '$[obfuscate]',
       createArtifact: 'false'
     ]
-/*  step 'createBundle',
-    description: 'Zip the different files',
-    resourceName: '$[/myJob/gatheringResource]',
-    subprocedure: 'Create Zip File',
-    subproject: '/plugins/EC-FileOps/project',
-    actualParameter: [
-      sourceFile: '$[/myJob/destinationDirectory]',
-      zipFile: '$[/myJob/destinationDirectory].zip'
-    ]
-*/
+
   step 'uploadBundleToSharefile',
     resourceName: '$[/myJob/gatheringResource]',
     subprocedure: 'CreateFolderAndUploadFile',

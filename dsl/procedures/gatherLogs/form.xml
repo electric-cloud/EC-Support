@@ -40,10 +40,18 @@
         <documentation>The comma separated list of agents where the problem occured.</documentation>
         <type>entry</type>
     </formElement>
+
     <formElement>
-        <label>Web server  List</label>
+        <label>Web server List</label>
         <property>web</property>
-        <documentation>The comma separated list of Web servers if you want to include ther apache logs.</documentation>
+        <documentation>The comma separated list of Web servers if you want to include the apache logs.</documentation>
+        <type>entry</type>
+    </formElement>
+
+    <formElement>
+        <label>Repo server List</label>
+        <property>repo</property>
+        <documentation>The comma separated list of Artifact Repository servers if you want to include the repo logs.</documentation>
         <type>entry</type>
     </formElement>
 

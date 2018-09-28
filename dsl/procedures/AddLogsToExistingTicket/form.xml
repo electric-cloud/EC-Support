@@ -33,6 +33,17 @@
     </formElement>
 
     <formElement>
+        <label>Obfuscate logs</label>
+        <property>obfuscate</property>
+        <documentation>A boolean to obfuscate or not the log files/</documentation>
+        <type>checkbox</type>
+        <checkedValue>true</checkedValue>
+        <uncheckedValue>false</uncheckedValue>
+        <initiallyChecked>o</initiallyChecked>
+        <value>false</value>
+    </formElement>
+
+    <formElement>
         <label>Zendesk configuration</label>
         <property>zendeskConfiguration</property>
         <documentation>The name of the Zendesk configuration to use.</documentation>
@@ -47,15 +58,6 @@
         <documentation>The name of the ShareFile configuration to use.</documentation>
         <type>entry</type>
         <value>sharefile</value>
-        <required>1</required>
-    </formElement>
-
-    <formElement>
-        <label>ShareFile upload directory</label>
-        <property>sharefileUploadDirectory</property>
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation>
-        <type>entry</type>
-        <value>/clients/X-Z/NAME/uploads</value>
         <required>1</required>
     </formElement>
 

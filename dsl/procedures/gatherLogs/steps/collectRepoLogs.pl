@@ -29,7 +29,7 @@ $[/plugins[EC-Admin]project/scripts/perlHeaderJSON]
 # Parameters
 #
 #############################################################################
-my $webList = "$[web]";
+my $repoList = "$[repo]";
 
 #############################################################################
 #
@@ -41,13 +41,13 @@ my $DEBUG=1;
 my $logDir="$[/server/Electric Cloud/dataDirectory]/logs";
 my $cwd = getcwd();
 
-foreach my $web (sort split(",", $webList)) {
+foreach my $repo (sort split(",", $repoList)) {
 
-	# Testing web existence
+	# Testing repo existence
     #
-	my($ok, $json)=InvokeCommander("IgnoreError SuppressLog", 'getResource', $web);
+	my($ok, $json)=InvokeCommander("IgnoreError SuppressLog", 'getResource', $repo);
     if (! $ok) {
-    	printf("Web agent '%s' does not exist!", $web);
+    	printf("Repo agent '%s' does not exist!", $repo);
         $ec->setProperty("outcome", "warning");
         next;
     }
@@ -55,12 +55,12 @@ foreach my $web (sort split(",", $webList)) {
     # Testing if agent is running
     #
     if ($json->{responses}->[0]->{resource}->{agentState}->{state} ne "alive") {
-    	printf("Web agent '%s' is not running!\n", $web);
+    	printf("Repo agent '%s' is not running!\n", $repo);
         $ec->setProperty("outcome", "warning");
         next;
     }
     if ($json->{responses}->[0]->{resource}->{resourceDisabled} eq "1") {
-    	printf("Web agent '%s' is disabled!\n", $web);
+    	printf("Repo agent '%s' is disabled!\n", $repo);
         $ec->setProperty("outcome", "warning");
         next;
     }
@@ -69,14 +69,14 @@ foreach my $web (sort split(",", $webList)) {
     $ec->createJobStep({
         subproject   => "/plugins/EC-FileOps/project",
         subprocedure => "Remote Copy - Native",
-        jobStepName  => "Copy-Web $web",
-        resourceName => $web,
+        jobStepName  => "Copy-Repo $repo",
+        resourceName => $repo,
         actualParameter => [
          	{actualParameterName => 'sourceWorkspaceName',      value => "default"},
-        	{actualParameterName => 'sourceResourceName',       value => "$web"},
-          {actualParameterName => 'sourceFile',               value => $ENV{COMMANDER_DATA}."/apache/logs/*.log"},
+        	{actualParameterName => 'sourceResourceName',       value => "$repo"},
+          {actualParameterName => 'sourceFile',               value => $ENV{COMMANDER_DATA}."/logs/repository/*.log"},
         	{actualParameterName => 'destinationResourceName',  value => "local"},
-         	{actualParameterName => 'destinationFile',          value => "$[/myJob/destinationDirectory]/web/$web"},
+         	{actualParameterName => 'destinationFile',          value => "$[/myJob/destinationDirectory]/repo/$repo"},
          	{actualParameterName => 'destinationWorkspaceName', value => "default"},
            ],
     });

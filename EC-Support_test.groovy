@@ -41,7 +41,6 @@ project 'EC-Support_Test', {
       actualParameter 'product', 'electricflow'
       actualParameter 'serverResources', 'local'
       actualParameter 'sharefileConfiguration', 'sharefile'
-      actualParameter 'sharefileUploadDirectory', '/clients/S-U/Test/uploads'
       actualParameter 'ticketDescription', '''this is a test for EC-Support plugin
 
 Feel free to close if you find still open

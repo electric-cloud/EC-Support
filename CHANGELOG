@@ -1,6 +1,7 @@
 History:
-- version 1.6.0.73
+- version 1.6.1.74
   + Fixed #7 gather apache servers logs
+  + Gather repo logs as well
 
 - version 1.5.4.70
   + Fixed AddLogsToExistingTicket
