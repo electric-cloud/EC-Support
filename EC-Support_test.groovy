@@ -11,6 +11,13 @@ project 'EC-Support_Test', {
     timeLimitUnits = 'minutes'
     workspaceName = ''
 
+    step 'version',
+      shell:'ec-perl',
+      command: '''\
+         $[/plugins/EC-Admin/project/scripts/perlHeaderJSON]
+         $ec->setProperty("summary", "Support: $[/plugins/EC-Support/pluginVersion]\nZendesk: $[/plugins/EC-Zendesk/pluginVersion]\nSharefile: $[/plugins/EC-Sharefile/pluginVersion]")
+      '''.stripIndent()
+
     step 'openTicket', {
       description = ''
       alwaysRun = '0'
@@ -41,7 +48,7 @@ project 'EC-Support_Test', {
       actualParameter 'product', 'electricflow'
       actualParameter 'serverResources', 'local'
       actualParameter 'sharefileConfiguration', 'sharefile'
-      actualParameter 'sharefileUploadDirectory', '/clients/S-U/Test/uploads'
+      actualParameter 'sharefileUploadDirectory', 'employees/lrochette'
       actualParameter 'ticketDescription', '''this is a test for EC-Support plugin
 
 Feel free to close if you find still open

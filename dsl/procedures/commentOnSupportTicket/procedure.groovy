@@ -7,8 +7,8 @@ procedure 'commentOnSupportTicket',
     subprocedure: 'commentOnTicket',
     subproject: '/plugins/EC-Zendesk/project',
     actualParameter: [
-      comment: '$[comment]',
-      config: '$[zendeskConfiguration]',
+      ticketComment: '$[ticketComment]',
+      config: '$[config]',
       ticketNumber: '$[ticketId]'
     ]
 }

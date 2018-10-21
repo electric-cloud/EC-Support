@@ -33,6 +33,17 @@
     </formElement>
 
     <formElement>
+        <label>Obfuscate logs</label>
+        <property>obfuscate</property>
+        <documentation>A boolean to obfuscate or not the log files/</documentation>
+        <type>checkbox</type>
+        <checkedValue>true</checkedValue>
+        <uncheckedValue>false</uncheckedValue>
+        <initiallyChecked>o</initiallyChecked>
+        <value>false</value>
+    </formElement>
+
+    <formElement>
         <label>Zendesk configuration</label>
         <property>zendeskConfiguration</property>
         <documentation>The name of the Zendesk configuration to use.</documentation>
@@ -51,18 +62,23 @@
     </formElement>
 
     <formElement>
-        <label>ShareFile upload directory</label>
-        <property>sharefileUploadDirectory</property>
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation>
-        <type>entry</type>
-        <value>/clients/X-Z/NAME/uploads</value>
-        <required>1</required>
-    </formElement>
-
-    <formElement>
         <label>Agent List</label>
         <property>agents</property>
         <documentation>The comma separated list of agents where the problem occured.</documentation>
+        <type>entry</type>
+    </formElement>
+
+    <formElement>
+        <label>Web server List</label>
+        <property>web</property>
+        <documentation>The comma separated list of Web servers if you want to include the apache logs.</documentation>
+        <type>entry</type>
+    </formElement>
+
+    <formElement>
+        <label>Repo server List</label>
+        <property>repo</property>
+        <documentation>The comma separated list of Artifact Repository servers if you want to include the repo logs.</documentation>
         <type>entry</type>
     </formElement>
 

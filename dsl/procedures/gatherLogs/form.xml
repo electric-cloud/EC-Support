@@ -42,6 +42,20 @@
     </formElement>
 
     <formElement>
+        <label>Web server List</label>
+        <property>web</property>
+        <documentation>The comma separated list of Web servers if you want to include the apache logs.</documentation>
+        <type>entry</type>
+    </formElement>
+
+    <formElement>
+        <label>Repo server List</label>
+        <property>repo</property>
+        <documentation>The comma separated list of Artifact Repository servers if you want to include the repo logs.</documentation>
+        <type>entry</type>
+    </formElement>
+
+    <formElement>
         <label>Time</label>
         <property>time</property>
         <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation>
