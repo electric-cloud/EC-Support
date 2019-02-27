@@ -148,6 +148,11 @@
                   uploaded automatically.</td>
 	            </tr>
               <tr>
+	                <td>Obfuscate Logs</td>
+	                <td>Checkbox to remove some of the sensitive informations
+                    from the logs like IP addresses, URLs, ...</td>
+	            </tr>
+              <tr>
 	                <td>Create Artifact</td>
 	                <td>Checkbox to create a EC-Support:logs artifact version that
                   you can download later to your desktop.</td>

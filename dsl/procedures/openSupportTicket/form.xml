@@ -1,133 +1,166 @@
+<!--
+
+     Copyright 2016-2018 Electric Cloud, Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
 <editor>
-    <formElement> 
-        <label>Title</label> 
-        <property>ticketTitle</property> 
-        <documentation>The title of your ticket.</documentation> 
+    <formElement>
+        <label>Title</label>
+        <property>ticketTitle</property>
+        <documentation>The title of your ticket.</documentation>
         <type>entry</type>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Description</label> 
-        <property>ticketDescription</property> 
-        <documentation>The full description of your ticket.</documentation> 
+    <formElement>
+        <label>Description</label>
+        <property>ticketDescription</property>
+        <documentation>The full description of your ticket.</documentation>
         <type>textarea</type>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Product</label> 
-        <property>product</property> 
-        <documentation>The name of the product with which you have an issue.</documentation> 
-        <type>select</type> 
-        <option> 
-            <name>ElectricCommander</name> 
-            <value>electriccommander</value> 
-        </option> 
-        <option> 
-            <name>ElectricFlow</name> 
-            <value>electricflow</value> 
-        </option> 
-        <value>electriccommander</value> 
+    <formElement>
+        <label>Product</label>
+        <property>product</property>
+        <documentation>The name of the product with which you have an issue.</documentation>
+        <type>select</type>
+        <option>
+            <name>ElectricCommander</name>
+            <value>electriccommander</value>
+        </option>
+        <option>
+            <name>ElectricFlow</name>
+            <value>electricflow</value>
+        </option>
+        <value>electricflow</value>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Problem Type</label> 
-        <property>problemType</property> 
-        <documentation>The type of problem, to help support prioritize your ticket.</documentation> 
-        <type>select</type> 
-        <option><name>Enhancement</name><value>1_enhancement</value></option> 
-        <option><name>Need Assistance</name><value>2_need_assistance</value></option> 
-        <option><name>Nuisance</name><value>3_nuisance</value></option> 
-        <option><name>Tool Limiting</name><value>4_tool_limiting</value></option> 
-        <option><name>Performance</name><value>5_performance</value></option> 
-        <option><name>Blocking</name><value>6_blocking</value></option> 
-        <value>2_need_assistance</value> 
+    <formElement>
+        <label>Problem Type</label>
+        <property>problemType</property>
+        <documentation>The type of problem, to help support prioritize your ticket.</documentation>
+        <type>select</type>
+        <option><name>Enhancement</name><value>1_enhancement</value></option>
+        <option><name>Need Assistance</name><value>2_need_assistance</value></option>
+        <option><name>Nuisance</name><value>3_nuisance</value></option>
+        <option><name>Tool Limiting</name><value>4_tool_limiting</value></option>
+        <option><name>Performance</name><value>5_performance</value></option>
+        <option><name>Blocking</name><value>6_blocking</value></option>
+        <value>2_need_assistance</value>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Problem Scope</label> 
-        <property>problemScope</property> 
-        <documentation>The scope of the problem, to help support prioritize your ticket.</documentation> 
-        <type>select</type> 
-        <option><name>Test Setup</name><value>01_test_setup</value></option> 
-        <option><name>One User</name><value>2_one_user</value></option> 
-        <option><name>One Team</name><value>3_one_team</value></option> 
-        <option><name>Some users</name><value>4_some_users</value></option> 
-        <option><name>One Site</name><value>5_one_site</value></option> 
-        <option><name>Some teams</name><value>6_some_teams</value></option> 
-        <option><name>Some sites</name><value>7_some_sites</value></option> 
-        <option><name>Everyone</name><value>8_everyone</value></option> 
-        <value>2_one_user</value> 
+    <formElement>
+        <label>Problem Scope</label>
+        <property>problemScope</property>
+        <documentation>The scope of the problem, to help support prioritize your ticket.</documentation>
+        <type>select</type>
+        <option><name>Test Setup</name><value>01_test_setup</value></option>
+        <option><name>One User</name><value>2_one_user</value></option>
+        <option><name>One Team</name><value>3_one_team</value></option>
+        <option><name>Some users</name><value>4_some_users</value></option>
+        <option><name>One Site</name><value>5_one_site</value></option>
+        <option><name>Some teams</name><value>6_some_teams</value></option>
+        <option><name>Some sites</name><value>7_some_sites</value></option>
+        <option><name>Everyone</name><value>8_everyone</value></option>
+        <value>2_one_user</value>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
     <formElement>
         <label>Gathering Resource</label>
         <property>gatheringResource</property>
-         <documentation>The resource to gather the logs, open ticket and upload logs.</documentation> 
+         <documentation>The resource to gather the logs, open ticket and upload logs.</documentation>
         <type>entry</type>
         <required>1</required>
-        <value>local</value>       
-    </formElement> 
+        <value>local</value>
+    </formElement>
 
     <formElement>
         <label>Server Resources</label>
         <property>serverResources</property>
-         <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation> 
+         <documentation>A list of resources -comma separated- or pools to represent your server list. Change the default value for cluster mode.</documentation>
         <type>entry</type>
         <required>1</required>
-        <value>default</value>       
-    </formElement> 
+        <value>default</value>
+    </formElement>
 
-    <formElement> 
-        <label>Zendesk configuration</label> 
-        <property>zendeskConfiguration</property> 
-        <documentation>The name of the Zendesk configuration to use.</documentation> 
+    <formElement>
+        <label>Obfuscate logs</label>
+        <property>obfuscate</property>
+        <documentation>A boolean to obfuscate or not the log files/</documentation>
+        <type>checkbox</type>
+        <checkedValue>true</checkedValue>
+        <uncheckedValue>false</uncheckedValue>
+        <initiallyChecked>o</initiallyChecked>
+        <value>false</value>
+    </formElement>
+
+    <formElement>
+        <label>Zendesk configuration</label>
+        <property>zendeskConfiguration</property>
+        <documentation>The name of the Zendesk configuration to use.</documentation>
         <type>entry</type>
         <value>zendesk</value>
         <required>1</required>
-    </formElement> 
-    
-    <formElement> 
-        <label>ShareFile configuration</label> 
-        <property>sharefileConfiguration</property> 
-        <documentation>The name of the ShareFile configuration to use.</documentation> 
+    </formElement>
+
+    <formElement>
+        <label>ShareFile configuration</label>
+        <property>sharefileConfiguration</property>
+        <documentation>The name of the ShareFile configuration to use.</documentation>
         <type>entry</type>
         <value>sharefile</value>
         <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>ShareFile upload directory</label> 
-        <property>sharefileUploadDirectory</property> 
-        <documentation>The path to your EC-ShareFile uploads directory.</documentation> 
+    <formElement>
+        <label>Agent List</label>
+        <property>agents</property>
+        <documentation>The comma separated list of agents where the problem occured.</documentation>
         <type>entry</type>
-        <value>/clients/S-U/Test/uploads</value>
-        <required>1</required>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Agent List</label> 
-        <property>agents</property> 
-        <documentation>The comma separated list of agents where the problem occured.</documentation> 
+    <formElement>
+        <label>Web server List</label>
+        <property>web</property>
+        <documentation>The comma separated list of Web servers if you want to include the apache logs.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Time</label> 
-        <property>time</property> 
-        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation> 
+    <formElement>
+        <label>Repo server List</label>
+        <property>repo</property>
+        <documentation>The comma separated list of Artifact Repository servers if you want to include the repo logs.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
 
-    <formElement> 
-        <label>Job Id</label> 
-        <property>jobNumber</property> 
-        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation> 
+    <formElement>
+        <label>Time</label>
+        <property>time</property>
+        <documentation>The time at which the issue happened (if known). Format is [yyyy-mm-dd] HH:mm.</documentation>
         <type>entry</type>
-    </formElement> 
+    </formElement>
+
+    <formElement>
+        <label>Job Id</label>
+        <property>jobNumber</property>
+        <documentation>The jobId in which the issue occured (if known). It is used to retrieve the correct logs.</documentation>
+        <type>entry</type>
+    </formElement>
 
 </editor>
